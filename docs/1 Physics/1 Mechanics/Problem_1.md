@@ -27,7 +27,10 @@ Where:
 ### Time of Flight
 
 The projectile returns to the ground when its vertical position becomes zero:  
-\( y(t) = 0 \)
+
+\[
+y(t) = 0
+\]
 
 Solving for \( t \):
 
