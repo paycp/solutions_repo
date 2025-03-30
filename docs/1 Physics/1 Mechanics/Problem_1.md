@@ -18,7 +18,7 @@ x(t) = v_0 \cdot \cos(\theta) \cdot t
 y(t) = v_0 \cdot \sin(\theta) \cdot t - \frac{1}{2}gt^2
 \]
 
-Where:
+Where:  
 - \( v_0 \) is the initial speed,  
 - \( \theta \) is the launch angle,  
 - \( g \) is the acceleration due to gravity,  
