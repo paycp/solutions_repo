@@ -19,11 +19,10 @@ y(t) = v_0 \cdot \sin(\theta) \cdot t - \frac{1}{2}gt^2
 \]
 
 Where:
-
-- \( v_0 \) is the initial speed  
-- \( \theta \) is the launch angle  
-- \( g \) is the acceleration due to gravity  
-- \( t \) is time  
+- \( v_0 \) is the initial speed,  
+- \( \theta \) is the launch angle,  
+- \( g \) is the acceleration due to gravity,  
+- \( t \) is time.  
 
 ### Time of Flight
 
