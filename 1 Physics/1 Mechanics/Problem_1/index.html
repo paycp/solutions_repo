@@ -60,6 +60,18 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-the-range">2. Analysis of the Range</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#behavior-of-the-range-function">Behavior of the Range Function</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#symmetry-in-the-range">Symmetry in the Range</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#implications">Implications</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#visual-expectation">Visual Expectation</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -227,6 +239,37 @@ R = \frac{v_0^2 \cdot \sin(2\theta)}{g}
 - the sine of twice the launch angle <span class="arithmatex">\( \theta \)</span>,
 - and the gravitational acceleration <span class="arithmatex">\( g \)</span>.</p>
 <p>For fixed <span class="arithmatex">\( v_0 \)</span> and <span class="arithmatex">\( g \)</span>, the range varies <strong>only with the launch angle</strong>, forming a family of solutions that can be explored analytically and computationally.</p>
+<h2 id="2-analysis-of-the-range">2. Analysis of the Range</h2>
+<h3 id="behavior-of-the-range-function">Behavior of the Range Function</h3>
+<p>From the equation:</p>
+<div class="arithmatex">\[
+R(\theta) = \frac{v_0^2 \cdot \sin(2\theta)}{g}
+\]</div>
+<p>we observe that the range <span class="arithmatex">\( R \)</span> depends on the sine of twice the launch angle <span class="arithmatex">\( \theta \)</span>. This means:</p>
+<ul>
+<li>The function <span class="arithmatex">\( \sin(2\theta) \)</span> reaches its <strong>maximum value of 1</strong> when <span class="arithmatex">\( 2\theta = 90^\circ \)</span>, i.e. <span class="arithmatex">\( \theta = 45^\circ \)</span>.</li>
+<li>Therefore, the <strong>maximum range</strong> is achieved when the projectile is launched at an angle of <strong>45°</strong>.</li>
+</ul>
+<h3 id="symmetry-in-the-range">Symmetry in the Range</h3>
+<p>The function <span class="arithmatex">\( \sin(2\theta) \)</span> is <strong>symmetric</strong> around <span class="arithmatex">\( \theta = 45^\circ \)</span>. This implies that:</p>
+<div class="arithmatex">\[
+R(\theta) = R(90^\circ - \theta)
+\]</div>
+<p><strong>Example:</strong><br/>
+- A launch at <span class="arithmatex">\( 30^\circ \)</span> gives the same range as a launch at <span class="arithmatex">\( 60^\circ \)</span>.
+- Likewise, <span class="arithmatex">\( 20^\circ \)</span> and <span class="arithmatex">\( 70^\circ \)</span> give the same range.</p>
+<p>This symmetry creates <strong>pairs of angles</strong> with identical range values, despite different trajectories.</p>
+<h3 id="implications">Implications</h3>
+<ul>
+<li>The same horizontal distance can be achieved with different angles, but:</li>
+<li>Lower angles produce flatter, faster trajectories.</li>
+<li>Higher angles result in higher arcs with longer air time.</li>
+</ul>
+<h3 id="visual-expectation">Visual Expectation</h3>
+<p>A plot of <span class="arithmatex">\( R(\theta) \)</span> versus <span class="arithmatex">\( \theta \)</span> from <span class="arithmatex">\( 0^\circ \)</span> to <span class="arithmatex">\( 90^\circ \)</span> will form a <strong>symmetric curve</strong>, peaking at <span class="arithmatex">\( 45^\circ \)</span>.</p>
+<blockquote>
+<p>This provides a solid foundation for experimental simulation or numerical analysis to visualize this behavior.</p>
+</blockquote>
 <hr/>
 </div>
 </div><footer>
