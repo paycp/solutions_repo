@@ -1,8 +1,8 @@
 # Problem 1
 
-# 1. Theoretical Foundation
+## 1. Theoretical Foundation
 
-## Governing Equations of Motion
+### Governing Equations of Motion
 
 To analyze projectile motion, we start with Newton’s laws and decompose the motion into two perpendicular components: horizontal (x-axis) and vertical (y-axis). Assuming no air resistance and a flat surface, the equations of motion are:
 
@@ -24,7 +24,7 @@ Where:
 - \( g \) is the acceleration due to gravity,
 - \( t \) is time.
 
-## Time of Flight
+### Time of Flight
 
 The projectile returns to the ground when its vertical position becomes zero:  
 \( y(t) = 0 \)
@@ -37,7 +37,7 @@ t = \frac{2v_0 \cdot \sin(\theta)}{g}
 
 This represents the **total time of flight**.
 
-## Range of the Projectile
+### Range of the Projectile
 
 Substitute the time of flight into the horizontal equation:
 
@@ -51,7 +51,7 @@ Using the trigonometric identity \( 2 \cdot \sin(\theta) \cdot \cos(\theta) = \s
 R = \frac{v_0^2 \cdot \sin(2\theta)}{g}
 \]
 
-## Family of Solutions
+### Family of Solutions
 
 This final equation shows that the range \( R \) depends on:
 - the square of the initial speed \( v_0 \),
