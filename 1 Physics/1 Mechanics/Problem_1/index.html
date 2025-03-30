@@ -172,7 +172,50 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<p>test </p>
+<h1 id="1-theoretical-foundation">1. Theoretical Foundation</h1>
+<h2 id="governing-equations-of-motion">Governing Equations of Motion</h2>
+<p>To analyze projectile motion, we start with Newton’s laws and decompose the motion into two perpendicular components: horizontal (x-axis) and vertical (y-axis). Assuming no air resistance and a flat surface, the equations of motion are:</p>
+<ul>
+<li><strong>Horizontal motion:</strong></li>
+</ul>
+<div class="arithmatex">\[
+x(t) = v_0 \cdot \cos(\theta) \cdot t
+\]</div>
+<ul>
+<li><strong>Vertical motion:</strong></li>
+</ul>
+<div class="arithmatex">\[
+y(t) = v_0 \cdot \sin(\theta) \cdot t - \frac{1}{2}gt^2
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( v_0 \)</span> is the initial speed,
+- <span class="arithmatex">\( \theta \)</span> is the launch angle,
+- <span class="arithmatex">\( g \)</span> is the acceleration due to gravity,
+- <span class="arithmatex">\( t \)</span> is time.</p>
+<h2 id="time-of-flight">Time of Flight</h2>
+<p>The projectile returns to the ground when its vertical position becomes zero:<br/>
+<span class="arithmatex">\( y(t) = 0 \)</span></p>
+<p>Solving for <span class="arithmatex">\( t \)</span>:</p>
+<div class="arithmatex">\[
+t = \frac{2v_0 \cdot \sin(\theta)}{g}
+\]</div>
+<p>This represents the <strong>total time of flight</strong>.</p>
+<h2 id="range-of-the-projectile">Range of the Projectile</h2>
+<p>Substitute the time of flight into the horizontal equation:</p>
+<div class="arithmatex">\[
+R = v_0 \cdot \cos(\theta) \cdot \frac{2v_0 \cdot \sin(\theta)}{g}
+\]</div>
+<p>Using the trigonometric identity <span class="arithmatex">\( 2 \cdot \sin(\theta) \cdot \cos(\theta) = \sin(2\theta) \)</span>, we simplify:</p>
+<div class="arithmatex">\[
+R = \frac{v_0^2 \cdot \sin(2\theta)}{g}
+\]</div>
+<h2 id="family-of-solutions">Family of Solutions</h2>
+<p>This final equation shows that the range <span class="arithmatex">\( R \)</span> depends on:
+- the square of the initial speed <span class="arithmatex">\( v_0 \)</span>,
+- the sine of twice the launch angle <span class="arithmatex">\( \theta \)</span>,
+- and the gravitational acceleration <span class="arithmatex">\( g \)</span>.</p>
+<p>For fixed <span class="arithmatex">\( v_0 \)</span> and <span class="arithmatex">\( g \)</span>, the range varies <strong>only with the launch angle</strong>, forming a family of solutions that can be explored analytically and computationally.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
