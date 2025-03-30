@@ -166,4 +166,27 @@ Such graphical analysis provides a deeper understanding of projectile motion:
 
 This visualization confirms the theoretical predictions and provides a strong foundation for exploring more complex or real-world scenarios in future sections.
 
+## 5. Limitations and Further Improvements
+
+### Idealized Assumptions
+
+This model makes several simplifying assumptions:
+
+- **No air resistance**: In reality, drag significantly affects the range, especially at higher velocities.
+- **Launch from ground level**: The model does not account for launches from elevated platforms or terrains.
+- **Constant gravity**: Gravitational acceleration is treated as constant, though it can vary slightly with altitude or location.
+- **No wind or atmospheric effects**: Wind direction and speed can greatly alter projectile behavior.
+
+### Possible Extensions
+
+To increase realism, future versions of the model can include:
+
+- Air resistance (quadratic drag or using differential equations)
+- Launch from an arbitrary height
+- Custom terrain elevation or slope
+- Variable gravitational environments (e.g., other planets)
+- 3D projectile motion
+
+These refinements make the model more applicable to engineering, aerospace, and defense systems where precision is critical.
+
 ---
