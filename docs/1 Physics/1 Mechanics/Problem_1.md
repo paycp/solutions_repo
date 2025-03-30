@@ -101,4 +101,38 @@ A plot of \( R(\theta) \) versus \( \theta \) from \( 0^\circ \) to \( 90^\circ 
 
 > This provides a solid foundation for experimental simulation or numerical analysis to visualize this behavior.
 
+## 3. Code Implementation
+
+To analyze the relationship between the launch angle and the projectile range, we simulate the motion using Python with `numpy` and `matplotlib`.
+
+### Python Code
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+v0 = 10  # initial velocity in m/s
+g = 9.8  # acceleration due to gravity in m/s^2
+
+# Angle range from 0 to 90 degrees
+angles_deg = np.linspace(0, 90, 1000)
+angles_rad = np.deg2rad(angles_deg)
+
+# Range formula
+range_values = (v0**2 * np.sin(2 * angles_rad)) / g
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(angles_deg, range_values, label='Range vs Angle', color='teal')
+plt.axvline(45, color='gray', linestyle='--', label='Maximum Range at 45°')
+
+plt.title('Projectile Range as a Function of Launch Angle')
+plt.xlabel('Launch Angle (degrees)')
+plt.ylabel('Range (meters)')
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
 ---
