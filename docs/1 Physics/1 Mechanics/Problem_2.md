@@ -129,86 +129,92 @@ The forced damped pendulum model, while idealized, has important applications in
 
 ## 4. Implementation
 
-To simulate the motion of a forced damped pendulum, we model the system numerically using Python.  
-Given the complexity of the system, particularly for large angles and chaotic motion, we employ a numerical integration method.
+To explore the behavior of the forced damped pendulum, we develop a computational model using Python.
 
-### Numerical Method
-
-We use the **fourth-order Runge-Kutta (RK4) method** to solve the system of first-order differential equations derived from the original second-order equation.
-
-Let:
-
-\[
-\theta' = \omega
-\]
-\[
-\omega' = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
-\]
-
-where:
-- \( \theta \) is the angular displacement,
-- \( \omega \) is the angular velocity,
-- \( t \) is time.
-
-This transforms the original second-order ODE into a system of two coupled first-order ODEs.
+We use a numerical method, specifically the fourth-order Runge-Kutta method (`scipy.integrate.solve_ivp`), to solve the system of ordinary differential equations (ODEs).
 
 ---
 
-### Python Implementation
+### Mathematical Model
+
+The second-order differential equation:
+
+\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+\]
+
+can be rewritten as a system of two first-order equations:
+
+\[
+\frac{d\theta}{dt} = \omega
+\]
+\[
+\frac{d\omega}{dt} = -b\omega - \frac{g}{L}\sin(\theta) + A\cos(\omega_{\text{drive}} t)
+\]
+
+where \( \omega \) is the angular velocity.
+
+---
+
+### Python Code
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
 
 # Parameters
-g = 9.8      # gravitational acceleration (m/s^2)
-L = 1.0      # length of the pendulum (m)
-b = 0.2      # damping coefficient
-A = 1.2      # driving amplitude
+g = 9.8          # gravitational acceleration (m/s^2)
+L = 1.0          # length of pendulum (m)
+b = 0.2          # damping coefficient
+A = 1.2          # amplitude of driving force
 omega_drive = 2/3  # driving frequency (rad/s)
 
-# Time settings
-dt = 0.04       # time step (s)
-t_max = 60      # maximum simulation time (s)
-t = np.arange(0, t_max, dt)
+# Time span
+t_span = (0, 60)
+t_eval = np.linspace(t_span[0], t_span[1], 1000)
 
-# Initialize arrays
-theta = np.zeros(len(t))
-omega = np.zeros(len(t))
+# System of equations
+def pendulum(t, y):
+    theta, omega = y
+    dtheta_dt = omega
+    domega_dt = -b * omega - (g/L) * np.sin(theta) + A * np.cos(omega_drive * t)
+    return [dtheta_dt, domega_dt]
 
-# Initial conditions
-theta[0] = 0.2  # initial angle (radians)
-omega[0] = 0.0  # initial angular velocity (radians/s)
+# Initial conditions: [theta0, omega0]
+y0 = [0.2, 0.0]  # Small initial angle, zero initial velocity
 
-# Runge-Kutta 4th Order Method
-for i in range(len(t) - 1):
-    k1_theta = omega[i]
-    k1_omega = -b * omega[i] - (g/L) * np.sin(theta[i]) + A * np.cos(omega_drive * t[i])
-    
-    k2_theta = omega[i] + 0.5 * dt * k1_omega
-    k2_omega = -b * (omega[i] + 0.5 * dt * k1_omega) - (g/L) * np.sin(theta[i] + 0.5 * dt * k1_theta) + A * np.cos(omega_drive * (t[i] + 0.5 * dt))
-    
-    k3_theta = omega[i] + 0.5 * dt * k2_omega
-    k3_omega = -b * (omega[i] + 0.5 * dt * k2_omega) - (g/L) * np.sin(theta[i] + 0.5 * dt * k2_theta) + A * np.cos(omega_drive * (t[i] + 0.5 * dt))
-    
-    k4_theta = omega[i] + dt * k3_omega
-    k4_omega = -b * (omega[i] + dt * k3_omega) - (g/L) * np.sin(theta[i] + dt * k3_theta) + A * np.cos(omega_drive * (t[i] + dt))
-    
-    theta[i+1] = theta[i] + (dt/6) * (k1_theta + 2*k2_theta + 2*k3_theta + k4_theta)
-    omega[i+1] = omega[i] + (dt/6) * (k1_omega + 2*k2_omega + 2*k3_omega + k4_omega)
-    
-    # Keep theta within [-pi, pi] for better visualization
-    if theta[i+1] > np.pi:
-        theta[i+1] -= 2*np.pi
-    elif theta[i+1] < -np.pi:
-        theta[i+1] += 2*np.pi
+# Solve ODE
+solution = solve_ivp(pendulum, t_span, y0, t_eval=t_eval, method='RK45')
+
+# Extract results
+theta = solution.y[0]
+omega = solution.y[1]
+time = solution.t
+
+# Normalize theta to [-pi, pi] for better visualization
+theta = (theta + np.pi) % (2 * np.pi) - np.pi
 
 # Plotting
-plt.figure(figsize=(10, 6))
-plt.plot(t, theta)
-plt.title('Forced Damped Pendulum: Angular Displacement Over Time')
+plt.figure(figsize=(12, 6))
+
+# Angle vs Time
+plt.subplot(2, 1, 1)
+plt.plot(time, theta, label='Theta (angle)')
 plt.xlabel('Time (s)')
 plt.ylabel('Angle (radians)')
+plt.title('Angle vs Time')
 plt.grid(True)
+plt.legend()
+
+# Phase Portrait: Angular velocity vs Angle
+plt.subplot(2, 1, 2)
+plt.plot(theta, omega, '.', markersize=1, label='Phase Portrait')
+plt.xlabel('Angle (radians)')
+plt.ylabel('Angular velocity (rad/s)')
+plt.title('Phase Portrait')
+plt.grid(True)
+plt.legend()
+
 plt.tight_layout()
 plt.show()
