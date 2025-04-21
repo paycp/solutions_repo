@@ -65,17 +65,17 @@ However, damping and nonlinearity in the full equation modify the resonance beha
 The behavior of the forced damped pendulum is strongly influenced by three key parameters.
 
 - **Damping coefficient** (\( b \))
-  
+
   * Higher damping leads to quicker energy dissipation, causing oscillations to decay faster.
   * Lower damping allows oscillations to persist and can enable complex dynamics, including chaotic motion.
 
 - **Driving amplitude** (\( A \))
-  
+
   * A small driving amplitude results in regular, predictable oscillations.
   * A larger driving amplitude can push the system into nonlinear and chaotic behavior.
 
 - **Driving frequency** (\( \omega \))
-  
+
   * When the driving frequency approaches the system’s natural frequency (\( \omega_0 \)), resonance occurs, greatly amplifying oscillation amplitudes.
   * Away from resonance, the response is much smaller.
 
@@ -83,12 +83,12 @@ The behavior of the forced damped pendulum is strongly influenced by three key p
 
 As the driving amplitude \( A \) or the driving frequency \( \omega \) increases, the system exhibits the following transitions:
 
-- **Periodic motion**  
+- **Periodic motion**
   + Regular, repeating oscillations over time.
 
-- **Quasiperiodic motion**  
+- **Quasiperiodic motion**
   + Oscillations combining two or more frequencies, leading to a non-repeating but structured pattern.
 
-- **Chaotic motion**  
+- **Chaotic motion**
   + Highly sensitive to initial conditions, with irregular, unpredictable behavior.  
   + Characterized by positive Lyapunov exponents and complex structures in phase space.
