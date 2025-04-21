@@ -10,14 +10,15 @@ The motion of a forced damped pendulum is described by the second-order nonlinea
 \frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
 \]
 
-where:
-- \( \theta \) is the angular displacement,
-- \( b \) is the damping coefficient,
-- \( g \) is the gravitational acceleration,
-- \( L \) is the length of the pendulum,
-- \( A \) is the amplitude of the external driving force,
-- \( \omega \) is the driving angular frequency,
-- \( t \) is time.
+Where:  
+- \( \theta \) — the angular displacement,  
+- \( b \) — the damping coefficient,  
+- \( g \) — the gravitational acceleration,  
+- \( L \) — the length of the pendulum,  
+- \( A \) — the amplitude of the external driving force,  
+- \( \omega \) — the driving angular frequency,  
+- \( t \) — time.
+
 
 ### Small-Angle Approximation
 
@@ -35,15 +36,14 @@ Substituting this into the governing equation simplifies it to:
 
 This is now a **linear second-order nonhomogeneous differential equation** with constant coefficients.
 
-### Interpretation
-
-- The term \( b\frac{d\theta}{dt} \) represents **energy dissipation** (damping).
-- The term \( \frac{g}{L} \theta \) is the **restoring force** due to gravity.
+### Interpretation  
+- The term \( b\frac{d\theta}{dt} \) represents **energy dissipation** (damping).  
+- The term \( \frac{g}{L} \theta \) is the **restoring force** due to gravity.  
 - The right-hand side \( A \cos(\omega t) \) models an **external periodic driving force**.
 
-Depending on the parameters \( b \), \( A \), and \( \omega \), the system can exhibit a variety of behaviors, including:
-- **Steady-state oscillations** (harmonic motion),
-- **Resonance phenomena**,
+Depending on the parameters \( b \), \( A \), and \( \omega \), the system can exhibit a variety of behaviors, including:  
+- **Steady-state oscillations** (harmonic motion),  
+- **Resonance phenomena**,  
 - **Chaotic dynamics** at larger driving amplitudes and specific frequencies.
 
 ### Resonance Conditions
@@ -54,8 +54,8 @@ In the absence of damping and at small angles, resonance occurs when the driving
 \omega_0 = \sqrt{\frac{g}{L}}
 \]
 
-Under resonance conditions:
-- The amplitude of oscillations grows significantly.
+Under resonance conditions:  
+- The amplitude of oscillations grows significantly.  
 - Energy input from the external force is maximally efficient.
 
 However, damping and nonlinearity in the full equation modify the resonance behavior, preventing unbounded amplitude growth and introducing complex dynamics.
