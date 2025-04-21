@@ -62,21 +62,22 @@ However, damping and nonlinearity in the full equation modify the resonance beha
 
 ## 2. Analysis of Dynamics
 
-### Influence of Parameters
+The behavior of the forced damped pendulum is strongly influenced by three key parameters.
 
-The behavior of the forced damped pendulum is strongly influenced by three key parameters:
+- **Damping coefficient** (\( b \))
+  
+  - Higher damping leads to quicker energy dissipation, causing oscillations to decay faster.
+  - Lower damping allows oscillations to persist and can enable complex dynamics, including chaotic motion.
 
-- **Damping coefficient** (\( b \))  
-  Higher damping leads to quicker energy dissipation, causing oscillations to decay faster.  
-  Lower damping allows oscillations to persist and can enable complex dynamics, including chaotic motion.
+- **Driving amplitude** (\( A \))
+  
+  - A small driving amplitude results in regular, predictable oscillations.
+  - A larger driving amplitude can push the system into nonlinear and chaotic behavior.
 
-- **Driving amplitude** (\( A \))  
-  A small driving amplitude results in regular, predictable oscillations.  
-  A larger driving amplitude can push the system into nonlinear and chaotic behavior.
-
-- **Driving frequency** (\( \omega \))  
-  When the driving frequency approaches the system’s natural frequency (\( \omega_0 \)), resonance occurs, greatly amplifying oscillation amplitudes.  
-  Away from resonance, the response is much smaller.
+- **Driving frequency** (\( \omega \))
+  
+  - When the driving frequency approaches the system’s natural frequency (\( \omega_0 \)), resonance occurs, greatly amplifying oscillation amplitudes.
+  - Away from resonance, the response is much smaller.
 
 ### Transition from Regular to Chaotic Motion
 
@@ -89,10 +90,5 @@ As the driving amplitude \( A \) or the driving frequency \( \omega \) increases
   Oscillations combining two or more frequencies, leading to a non-repeating but structured pattern.
 
 - **Chaotic motion**  
-  Highly sensitive to initial conditions: even minute differences in the starting point lead to vastly different trajectories over time.  
-  Chaotic motion is characterized by:
-  - Irregular, unpredictable behavior,
-  - Positive Lyapunov exponents,
-  - Complex, fractal-like structures in phase space.
-
-These transitions highlight the richness of nonlinear dynamics even in relatively simple mechanical systems.
+  Highly sensitive to initial conditions, with irregular, unpredictable behavior.  
+  Characterized by positive Lyapunov exponents and complex structures in phase space.
