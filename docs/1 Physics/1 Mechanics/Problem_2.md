@@ -149,7 +149,7 @@ can be rewritten as a system of two first-order equations:
 \frac{d\theta}{dt} = \omega
 \]
 \[
-\frac{d\omega}{dt} = -b\omega - \frac{g}{L}\sin(\theta) + A\cos(\omega_{\text{drive}} t)
+\frac{d\omega}{dt} = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
 \]
 
 where \( \omega \) is the angular velocity.
