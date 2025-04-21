@@ -68,6 +68,26 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#3-practical-applications">3. Practical Applications</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#energy-harvesting-devices">Energy Harvesting Devices</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#suspension-bridges">Suspension Bridges</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#oscillating-electrical-circuits">Oscillating Electrical Circuits</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#biomechanics-and-gait-analysis">Biomechanics and Gait Analysis</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-implementation">4. Implementation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#numerical-method">Numerical Method</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#python-implementation">Python Implementation</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -196,16 +216,14 @@
 <div class="arithmatex">\[
 \frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
 \]</div>
-<p>Where:</p>
-<ul>
-<li><span class="arithmatex">\( \theta \)</span> — the angular displacement  </li>
-<li><span class="arithmatex">\( b \)</span> — the damping coefficient  </li>
-<li><span class="arithmatex">\( g \)</span> — the gravitational acceleration  </li>
-<li><span class="arithmatex">\( L \)</span> — the length of the pendulum  </li>
-<li><span class="arithmatex">\( A \)</span> — the amplitude of the external driving force  </li>
-<li><span class="arithmatex">\( \omega \)</span> — the driving angular frequency  </li>
-<li><span class="arithmatex">\( t \)</span> — time</li>
-</ul>
+<p>Where:<br/>
+- <span class="arithmatex">\( \theta \)</span> — the angular displacement<br/>
+- <span class="arithmatex">\( b \)</span> — the damping coefficient<br/>
+- <span class="arithmatex">\( g \)</span> — the gravitational acceleration<br/>
+- <span class="arithmatex">\( L \)</span> — the length of the pendulum<br/>
+- <span class="arithmatex">\( A \)</span> — the amplitude of the external driving force<br/>
+- <span class="arithmatex">\( \omega \)</span> — the driving angular frequency<br/>
+- <span class="arithmatex">\( t \)</span> — time</p>
 <hr/>
 <h3 id="small-angle-approximation">Small-Angle Approximation</h3>
 <p>For small angular displacements (<span class="arithmatex">\( \theta \)</span> close to zero), we can approximate:</p>
@@ -267,6 +285,7 @@
 </ul>
 </li>
 </ul>
+<hr/>
 <h3 id="transition-from-regular-to-chaotic-motion">Transition from Regular to Chaotic Motion</h3>
 <p>As the driving amplitude <span class="arithmatex">\( A \)</span> or the driving frequency <span class="arithmatex">\( \omega \)</span> increases, the system exhibits the following transitions:</p>
 <ul>
@@ -290,6 +309,100 @@
 </ul>
 </li>
 </ul>
+<h2 id="3-practical-applications">3. Practical Applications</h2>
+<p>The forced damped pendulum model, while idealized, has important applications in various real-world systems where periodic driving and damping effects are present.</p>
+<h3 id="energy-harvesting-devices">Energy Harvesting Devices</h3>
+<ul>
+<li>Systems such as piezoelectric energy harvesters rely on oscillations induced by ambient vibrations.</li>
+<li>Understanding resonance and damping helps optimize energy extraction.</li>
+</ul>
+<h3 id="suspension-bridges">Suspension Bridges</h3>
+<ul>
+<li>Suspension bridges are susceptible to wind-induced oscillations, which can lead to resonance phenomena.</li>
+<li>Proper damping mechanisms are critical to prevent catastrophic failures, such as the Tacoma Narrows Bridge collapse.</li>
+</ul>
+<h3 id="oscillating-electrical-circuits">Oscillating Electrical Circuits</h3>
+<ul>
+<li>Driven RLC circuits (resistor-inductor-capacitor systems) behave analogously to forced damped pendulums.</li>
+<li>Analysis of resonance and damping is essential for the design of stable and efficient electronic systems.</li>
+</ul>
+<h3 id="biomechanics-and-gait-analysis">Biomechanics and Gait Analysis</h3>
+<ul>
+<li>Human gait dynamics under external perturbations (e.g., uneven surfaces or wearable devices) can be modeled similarly.</li>
+<li>Damping and external forcing play roles in maintaining balance and stability.</li>
+</ul>
+<blockquote>
+<p>These practical examples demonstrate the relevance of the forced damped pendulum model beyond theoretical physics, providing insight into engineering, biomechanics, and energy systems.</p>
+</blockquote>
+<h2 id="4-implementation">4. Implementation</h2>
+<p>To simulate the motion of a forced damped pendulum, we model the system numerically using Python.<br/>
+Given the complexity of the system, particularly for large angles and chaotic motion, we employ a numerical integration method.</p>
+<h3 id="numerical-method">Numerical Method</h3>
+<p>We use the <strong>fourth-order Runge-Kutta (RK4) method</strong> to solve the system of first-order differential equations derived from the original second-order equation.</p>
+<p>Let:</p>
+<p>[
+\theta' = \omega
+]
+[
+\omega' = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
+]</p>
+<p>where:
+- <span class="arithmatex">\( \theta \)</span> is the angular displacement,
+- <span class="arithmatex">\( \omega \)</span> is the angular velocity,
+- <span class="arithmatex">\( t \)</span> is time.</p>
+<p>This transforms the original second-order ODE into a system of two coupled first-order ODEs.</p>
+<hr/>
+<h3 id="python-implementation">Python Implementation</h3>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="parameters">Parameters</h1>
+<p>g = 9.8      # gravitational acceleration (m/s^2)
+L = 1.0      # length of the pendulum (m)
+b = 0.2      # damping coefficient
+A = 1.2      # driving amplitude
+omega_drive = 2/3  # driving frequency (rad/s)</p>
+<h1 id="time-settings">Time settings</h1>
+<p>dt = 0.04       # time step (s)
+t_max = 60      # maximum simulation time (s)
+t = np.arange(0, t_max, dt)</p>
+<h1 id="initialize-arrays">Initialize arrays</h1>
+<p>theta = np.zeros(len(t))
+omega = np.zeros(len(t))</p>
+<h1 id="initial-conditions">Initial conditions</h1>
+<p>theta[0] = 0.2  # initial angle (radians)
+omega[0] = 0.0  # initial angular velocity (radians/s)</p>
+<h1 id="runge-kutta-4th-order-method">Runge-Kutta 4th Order Method</h1>
+<p>for i in range(len(t) - 1):
+    k1_theta = omega[i]
+    k1_omega = -b * omega[i] - (g/L) * np.sin(theta[i]) + A * np.cos(omega_drive * t[i])</p>
+<pre><code>k2_theta = omega[i] + 0.5 * dt * k1_omega
+k2_omega = -b * (omega[i] + 0.5 * dt * k1_omega) - (g/L) * np.sin(theta[i] + 0.5 * dt * k1_theta) + A * np.cos(omega_drive * (t[i] + 0.5 * dt))
+
+k3_theta = omega[i] + 0.5 * dt * k2_omega
+k3_omega = -b * (omega[i] + 0.5 * dt * k2_omega) - (g/L) * np.sin(theta[i] + 0.5 * dt * k2_theta) + A * np.cos(omega_drive * (t[i] + 0.5 * dt))
+
+k4_theta = omega[i] + dt * k3_omega
+k4_omega = -b * (omega[i] + dt * k3_omega) - (g/L) * np.sin(theta[i] + dt * k3_theta) + A * np.cos(omega_drive * (t[i] + dt))
+
+theta[i+1] = theta[i] + (dt/6) * (k1_theta + 2*k2_theta + 2*k3_theta + k4_theta)
+omega[i+1] = omega[i] + (dt/6) * (k1_omega + 2*k2_omega + 2*k3_omega + k4_omega)
+
+# Keep theta within [-pi, pi] for better visualization
+if theta[i+1] &gt; np.pi:
+    theta[i+1] -= 2*np.pi
+elif theta[i+1] &lt; -np.pi:
+    theta[i+1] += 2*np.pi
+</code></pre>
+<h1 id="plotting">Plotting</h1>
+<p>plt.figure(figsize=(10, 6))
+plt.plot(t, theta)
+plt.title('Forced Damped Pendulum: Angular Displacement Over Time')
+plt.xlabel('Time (s)')
+plt.ylabel('Angle (radians)')
+plt.grid(True)
+plt.tight_layout()
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
