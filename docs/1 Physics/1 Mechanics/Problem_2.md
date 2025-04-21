@@ -218,3 +218,75 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
+
+## 5. Advanced Visualization: Poincaré Sections and Bifurcation Diagrams
+
+---
+
+### 5.1 Poincaré Section
+
+A **Poincaré section** samples the system's state at regular intervals synchronized with the driving period:
+
+\[
+T_{\text{drive}} = \frac{2\pi}{\omega_{\text{drive}}}
+\]
+
+By recording the pendulum’s angle and velocity at these times, we can distinguish between periodic, quasiperiodic, and chaotic behavior.
+
+```python
+# Poincaré Section
+
+T_drive = 2 * np.pi / omega_drive
+sample_times = np.arange(0, t_span[1], T_drive)
+
+# Solve specifically at sample times
+solution_poincare = solve_ivp(pendulum, t_span, y0, t_eval=sample_times, method='RK45')
+
+theta_p = solution_poincare.y[0]
+omega_p = solution_poincare.y[1]
+
+# Normalize theta for visualization
+theta_p = (theta_p + np.pi) % (2 * np.pi) - np.pi
+
+# Plot Poincaré Section
+plt.figure(figsize=(8, 6))
+plt.plot(theta_p, omega_p, 'o', markersize=2)
+plt.xlabel('Angle (radians)')
+plt.ylabel('Angular velocity (rad/s)')
+plt.title('Poincaré Section')
+plt.grid(True)
+plt.show()
+
+# Bifurcation Diagram
+
+A_values = np.linspace(0.5, 1.5, 200)  # Range of A values
+theta_bif = []
+
+for A_current in A_values:
+    # Redefine the system with current A
+    def pendulum_bif(t, y):
+        theta, omega = y
+        dtheta_dt = omega
+        domega_dt = -b * omega - (g/L) * np.sin(theta) + A_current * np.cos(omega_drive * t)
+        return [dtheta_dt, domega_dt]
+
+    # Solve
+    solution = solve_ivp(pendulum_bif, t_span, y0, t_eval=sample_times, method='RK45')
+
+    # Take last few points after transients
+    theta_sampled = (solution.y[0][-50:] + np.pi) % (2 * np.pi) - np.pi
+    A_repeated = np.full_like(theta_sampled, A_current)
+
+    theta_bif.append((A_repeated, theta_sampled))
+
+# Plot bifurcation diagram
+plt.figure(figsize=(10, 6))
+
+for A_pts, theta_pts in theta_bif:
+    plt.plot(A_pts, theta_pts, 'k.', markersize=0.5)
+
+plt.xlabel('Driving Amplitude (A)')
+plt.ylabel('Angle (radians)')
+plt.title('Bifurcation Diagram')
+plt.grid(True)
+plt.show()
