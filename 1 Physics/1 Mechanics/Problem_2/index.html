@@ -50,6 +50,18 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#governing-equation-of-motion">Governing Equation of Motion</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">Small-Angle Approximation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#interpretation">Interpretation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#resonance-conditions">Resonance Conditions</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +184,49 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<h3 id="governing-equation-of-motion">Governing Equation of Motion</h3>
+<p>The motion of a forced damped pendulum is described by the second-order nonlinear differential equation:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+\]</div>
+<p>where:
+- <span class="arithmatex">\( \theta \)</span> is the angular displacement,
+- <span class="arithmatex">\( b \)</span> is the damping coefficient,
+- <span class="arithmatex">\( g \)</span> is the gravitational acceleration,
+- <span class="arithmatex">\( L \)</span> is the length of the pendulum,
+- <span class="arithmatex">\( A \)</span> is the amplitude of the external driving force,
+- <span class="arithmatex">\( \omega \)</span> is the driving angular frequency,
+- <span class="arithmatex">\( t \)</span> is time.</p>
+<h3 id="small-angle-approximation">Small-Angle Approximation</h3>
+<p>For small angular displacements (<span class="arithmatex">\( \theta \)</span> close to 0), we can use the approximation:</p>
+<div class="arithmatex">\[
+\sin(\theta) \approx \theta
+\]</div>
+<p>Substituting this into the governing equation simplifies it to:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
+\]</div>
+<p>This is now a <strong>linear second-order nonhomogeneous differential equation</strong> with constant coefficients.</p>
+<h3 id="interpretation">Interpretation</h3>
+<ul>
+<li>The term <span class="arithmatex">\( b\frac{d\theta}{dt} \)</span> represents <strong>energy dissipation</strong> (damping).</li>
+<li>The term <span class="arithmatex">\( \frac{g}{L} \theta \)</span> is the <strong>restoring force</strong> due to gravity.</li>
+<li>The right-hand side <span class="arithmatex">\( A \cos(\omega t) \)</span> models an <strong>external periodic driving force</strong>.</li>
+</ul>
+<p>Depending on the parameters <span class="arithmatex">\( b \)</span>, <span class="arithmatex">\( A \)</span>, and <span class="arithmatex">\( \omega \)</span>, the system can exhibit a variety of behaviors, including:
+- <strong>Steady-state oscillations</strong> (harmonic motion),
+- <strong>Resonance phenomena</strong>,
+- <strong>Chaotic dynamics</strong> at larger driving amplitudes and specific frequencies.</p>
+<h3 id="resonance-conditions">Resonance Conditions</h3>
+<p>In the absence of damping and at small angles, resonance occurs when the driving frequency <span class="arithmatex">\( \omega \)</span> matches the natural frequency of the pendulum:</p>
+<div class="arithmatex">\[
+\omega_0 = \sqrt{\frac{g}{L}}
+\]</div>
+<p>Under resonance conditions:
+- The amplitude of oscillations grows significantly.
+- Energy input from the external force is maximally efficient.</p>
+<p>However, damping and nonlinearity in the full equation modify the resonance behavior, preventing unbounded amplitude growth and introducing complex dynamics.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
