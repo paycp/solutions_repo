@@ -137,23 +137,30 @@ We use a numerical method, specifically the fourth-order Runge-Kutta method (`sc
 
 ### Mathematical Model
 
-The second-order differential equation:
+The second-order differential equation describing the forced damped pendulum is:
 
 .. math::
 
-    \frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+   \frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
 
-can be rewritten as a system of two first-order equations:
-
-.. math::
-
-    \frac{d\theta}{dt} = \omega
+This can be rewritten as a system of two first-order equations:
 
 .. math::
 
-    \frac{d\omega}{dt} = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
+   \begin{aligned}
+   \frac{d\theta}{dt} &= \omega \\
+   \frac{d\omega}{dt} &= -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
+   \end{aligned}
 
-where \( \omega \) is the angular velocity.
+where:  
+- \( \theta \) is the angular displacement,  
+- \( \omega \) is the angular velocity,  
+- \( b \) is the damping coefficient,  
+- \( g \) is the gravitational acceleration,  
+- \( L \) is the length of the pendulum,  
+- \( A \) is the amplitude of the external driving force,  
+- \( \omega_{\text{drive}} \) is the driving angular frequency.
+
 
 ---
 
