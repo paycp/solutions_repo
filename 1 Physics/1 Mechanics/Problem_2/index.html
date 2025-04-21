@@ -342,14 +342,15 @@
 <hr/>
 <h3 id="mathematical-model">Mathematical Model</h3>
 <p>The second-order differential equation describing the forced damped pendulum is:</p>
-<p>.. math::</p>
-<p>\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+\]</div>
 <p>This can be rewritten as a system of two first-order equations:</p>
-<p>.. math::</p>
-<p>\begin{aligned}
-   \frac{d\theta}{dt} &amp;= \omega \
-   \frac{d\omega}{dt} &amp;= -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
-   \end{aligned}</p>
+<div class="arithmatex">\[
+\frac{d\theta}{dt} = \omega
+\quad \quad
+\frac{d\omega}{dt} = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
+\]</div>
 <p>where:<br/>
 - <span class="arithmatex">\( \theta \)</span> is the angular displacement,<br/>
 - <span class="arithmatex">\( \omega \)</span> is the angular velocity,<br/>
@@ -360,7 +361,6 @@
 - <span class="arithmatex">\( \omega_{\text{drive}} \)</span> is the driving angular frequency.</p>
 <hr/>
 <h3 id="python-code">Python Code</h3>
-<p>.. code-block:: python</p>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
