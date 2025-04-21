@@ -64,36 +64,35 @@ However, damping and nonlinearity in the full equation modify the resonance beha
 
 ### Influence of Parameters
 
-The behavior of the forced damped pendulum is heavily influenced by three key parameters:
+The behavior of the forced damped pendulum is strongly influenced by three key parameters:
 
-- **Damping coefficient (\( b \))**  
-  - Higher damping leads to quicker dissipation of energy, causing oscillations to die out faster.  
-  - Lower damping allows oscillations to persist longer and enables more complex dynamics, including chaotic behavior under certain conditions.  
+- **Damping coefficient** (\( b \))  
+  Higher damping leads to quicker energy dissipation, causing oscillations to decay faster.  
+  Lower damping allows oscillations to persist and can enable complex dynamics, including chaotic motion.
 
-- **Driving amplitude (\( A \))**  
-  - A small driving amplitude results in regular periodic motion.  
-  - A large driving amplitude can push the system into nonlinear regimes, leading to irregular, chaotic motion.
+- **Driving amplitude** (\( A \))  
+  A small driving amplitude results in regular, predictable oscillations.  
+  A larger driving amplitude can push the system into nonlinear and chaotic behavior.
 
-- **Driving frequency (\( \omega \))**  
-  - When \( \omega \) is close to the system's natural frequency \( \omega_0 \), resonance occurs, causing large oscillation amplitudes.  
-  - Away from resonance, the system responds less dramatically, with smaller amplitude oscillations.
+- **Driving frequency** (\( \omega \))  
+  When the driving frequency approaches the system’s natural frequency (\( \omega_0 \)), resonance occurs, greatly amplifying oscillation amplitudes.  
+  Away from resonance, the response is much smaller.
 
 ### Transition from Regular to Chaotic Motion
 
-As the driving amplitude \( A \) or the driving frequency \( \omega \) is varied, the pendulum can transition through several dynamic regimes:
+As the driving amplitude \( A \) or the driving frequency \( \omega \) increases, the system exhibits the following transitions:
 
-- **Periodic Motion**:  
-  The pendulum oscillates with a regular, repeating pattern.
+- **Periodic motion**  
+  Regular, repeating oscillations over time.
 
-- **Quasiperiodic Motion**:  
-  Two or more incommensurate frequencies combine, producing a non-repeating but still structured pattern.
+- **Quasiperiodic motion**  
+  Oscillations combining two or more frequencies, leading to a non-repeating but structured pattern.
 
-- **Chaotic Motion**:  
-  Highly sensitive to initial conditions; small differences in starting points lead to drastically different outcomes over time.
+- **Chaotic motion**  
+  Highly sensitive to initial conditions: even minute differences in the starting point lead to vastly different trajectories over time.  
+  Chaotic motion is characterized by:
+  - Irregular, unpredictable behavior,
+  - Positive Lyapunov exponents,
+  - Complex, fractal-like structures in phase space.
 
-  Characterized by:  
-  - Irregular, non-repeating trajectories,  
-  - Positive Lyapunov exponents,  
-  - Strange attractors in phase space.
-
-These transitions are hallmark features of nonlinear dynamical systems and demonstrate the rich complexity arising from a simple physical setup.
+These transitions highlight the richness of nonlinear dynamics even in relatively simple mechanical systems.
