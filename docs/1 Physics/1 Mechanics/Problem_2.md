@@ -139,18 +139,17 @@ We use a numerical method, specifically the fourth-order Runge-Kutta method (`sc
 
 The second-order differential equation describing the forced damped pendulum is:
 
-.. math::
-
-   \frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+\]
 
 This can be rewritten as a system of two first-order equations:
 
-.. math::
-
-   \begin{aligned}
-   \frac{d\theta}{dt} &= \omega \\
-   \frac{d\omega}{dt} &= -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
-   \end{aligned}
+\[
+\frac{d\theta}{dt} = \omega
+\quad \quad
+\frac{d\omega}{dt} = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
+\]
 
 where:  
 - \( \theta \) is the angular displacement,  
@@ -164,8 +163,6 @@ where:
 ---
 
 ### Python Code
-
-.. code-block:: python
 
     import numpy as np
     import matplotlib.pyplot as plt
