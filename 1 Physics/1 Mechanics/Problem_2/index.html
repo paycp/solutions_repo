@@ -56,9 +56,9 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">Small-Angle Approximation</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#interpretation">Interpretation</a>
+<li class="toctree-l4"><a class="reference internal" href="#interpretation-of-terms">Interpretation of Terms</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#resonance-conditions">Resonance Conditions</a>
+<li class="toctree-l4"><a class="reference internal" href="#resonance-condition">Resonance Condition</a>
 </li>
 </ul>
 </li>
@@ -196,43 +196,52 @@
 <div class="arithmatex">\[
 \frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
 \]</div>
-<p>Where:<br/>
-- <span class="arithmatex">\( \theta \)</span> — the angular displacement,<br/>
-- <span class="arithmatex">\( b \)</span> — the damping coefficient,<br/>
-- <span class="arithmatex">\( g \)</span> — the gravitational acceleration,<br/>
-- <span class="arithmatex">\( L \)</span> — the length of the pendulum,<br/>
-- <span class="arithmatex">\( A \)</span> — the amplitude of the external driving force,<br/>
-- <span class="arithmatex">\( \omega \)</span> — the driving angular frequency,<br/>
-- <span class="arithmatex">\( t \)</span> — time.</p>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\( \theta \)</span> — the angular displacement  </li>
+<li><span class="arithmatex">\( b \)</span> — the damping coefficient  </li>
+<li><span class="arithmatex">\( g \)</span> — the gravitational acceleration  </li>
+<li><span class="arithmatex">\( L \)</span> — the length of the pendulum  </li>
+<li><span class="arithmatex">\( A \)</span> — the amplitude of the external driving force  </li>
+<li><span class="arithmatex">\( \omega \)</span> — the driving angular frequency  </li>
+<li><span class="arithmatex">\( t \)</span> — time</li>
+</ul>
+<hr/>
 <h3 id="small-angle-approximation">Small-Angle Approximation</h3>
-<p>For small angular displacements (<span class="arithmatex">\( \theta \)</span> close to 0), we can use the approximation:</p>
+<p>For small angular displacements (<span class="arithmatex">\( \theta \)</span> close to zero), we can approximate:</p>
 <div class="arithmatex">\[
 \sin(\theta) \approx \theta
 \]</div>
-<p>Substituting this into the governing equation simplifies it to:</p>
+<p>Substituting this into the governing equation gives:</p>
 <div class="arithmatex">\[
 \frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
 \]</div>
-<p>This is now a <strong>linear second-order nonhomogeneous differential equation</strong> with constant coefficients.</p>
-<h3 id="interpretation">Interpretation</h3>
+<p>This simplifies the system to a <strong>linear second-order nonhomogeneous differential equation</strong> with constant coefficients.</p>
+<hr/>
+<h3 id="interpretation-of-terms">Interpretation of Terms</h3>
 <ul>
-<li>The term <span class="arithmatex">\( b\frac{d\theta}{dt} \)</span> represents <strong>energy dissipation</strong> (damping).  </li>
-<li>The term <span class="arithmatex">\( \frac{g}{L} \theta \)</span> is the <strong>restoring force</strong> due to gravity.  </li>
-<li>The right-hand side <span class="arithmatex">\( A \cos(\omega t) \)</span> models an <strong>external periodic driving force</strong>.</li>
+<li>The term <span class="arithmatex">\( b\frac{d\theta}{dt} \)</span> represents <strong>energy dissipation</strong> due to damping.</li>
+<li>The term <span class="arithmatex">\( \frac{g}{L}\theta \)</span> represents the <strong>restoring force</strong> due to gravity.</li>
+<li>The right-hand side <span class="arithmatex">\( A\cos(\omega t) \)</span> represents an <strong>external periodic driving force</strong>.</li>
 </ul>
-<p>Depending on the parameters <span class="arithmatex">\( b \)</span>, <span class="arithmatex">\( A \)</span>, and <span class="arithmatex">\( \omega \)</span>, the system can exhibit a variety of behaviors, including:<br/>
-- <strong>Steady-state oscillations</strong> (harmonic motion),<br/>
-- <strong>Resonance phenomena</strong>,<br/>
-- <strong>Chaotic dynamics</strong> at larger driving amplitudes and specific frequencies.</p>
-<h3 id="resonance-conditions">Resonance Conditions</h3>
-<p>In the absence of damping and at small angles, resonance occurs when the driving frequency <span class="arithmatex">\( \omega \)</span> matches the natural frequency of the pendulum:</p>
+<p>Depending on the values of <span class="arithmatex">\( b \)</span>, <span class="arithmatex">\( A \)</span>, and <span class="arithmatex">\( \omega \)</span>, the system can exhibit:</p>
+<ul>
+<li><strong>Steady-state periodic motion</strong></li>
+<li><strong>Resonance phenomena</strong></li>
+<li><strong>Quasiperiodic or chaotic behavior</strong></li>
+</ul>
+<hr/>
+<h3 id="resonance-condition">Resonance Condition</h3>
+<p>In the absence of damping and under the small-angle approximation, resonance occurs when the driving frequency <span class="arithmatex">\( \omega \)</span> matches the natural frequency <span class="arithmatex">\( \omega_0 \)</span> of the pendulum:</p>
 <div class="arithmatex">\[
 \omega_0 = \sqrt{\frac{g}{L}}
 \]</div>
-<p>Under resonance conditions:<br/>
-- The amplitude of oscillations grows significantly.<br/>
-- Energy input from the external force is maximally efficient.</p>
-<p>However, damping and nonlinearity in the full equation modify the resonance behavior, preventing unbounded amplitude growth and introducing complex dynamics.</p>
+<p>Under resonance:</p>
+<ul>
+<li>The amplitude of oscillations becomes significantly large.</li>
+<li>Energy transfer from the external driving force to the pendulum is maximized.</li>
+</ul>
+<p>However, real systems with damping exhibit limited amplitudes and more complex resonance behavior.</p>
 <h2 id="2-analysis-of-dynamics">2. Analysis of Dynamics</h2>
 <p>The behavior of the forced damped pendulum is strongly influenced by three key parameters:</p>
 <ul>
