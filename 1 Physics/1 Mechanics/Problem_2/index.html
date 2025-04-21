@@ -341,18 +341,23 @@
 <p>We use a numerical method, specifically the fourth-order Runge-Kutta method (<code>scipy.integrate.solve_ivp</code>), to solve the system of ordinary differential equations (ODEs).</p>
 <hr/>
 <h3 id="mathematical-model">Mathematical Model</h3>
-<p>The second-order differential equation:</p>
+<p>The second-order differential equation describing the forced damped pendulum is:</p>
 <p>.. math::</p>
-<pre><code>\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
-</code></pre>
-<p>can be rewritten as a system of two first-order equations:</p>
+<p>\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)</p>
+<p>This can be rewritten as a system of two first-order equations:</p>
 <p>.. math::</p>
-<pre><code>\frac{d\theta}{dt} = \omega
-</code></pre>
-<p>.. math::</p>
-<pre><code>\frac{d\omega}{dt} = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
-</code></pre>
-<p>where <span class="arithmatex">\( \omega \)</span> is the angular velocity.</p>
+<p>\begin{aligned}
+   \frac{d\theta}{dt} &amp;= \omega \
+   \frac{d\omega}{dt} &amp;= -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
+   \end{aligned}</p>
+<p>where:<br/>
+- <span class="arithmatex">\( \theta \)</span> is the angular displacement,<br/>
+- <span class="arithmatex">\( \omega \)</span> is the angular velocity,<br/>
+- <span class="arithmatex">\( b \)</span> is the damping coefficient,<br/>
+- <span class="arithmatex">\( g \)</span> is the gravitational acceleration,<br/>
+- <span class="arithmatex">\( L \)</span> is the length of the pendulum,<br/>
+- <span class="arithmatex">\( A \)</span> is the amplitude of the external driving force,<br/>
+- <span class="arithmatex">\( \omega_{\text{drive}} \)</span> is the driving angular frequency.</p>
 <hr/>
 <h3 id="python-code">Python Code</h3>
 <p>.. code-block:: python</p>
