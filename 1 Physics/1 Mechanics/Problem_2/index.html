@@ -62,6 +62,14 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-dynamics">2. Analysis of Dynamics</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#influence-of-parameters">Influence of Parameters</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#transition-from-regular-to-chaotic-motion">Transition from Regular to Chaotic Motion</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -227,6 +235,49 @@
 - The amplitude of oscillations grows significantly.<br/>
 - Energy input from the external force is maximally efficient.</p>
 <p>However, damping and nonlinearity in the full equation modify the resonance behavior, preventing unbounded amplitude growth and introducing complex dynamics.</p>
+<h2 id="2-analysis-of-dynamics">2. Analysis of Dynamics</h2>
+<h3 id="influence-of-parameters">Influence of Parameters</h3>
+<p>The behavior of the forced damped pendulum is heavily influenced by three key parameters:</p>
+<ul>
+<li><strong>Damping coefficient (<span class="arithmatex">\( b \)</span>)</strong> </li>
+<li>Higher damping leads to quicker dissipation of energy, causing oscillations to die out faster.</li>
+<li>
+<p>Lower damping allows oscillations to persist longer and enables more complex dynamics, including chaotic behavior under certain conditions.</p>
+</li>
+<li>
+<p><strong>Driving amplitude (<span class="arithmatex">\( A \)</span>)</strong> </p>
+</li>
+<li>A small driving amplitude results in regular periodic motion.</li>
+<li>
+<p>A large driving amplitude can push the system into nonlinear regimes, leading to irregular, chaotic motion.</p>
+</li>
+<li>
+<p><strong>Driving frequency (<span class="arithmatex">\( \omega \)</span>)</strong> </p>
+</li>
+<li>When <span class="arithmatex">\( \omega \)</span> is close to the system's natural frequency <span class="arithmatex">\( \omega_0 \)</span>, resonance occurs, causing large oscillation amplitudes.</li>
+<li>Away from resonance, the system responds less dramatically, with smaller amplitude oscillations.</li>
+</ul>
+<h3 id="transition-from-regular-to-chaotic-motion">Transition from Regular to Chaotic Motion</h3>
+<p>As the driving amplitude <span class="arithmatex">\( A \)</span> or the driving frequency <span class="arithmatex">\( \omega \)</span> is varied, the pendulum can transition through several dynamic regimes:</p>
+<ul>
+<li>
+<p><strong>Periodic Motion</strong>:<br/>
+  The pendulum oscillates with a regular, repeating pattern.</p>
+</li>
+<li>
+<p><strong>Quasiperiodic Motion</strong>:<br/>
+  Two or more incommensurate frequencies combine, producing a non-repeating but still structured pattern.</p>
+</li>
+<li>
+<p><strong>Chaotic Motion</strong>:<br/>
+  Highly sensitive to initial conditions; small differences in starting points lead to drastically different outcomes over time.<br/>
+  Characterized by:</p>
+</li>
+<li>Irregular, non-repeating trajectories,</li>
+<li>Positive Lyapunov exponents,</li>
+<li>Strange attractors in phase space.</li>
+</ul>
+<p>These transitions are hallmark features of nonlinear dynamical systems and demonstrate the rich complexity arising from a simple physical setup.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
