@@ -161,7 +161,6 @@ where:
 - \( A \) is the amplitude of the external driving force,  
 - \( \omega_{\text{drive}} \) is the driving angular frequency.
 
-
 ---
 
 ### Python Code
