@@ -139,18 +139,19 @@ We use a numerical method, specifically the fourth-order Runge-Kutta method (`sc
 
 The second-order differential equation:
 
-\[
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
-\]
+.. math::
+
+    \frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
 
 can be rewritten as a system of two first-order equations:
 
-\[
-\frac{d\theta}{dt} = \omega
-\]
-\[
-\frac{d\omega}{dt} = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
-\]
+.. math::
+
+    \frac{d\theta}{dt} = \omega
+
+.. math::
+
+    \frac{d\omega}{dt} = -b\omega - \frac{g}{L} \sin(\theta) + A \cos(\omega_{\text{drive}} t)
 
 where \( \omega \) is the angular velocity.
 
@@ -158,135 +159,75 @@ where \( \omega \) is the angular velocity.
 
 ### Python Code
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
+.. code-block:: python
 
-# Parameters
-g = 9.8          # gravitational acceleration (m/s^2)
-L = 1.0          # length of pendulum (m)
-b = 0.2          # damping coefficient
-A = 1.2          # amplitude of driving force
-omega_drive = 2/3  # driving frequency (rad/s)
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_ivp
 
-# Time span
-t_span = (0, 60)
-t_eval = np.linspace(t_span[0], t_span[1], 1000)
+    # Parameters
+    g = 9.8          # gravitational acceleration (m/s^2)
+    L = 1.0          # length of pendulum (m)
+    b = 0.2          # damping coefficient
+    A = 1.2          # amplitude of driving force
+    omega_drive = 2/3  # driving frequency (rad/s)
 
-# System of equations
-def pendulum(t, y):
-    theta, omega = y
-    dtheta_dt = omega
-    domega_dt = -b * omega - (g/L) * np.sin(theta) + A * np.cos(omega_drive * t)
-    return [dtheta_dt, domega_dt]
+    # Time span
+    t_span = (0, 60)
+    t_eval = np.linspace(t_span[0], t_span[1], 1000)
 
-# Initial conditions: [theta0, omega0]
-y0 = [0.2, 0.0]  # Small initial angle, zero initial velocity
+    # System of equations
+    def pendulum(t, y):
+        theta, omega = y
+        dtheta_dt = omega
+        domega_dt = -b * omega - (g/L) * np.sin(theta) + A * np.cos(omega_drive * t)
+        return [dtheta_dt, domega_dt]
 
-# Solve ODE
-solution = solve_ivp(pendulum, t_span, y0, t_eval=t_eval, method='RK45')
+    # Initial conditions
+    y0 = [0.2, 0.0]  # Small initial angle, zero initial velocity
 
-# Extract results
-theta = solution.y[0]
-omega = solution.y[1]
-time = solution.t
+    # Solve ODE
+    solution = solve_ivp(pendulum, t_span, y0, t_eval=t_eval, method='RK45')
 
-# Normalize theta to [-pi, pi] for better visualization
-theta = (theta + np.pi) % (2 * np.pi) - np.pi
+    # Extract results
+    theta = solution.y[0]
+    omega = solution.y[1]
+    time = solution.t
 
-# Plotting
-plt.figure(figsize=(12, 6))
+    # Normalize theta to [-pi, pi]
+    theta = (theta + np.pi) % (2 * np.pi) - np.pi
 
-# Angle vs Time
-plt.subplot(2, 1, 1)
-plt.plot(time, theta, label='Theta (angle)')
-plt.xlabel('Time (s)')
-plt.ylabel('Angle (radians)')
-plt.title('Angle vs Time')
-plt.grid(True)
-plt.legend()
+    # Plotting
+    plt.figure(figsize=(12, 6))
 
-# Phase Portrait: Angular velocity vs Angle
-plt.subplot(2, 1, 2)
-plt.plot(theta, omega, '.', markersize=1, label='Phase Portrait')
-plt.xlabel('Angle (radians)')
-plt.ylabel('Angular velocity (rad/s)')
-plt.title('Phase Portrait')
-plt.grid(True)
-plt.legend()
+    # Angle vs Time
+    plt.subplot(2, 1, 1)
+    plt.plot(time, theta, label='Theta (angle)')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Angle (radians)')
+    plt.title('Angle vs Time')
+    plt.grid(True)
+    plt.legend()
 
-plt.tight_layout()
-plt.show()
+    # Phase Portrait
+    plt.subplot(2, 1, 2)
+    plt.plot(theta, omega, '.', markersize=1, label='Phase Portrait')
+    plt.xlabel('Angle (radians)')
+    plt.ylabel('Angular velocity (rad/s)')
+    plt.title('Phase Portrait')
+    plt.grid(True)
+    plt.legend()
 
-## 5. Advanced Visualization: Poincaré Sections and Bifurcation Diagrams
+    plt.tight_layout()
+    plt.show()
 
 ---
 
-### 5.1 Poincaré Section
+### Visualization Overview
 
-A **Poincaré section** samples the system's state at regular intervals synchronized with the driving period:
+- **Angle vs Time**  
+  Shows how the pendulum's angle evolves under the combined effects of damping and external forcing.
 
-\[
-T_{\text{drive}} = \frac{2\pi}{\omega_{\text{drive}}}
-\]
-
-By recording the pendulum’s angle and velocity at these times, we can distinguish between periodic, quasiperiodic, and chaotic behavior.
-
-```python
-# Poincaré Section
-
-T_drive = 2 * np.pi / omega_drive
-sample_times = np.arange(0, t_span[1], T_drive)
-
-# Solve specifically at sample times
-solution_poincare = solve_ivp(pendulum, t_span, y0, t_eval=sample_times, method='RK45')
-
-theta_p = solution_poincare.y[0]
-omega_p = solution_poincare.y[1]
-
-# Normalize theta for visualization
-theta_p = (theta_p + np.pi) % (2 * np.pi) - np.pi
-
-# Plot Poincaré Section
-plt.figure(figsize=(8, 6))
-plt.plot(theta_p, omega_p, 'o', markersize=2)
-plt.xlabel('Angle (radians)')
-plt.ylabel('Angular velocity (rad/s)')
-plt.title('Poincaré Section')
-plt.grid(True)
-plt.show()
-
-# Bifurcation Diagram
-
-A_values = np.linspace(0.5, 1.5, 200)  # Range of A values
-theta_bif = []
-
-for A_current in A_values:
-    # Redefine the system with current A
-    def pendulum_bif(t, y):
-        theta, omega = y
-        dtheta_dt = omega
-        domega_dt = -b * omega - (g/L) * np.sin(theta) + A_current * np.cos(omega_drive * t)
-        return [dtheta_dt, domega_dt]
-
-    # Solve
-    solution = solve_ivp(pendulum_bif, t_span, y0, t_eval=sample_times, method='RK45')
-
-    # Take last few points after transients
-    theta_sampled = (solution.y[0][-50:] + np.pi) % (2 * np.pi) - np.pi
-    A_repeated = np.full_like(theta_sampled, A_current)
-
-    theta_bif.append((A_repeated, theta_sampled))
-
-# Plot bifurcation diagram
-plt.figure(figsize=(10, 6))
-
-for A_pts, theta_pts in theta_bif:
-    plt.plot(A_pts, theta_pts, 'k.', markersize=0.5)
-
-plt.xlabel('Driving Amplitude (A)')
-plt.ylabel('Angle (radians)')
-plt.title('Bifurcation Diagram')
-plt.grid(True)
-plt.show()
+- **Phase Portrait**  
+  Plots angular velocity versus angle to visualize the dynamical behavior of the system.  
+  In chaotic regimes, the phase portrait appears scattered and complex.
