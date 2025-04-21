@@ -67,16 +67,16 @@ However, damping and nonlinearity in the full equation modify the resonance beha
 The behavior of the forced damped pendulum is heavily influenced by three key parameters:
 
 - **Damping coefficient (\( b \))**  
-  -- Higher damping leads to quicker dissipation of energy, causing oscillations to die out faster.
-  -- Lower damping allows oscillations to persist longer and enables more complex dynamics, including chaotic behavior under certain conditions.
+  - Higher damping leads to quicker dissipation of energy, causing oscillations to die out faster.  
+  - Lower damping allows oscillations to persist longer and enables more complex dynamics, including chaotic behavior under certain conditions.  
 
 - **Driving amplitude (\( A \))**  
-  -- A small driving amplitude results in regular periodic motion.
-  -- A large driving amplitude can push the system into nonlinear regimes, leading to irregular, chaotic motion.
+  - A small driving amplitude results in regular periodic motion.  
+  - A large driving amplitude can push the system into nonlinear regimes, leading to irregular, chaotic motion.
 
 - **Driving frequency (\( \omega \))**  
-  -- When \( \omega \) is close to the system's natural frequency \( \omega_0 \), resonance occurs, causing large oscillation amplitudes.
-  -- Away from resonance, the system responds less dramatically, with smaller amplitude oscillations.
+  - When \( \omega \) is close to the system's natural frequency \( \omega_0 \), resonance occurs, causing large oscillation amplitudes.  
+  - Away from resonance, the system responds less dramatically, with smaller amplitude oscillations.
 
 ### Transition from Regular to Chaotic Motion
 
@@ -89,10 +89,11 @@ As the driving amplitude \( A \) or the driving frequency \( \omega \) is varied
   Two or more incommensurate frequencies combine, producing a non-repeating but still structured pattern.
 
 - **Chaotic Motion**:  
-  Highly sensitive to initial conditions; small differences in starting points lead to drastically different outcomes over time.  
-  Characterized by:
-  - Irregular, non-repeating trajectories,
-  - Positive Lyapunov exponents,
+  Highly sensitive to initial conditions; small differences in starting points lead to drastically different outcomes over time.
+
+  Characterized by:  
+  - Irregular, non-repeating trajectories,  
+  - Positive Lyapunov exponents,  
   - Strange attractors in phase space.
 
 These transitions are hallmark features of nonlinear dynamical systems and demonstrate the rich complexity arising from a simple physical setup.
