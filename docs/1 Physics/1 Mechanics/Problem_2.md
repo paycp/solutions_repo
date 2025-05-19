@@ -332,4 +332,4 @@ These advanced visualizations help identify and classify dynamic regimes:
 - **Bifurcation diagrams**: track system response to parameter changes.
 
 Together, they provide powerful insight into nonlinear dynamics and chaotic systems.
-```
+
