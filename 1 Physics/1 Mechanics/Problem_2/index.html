@@ -90,6 +90,14 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#5-limitations-and-future-improvements">5. Limitations and Future Improvements</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#limitations-of-the-model">Limitations of the Model</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#possible-extensions">Possible Extensions</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -434,6 +442,44 @@ plt.show()
   In chaotic regimes, the phase portrait appears scattered and complex.</p>
 </li>
 </ul>
+<h2 id="5-limitations-and-future-improvements">5. Limitations and Future Improvements</h2>
+<h3 id="limitations-of-the-model">Limitations of the Model</h3>
+<p>While the current model captures many key features of the forced damped pendulum, it relies on simplifying assumptions that limit its accuracy and applicability in more complex scenarios:</p>
+<ul>
+<li>
+<p><strong>No nonlinear damping</strong><br/>
+  The damping term is assumed to be linear, but real systems often exhibit velocity-dependent or structural damping behaviors.</p>
+</li>
+<li>
+<p><strong>Ideal periodic forcing</strong><br/>
+  The driving force is modeled as a perfect cosine wave, while real external forces may be irregular, noisy, or even impulsive.</p>
+</li>
+<li>
+<p><strong>Planar motion only</strong><br/>
+  The model assumes the pendulum moves in a single plane, which may not hold in flexible or spatial pendulum systems.</p>
+</li>
+<li>
+<p><strong>No mechanical constraints</strong><br/>
+  It does not account for joint friction, finite range of motion, or collisions with boundaries.</p>
+</li>
+<li>
+<p><strong>Constant parameters</strong><br/>
+  Coefficients like damping <span class="arithmatex">\( b \)</span>, gravity <span class="arithmatex">\( g \)</span>, and amplitude <span class="arithmatex">\( A \)</span> are treated as constants, but in reality they can change over time or with temperature, load, etc.</p>
+</li>
+</ul>
+<hr/>
+<h3 id="possible-extensions">Possible Extensions</h3>
+<p>Future work can enhance the realism and scope of the model:</p>
+<ul>
+<li>Add <strong>nonlinear damping terms</strong> (e.g. proportional to <span class="arithmatex">\( \omega^2 \)</span>) to simulate more realistic energy loss.</li>
+<li>Introduce <strong>non-periodic or pulsed external forces</strong>, including stochastic driving.</li>
+<li>Simulate <strong>3D pendulum dynamics</strong>, including twisting and off-plane motion.</li>
+<li>Include <strong>parameter drift</strong> over time to model aging, fatigue, or environmental changes.</li>
+<li>Explore <strong>coupled pendulums</strong> or <strong>double pendulum systems</strong> to study synchronization, bifurcations, and chaos.</li>
+</ul>
+<blockquote>
+<p>These improvements can help bridge the gap between an idealized mathematical model and real-world systems in robotics, biomechanics, structural engineering, and control theory.</p>
+</blockquote>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
