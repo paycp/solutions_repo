@@ -247,7 +247,6 @@ Kepler’s Law is essential in:
 - Understanding orbital dynamics from Earth to exoplanetary systems.
 
 
-```markdown
 ## 4. Implementation
 
 To verify Kepler’s Third Law numerically, we simulate circular orbits of varying radii around a central mass and calculate the orbital periods for each case.
@@ -318,4 +317,4 @@ should produce a straight line when plotting \( T^2 \) versus \( r^3 \).
 - Try fitting a linear regression to estimate the constant \( k \).
 - Extend the simulation to include **elliptical orbits** using numerical integration.
 - Visualize orbits using **position updates** (x, y) for better understanding of orbital paths.
-```
+
