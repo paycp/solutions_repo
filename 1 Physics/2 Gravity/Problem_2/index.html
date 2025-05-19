@@ -58,6 +58,30 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#first-cosmic-velocity-v_1-orbital-velocity">First Cosmic Velocity (\( v_1 \)) – Orbital Velocity</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#second-cosmic-velocity-v_2-escape-velocity">Second Cosmic Velocity (\( v_2 \)) – Escape Velocity</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#third-cosmic-velocity-v_3-interstellar-escape-velocity">Third Cosmic Velocity (\( v_3 \)) – Interstellar Escape Velocity</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-mathematical-derivations-and-dependencies">2. Mathematical Derivations and Dependencies</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#first-cosmic-velocity-v_1">First Cosmic Velocity (\( v_1 \))</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#second-cosmic-velocity-v_2">Second Cosmic Velocity (\( v_2 \))</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#third-cosmic-velocity-v_3">Third Cosmic Velocity (\( v_3 \))</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#parameter-dependencies">Parameter Dependencies</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Problem 3</a>
@@ -172,6 +196,156 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<p>Cosmic velocities define the minimum speeds required to achieve specific goals in gravitational systems — from stable orbit to escaping the Solar System.</p>
+<hr/>
+<h3 id="first-cosmic-velocity-v_1-orbital-velocity">First Cosmic Velocity (<span class="arithmatex">\( v_1 \)</span>) – Orbital Velocity</h3>
+<p>This is the minimum horizontal velocity required to maintain a <strong>stable circular orbit</strong> near the surface of a celestial body.</p>
+<div class="arithmatex">\[
+v_1 = \sqrt{\frac{G M}{r}}
+\]</div>
+<ul>
+<li><span class="arithmatex">\( G \)</span> — gravitational constant  </li>
+<li><span class="arithmatex">\( M \)</span> — mass of the celestial body  </li>
+<li><span class="arithmatex">\( r \)</span> — orbital radius (typically the radius of the planet for low Earth orbit)</li>
+</ul>
+<p>✅ A satellite launched at this speed will remain in free fall around the planet.</p>
+<hr/>
+<h3 id="second-cosmic-velocity-v_2-escape-velocity">Second Cosmic Velocity (<span class="arithmatex">\( v_2 \)</span>) – Escape Velocity</h3>
+<p>This is the minimum speed required to <strong>break free from the gravitational pull</strong> of a celestial body without further propulsion.</p>
+<div class="arithmatex">\[
+v_2 = \sqrt{\frac{2 G M}{r}} = \sqrt{2} \cdot v_1
+\]</div>
+<ul>
+<li>This velocity allows an object to reach <strong>infinity with zero final velocity</strong>.</li>
+<li>Used for missions leaving Earth toward the Moon, Mars, etc.</li>
+</ul>
+<p>✅ The spacecraft overcomes gravitational binding energy.</p>
+<hr/>
+<h3 id="third-cosmic-velocity-v_3-interstellar-escape-velocity">Third Cosmic Velocity (<span class="arithmatex">\( v_3 \)</span>) – Interstellar Escape Velocity</h3>
+<p>This is the minimum speed required to <strong>leave the entire Solar System</strong> from Earth’s orbit, overcoming the Sun’s gravitational field.</p>
+<p>Assuming a starting point at Earth's orbit (neglecting Earth's own gravity):</p>
+<div class="arithmatex">\[
+v_3 = \sqrt{\frac{2 G M_{\odot}}{r_{\text{Earth}}}}
+\]</div>
+<ul>
+<li><span class="arithmatex">\( M_{\odot} \)</span> — mass of the Sun  </li>
+<li><span class="arithmatex">\( r_{\text{Earth}} \)</span> — Earth's orbital radius around the Sun</li>
+</ul>
+<p>To launch from Earth’s surface and escape the Solar System, both Earth’s gravity and orbital motion must be taken into account:</p>
+<div class="arithmatex">\[
+v_3^{\text{total}} = \sqrt{v_{2,\text{Earth}}^2 + v_3^2 - 2 v_{1,\text{Earth}} v_3 \cos(\theta)}
+\]</div>
+<p>✅ Often achieved through gravity assists and deep-space propulsion.</p>
+<hr/>
+<h3 id="summary">Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Velocity</th>
+<th>Meaning</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\( v_1 \)</span></td>
+<td>Circular orbital velocity</td>
+<td><span class="arithmatex">\( \sqrt{GM/r} \)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( v_2 \)</span></td>
+<td>Escape from planet</td>
+<td><span class="arithmatex">\( \sqrt{2GM/r} \)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( v_3 \)</span></td>
+<td>Escape from star system</td>
+<td><span class="arithmatex">\( \sqrt{2GM_{\odot}/r} \)</span></td>
+</tr>
+</tbody>
+</table>
+<p>These velocities form the foundation of <strong>orbital mechanics</strong> and are critical for mission planning, satellite deployment, and interplanetary navigation.</p>
+<h2 id="2-mathematical-derivations-and-dependencies">2. Mathematical Derivations and Dependencies</h2>
+<p>The first, second, and third cosmic velocities are derived from <strong>Newton's law of universal gravitation</strong> and principles of <strong>conservation of energy</strong>.</p>
+<hr/>
+<h3 id="first-cosmic-velocity-v_1">First Cosmic Velocity (<span class="arithmatex">\( v_1 \)</span>)</h3>
+<p>This is the orbital speed for a circular orbit just above the surface:</p>
+<p>From Newton’s law of gravitation:</p>
+<div class="arithmatex">\[
+F_{\text{gravity}} = \frac{G M m}{r^2}
+\]</div>
+<p>From Newton's second law (centripetal force):</p>
+<div class="arithmatex">\[
+F = \frac{m v^2}{r}
+\]</div>
+<p>Equating the forces:</p>
+<div class="arithmatex">\[
+\frac{G M m}{r^2} = \frac{m v_1^2}{r}
+\Rightarrow
+v_1 = \sqrt{\frac{G M}{r}}
+\]</div>
+<hr/>
+<h3 id="second-cosmic-velocity-v_2">Second Cosmic Velocity (<span class="arithmatex">\( v_2 \)</span>)</h3>
+<p>This is derived from <strong>energy conservation</strong>:</p>
+<div class="arithmatex">\[
+\text{Initial total energy} = \text{Final total energy}
+\]</div>
+<div class="arithmatex">\[
+\frac{1}{2} m v_2^2 - \frac{G M m}{r} = 0
+\Rightarrow
+v_2 = \sqrt{\frac{2 G M}{r}} = \sqrt{2} \cdot v_1
+\]</div>
+<p>Here:
+- The kinetic energy must exactly cancel the gravitational potential energy.
+- Final energy at infinity is zero.</p>
+<hr/>
+<h3 id="third-cosmic-velocity-v_3">Third Cosmic Velocity (<span class="arithmatex">\( v_3 \)</span>)</h3>
+<p>To escape the Sun’s gravity from Earth’s orbit:</p>
+<div class="arithmatex">\[
+E = \frac{1}{2} m v_3^2 - \frac{G M_{\odot} m}{r_{\text{Earth}}} = 0
+\Rightarrow
+v_3 = \sqrt{\frac{2 G M_{\odot}}{r_{\text{Earth}}}}
+\]</div>
+<p>But if launched from Earth, must also overcome Earth’s escape velocity <span class="arithmatex">\( v_{2,\text{Earth}} \)</span>.<br/>
+The <strong>actual total velocity</strong> depends on launch direction and existing orbital motion:</p>
+<div class="arithmatex">\[
+v_3^{\text{total}} = \sqrt{v_2^2 + v_3^2 - 2 v_1 v_3 \cos(\theta)}
+\]</div>
+<p>where:
+- <span class="arithmatex">\( \theta \)</span> is the angle between launch direction and Earth’s orbital velocity vector.</p>
+<hr/>
+<h3 id="parameter-dependencies">Parameter Dependencies</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Influence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\( M \)</span> — central mass</td>
+<td>All three velocities increase with mass</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( r \)</span> — orbital radius</td>
+<td>All velocities decrease with larger radius</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( G \)</span> — gravitational constant</td>
+<td>Appears in all expressions</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \theta \)</span> — launch angle (only for <span class="arithmatex">\( v_3^{\text{total}} \)</span>)</td>
+<td>Affects net velocity due to vector addition</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<blockquote>
+<p>These derivations form the basis for calculating required launch speeds, designing trajectories, and estimating fuel needs in orbital mechanics.</p>
+</blockquote>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
