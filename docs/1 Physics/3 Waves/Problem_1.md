@@ -132,3 +132,86 @@ You can vary:
 | Visualize pattern          | Use color maps to show constructive/destructive regions |
 
 > This strategy creates the foundation for generating visually rich and physically accurate wave interference simulations.
+
+## 3. Python Simulation & Plotting
+
+We simulate the interference pattern by computing the superposition of waves from multiple point sources over a 2D grid.
+
+The code below supports:
+- Configurable number of sources,
+- Adjustable polygon radius, wavelength, and frequency,
+- Static snapshot visualization using a 2D color map.
+
+---
+
+### Python Code
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+N = 5                  # Number of wave sources (e.g., 3=triangle, 4=square, 5=pentagon)
+R = 1.0                # Radius of the polygon (in meters)
+A = 1.0                # Wave amplitude
+lam = 0.5              # Wavelength (meters)
+f = 1.0                # Frequency (Hz)
+omega = 2 * np.pi * f
+k = 2 * np.pi / lam
+t = 0                  # Snapshot time (seconds)
+
+# Grid for visualization
+grid_size = 500
+x = np.linspace(-2, 2, grid_size)
+y = np.linspace(-2, 2, grid_size)
+X, Y = np.meshgrid(x, y)
+eta_total = np.zeros_like(X)
+
+# Generate source positions in regular polygon
+source_coords = [
+    (R * np.cos(2 * np.pi * i / N), R * np.sin(2 * np.pi * i / N))
+    for i in range(N)
+]
+
+# Compute superposition of waves
+for (x0, y0) in source_coords:
+    r = np.sqrt((X - x0)**2 + (Y - y0)**2) + 1e-6  # avoid division by 0
+    eta = (A / np.sqrt(r)) * np.cos(k * r - omega * t)
+    eta_total += eta
+
+# Visualization
+plt.figure(figsize=(7, 6))
+plt.imshow(eta_total, extent=[-2, 2, -2, 2], cmap='viridis', origin='lower')
+plt.colorbar(label='Displacement η(x, y, t)')
+plt.title(f'Interference Pattern: {N} Sources on Polygon')
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.axis('equal')
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+### How to Use
+
+Change these values to explore:
+
+| Parameter | Role |
+|-----------|------|
+| `N`       | Number of sources (polygon type) |
+| `R`       | Polygon size (radius) |
+| `lam`     | Wavelength — controls spacing of fringes |
+| `f`       | Frequency — affects animation if implemented |
+| `t`       | Time snapshot — static or animated |
+
+---
+
+### What This Shows
+
+- **Bright regions**: constructive interference (amplified waves)
+- **Dark regions**: destructive interference (cancellation)
+- **Fringes**: result of path differences between wave sources
+
+> You can extend this model to animations or interactive sliders using `ipywidgets` or `matplotlib.animation`.
+
