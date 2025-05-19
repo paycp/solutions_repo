@@ -72,13 +72,9 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a>
 </li>
-</ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-conditions">Initial Conditions</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#2-numerical-simulation-of-trajectories">2. Numerical Simulation of Trajectories</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#assumptions">Assumptions</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#python-implementation">Python Implementation</a>
+<li class="toctree-l4"><a class="reference internal" href="#output">Output</a>
 </li>
 </ul>
 </li>
@@ -274,50 +270,65 @@ r(\theta) = \frac{p}{1 + e \cos(\theta)}
 <blockquote>
 <p>These parameters help predict whether a payload returns, stays in orbit, or escapes.</p>
 </blockquote>
-<h2 id="2-numerical-simulation-of-trajectories">2. Numerical Simulation of Trajectories</h2>
-<p>To simulate the motion of a payload near Earth, we solve Newton's second law numerically:</p>
-<div class="arithmatex">\[
+<pre><code class="language-markdown">## 2. Numerical Simulation of Trajectories
+
+To simulate the motion of a payload near Earth, we solve Newton's second law numerically:
+
+\[
 \vec{a} = -\frac{G M}{r^3} \cdot \vec{r}
-\]</div>
-<p>This is a second-order differential equation describing motion under gravity.</p>
-<hr/>
-<h3 id="assumptions">Assumptions</h3>
-<ul>
-<li>Earth is treated as a point mass.</li>
-<li>Only gravity acts on the payload (no atmosphere).</li>
-<li>Motion occurs in 2D (x, y).</li>
-</ul>
-<hr/>
-<h3 id="python-implementation">Python Implementation</h3>
-<p>We use <code>scipy.integrate.solve_ivp</code> to simulate the trajectory from given initial position and velocity.</p>
-<p>```python
+\]
+
+This is a second-order differential equation describing motion under gravity.
+
+---
+
+### Assumptions
+
+- Earth is treated as a point mass.
+- Only gravity acts on the payload (no atmosphere).
+- Motion occurs in 2D (x, y).
+
+---
+
+### Python Implementation
+
+We use `scipy.integrate.solve_ivp` to simulate the trajectory from given initial position and velocity.
+
+```python
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp</p>
-<h1 id="constants">Constants</h1>
-<p>G = 6.67430e-11
+from scipy.integrate import solve_ivp
+
+# Constants
+G = 6.67430e-11
 M = 5.972e24       # Earth mass
-R = 6.371e6        # Earth radius</p>
-<h1 id="initial-position-and-velocity">Initial position and velocity</h1>
-<p>r0 = np.array([R + 300e3, 0])  # 300 km altitude
-v0 = np.array([0, 7700])       # 7.7 km/s horizontal velocity</p>
-<h1 id="ode-system-y-x-y-vx-vy">ODE system: y = [x, y, vx, vy]</h1>
-<p>def gravity(t, y):
+R = 6.371e6        # Earth radius
+
+# Initial position and velocity
+r0 = np.array([R + 300e3, 0])  # 300 km altitude
+v0 = np.array([0, 7700])       # 7.7 km/s horizontal velocity
+
+# ODE system: y = [x, y, vx, vy]
+def gravity(t, y):
     rx, ry, vx, vy = y
-    r = np.sqrt(rx<strong>2 + ry</strong>2)
-    ax = -G * M * rx / r<strong>3
-    ay = -G * M * ry / r</strong>3
-    return [vx, vy, ax, ay]</p>
-<h1 id="time-span-and-initial-state">Time span and initial state</h1>
-<p>t_span = (0, 10000)
+    r = np.sqrt(rx**2 + ry**2)
+    ax = -G * M * rx / r**3
+    ay = -G * M * ry / r**3
+    return [vx, vy, ax, ay]
+
+# Time span and initial state
+t_span = (0, 10000)
 y0 = [r0[0], r0[1], v0[0], v0[1]]
-t_eval = np.linspace(*t_span, 1000)</p>
-<h1 id="solve-ode">Solve ODE</h1>
-<p>sol = solve_ivp(gravity, t_span, y0, t_eval=t_eval)</p>
-<h1 id="extract-trajectory">Extract trajectory</h1>
-<p>x, y = sol.y[0], sol.y[1]</p>
-<h1 id="plot">Plot</h1>
-<p>plt.figure(figsize=(6, 6))
+t_eval = np.linspace(*t_span, 1000)
+
+# Solve ODE
+sol = solve_ivp(gravity, t_span, y0, t_eval=t_eval)
+
+# Extract trajectory
+x, y = sol.y[0], sol.y[1]
+
+# Plot
+plt.figure(figsize=(6, 6))
 plt.plot(x / 1e3, y / 1e3, label='Payload trajectory')
 circle = plt.Circle((0, 0), R / 1e3, color='blue', alpha=0.3, label='Earth')
 plt.gca().add_patch(circle)
@@ -329,7 +340,7 @@ plt.legend()
 plt.title('Trajectory of a Payload Released Near Earth')
 plt.tight_layout()
 plt.show()
-````</p>
+</code></pre>
 <hr/>
 <h3 id="initial-conditions">Initial Conditions</h3>
 <p>Try modifying:</p>
