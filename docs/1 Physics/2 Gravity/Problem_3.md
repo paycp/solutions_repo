@@ -77,30 +77,38 @@ The trajectory depends on initial velocity and position, and can be classified u
 > These parameters help predict whether a payload returns, stays in orbit, or escapes.
 
 
-````markdown
 ## 2. Numerical Simulation of Trajectories
 
-To simulate the motion of a payload near Earth, we solve Newton's second law numerically:
+To predict the motion of a freely released payload under Earth's gravity, we numerically solve Newton’s second law in a gravitational field:
 
 \[
-\vec{a} = -\frac{G M}{r^3} \cdot \vec{r}
+\vec{a} = -\frac{GM}{r^3} \vec{r}
 \]
 
-This is a second-order differential equation describing motion under gravity.
+This system models orbital, suborbital, and escape trajectories in two dimensions.
 
 ---
 
-### Assumptions
+### Initial Conditions
 
-- Earth is treated as a point mass.
-- Only gravity acts on the payload (no atmosphere).
-- Motion occurs in 2D (x, y).
+Let the payload be released at an altitude of 300 km above Earth’s surface with a specified velocity vector:
+
+- Initial position:  
+  \[
+  \vec{r}_0 = [R + h, 0]
+  \]  
+  where \( R = 6.371 \times 10^6 \, \text{m} \), \( h = 3 \times 10^5 \, \text{m} \)
+
+- Initial velocity (e.g. tangential):
+  \[
+  \vec{v}_0 = [0, v]
+  \]
+
+By varying \( v \), we generate different trajectory types.
 
 ---
 
-### Python Implementation
-
-We use `scipy.integrate.solve_ivp` to simulate the trajectory from given initial position and velocity.
+### Python Code
 
 ```python
 import numpy as np
@@ -108,67 +116,134 @@ import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
 # Constants
-G = 6.67430e-11
-M = 5.972e24       # Earth mass
-R = 6.371e6        # Earth radius
+G = 6.67430e-11        # Gravitational constant
+M = 5.972e24           # Earth mass (kg)
+R = 6.371e6            # Earth radius (m)
 
-# Initial position and velocity
-r0 = np.array([R + 300e3, 0])  # 300 km altitude
-v0 = np.array([0, 7700])       # 7.7 km/s horizontal velocity
+# Initial conditions
+h = 300e3              # Altitude (300 km)
+r0 = np.array([R + h, 0])          # Position vector
+v0 = np.array([0, 7700])           # Velocity vector (change this!)
 
-# ODE system: y = [x, y, vx, vy]
-def gravity(t, y):
+# Define the system of ODEs
+def two_body(t, y):
     rx, ry, vx, vy = y
     r = np.sqrt(rx**2 + ry**2)
     ax = -G * M * rx / r**3
     ay = -G * M * ry / r**3
     return [vx, vy, ax, ay]
 
-# Time span and initial state
+# Solve
 t_span = (0, 10000)
-y0 = [r0[0], r0[1], v0[0], v0[1]]
-t_eval = np.linspace(*t_span, 1000)
+y0 = np.concatenate((r0, v0))     # Combine position and velocity
+t_eval = np.linspace(*t_span, 2000)
+sol = solve_ivp(two_body, t_span, y0, t_eval=t_eval, rtol=1e-8)
 
-# Solve ODE
-sol = solve_ivp(gravity, t_span, y0, t_eval=t_eval)
-
-# Extract trajectory
-x, y = sol.y[0], sol.y[1]
+# Extract
+x, y = sol.y[0] / 1e3, sol.y[1] / 1e3     # Convert to km
 
 # Plot
-plt.figure(figsize=(6, 6))
-plt.plot(x / 1e3, y / 1e3, label='Payload trajectory')
-circle = plt.Circle((0, 0), R / 1e3, color='blue', alpha=0.3, label='Earth')
-plt.gca().add_patch(circle)
+plt.figure(figsize=(7, 7))
+plt.plot(x, y, label='Payload Trajectory')
+earth = plt.Circle((0, 0), R / 1e3, color='skyblue', alpha=0.6, label='Earth')
+plt.gca().add_patch(earth)
 plt.xlabel('x (km)')
 plt.ylabel('y (km)')
+plt.title('Trajectory of a Released Payload Near Earth')
 plt.axis('equal')
 plt.grid(True)
 plt.legend()
-plt.title('Trajectory of a Payload Released Near Earth')
 plt.tight_layout()
 plt.show()
-````
+```
 
 ---
 
-### Initial Conditions
+### Interpreting Results
 
-Try modifying:
+- **7700 m/s** → close to circular orbit (first cosmic speed)
+- **>11200 m/s** → escape trajectory (second cosmic speed)
+- **<7700 m/s** → suborbital, will fall back to Earth
 
-* $v_0 < v_1$: suborbital (falls back)
-* $v_0 = v_1$: circular orbit
-* $v_0 > v_1$: elliptical
-* $v_0 \approx v_2$: escape
-* $v_0 > v_2$: hyperbolic
+You can also test:
+- Diagonal or retrograde velocities
+- Higher altitudes
+- Angle variation to simulate real payload drops
 
 ---
 
-### Output
+### Notes
 
-* The trajectory will curve depending on energy and eccentricity.
-* The closer $v$ is to $v_2$, the further the payload travels before turning.
-* $v > v_2$: the payload escapes to infinity.
+- This model assumes **vacuum** and **no atmosphere**.
+- For long simulations, numerical precision (e.g., `rtol`) is critical.
+- Extending to 3D or adding perturbations (e.g., Moon, drag) is possible in future work.
 
-> Numerical integration lets us explore any trajectory based on initial speed, angle, and altitude.
+> By adjusting just the initial velocity, you can visualize orbit types and transitions from bound to unbound motion.
 
+
+## 3. Discussion of Trajectory Outcomes
+
+The shape and outcome of a payload’s trajectory depends on its **initial speed**, **direction**, and **altitude**. These parameters determine whether the object:
+
+- returns to Earth (reentry),
+- remains in orbit,
+- escapes Earth’s gravity (interplanetary transfer).
+
+---
+
+### Summary of Outcomes
+
+| Initial Velocity \( v \)       | Resulting Trajectory     | Real-World Application                      |
+|-------------------------------|---------------------------|---------------------------------------------|
+| \( v < v_1 \)                 | Suborbital / ballistic    | Space tourism, ICBMs, reentry capsules      |
+| \( v = v_1 \)                 | Circular orbit            | Satellites (LEO, MEO, GEO), ISS             |
+| \( v_1 < v < v_2 \)           | Elliptical orbit          | Transfer orbits, Molniya, GTO               |
+| \( v = v_2 \)                 | Parabolic (escape)        | Theoretical limit for escape trajectories   |
+| \( v > v_2 \)                 | Hyperbolic (unbound)      | Interplanetary probes, escape trajectories  |
+
+---
+
+### Practical Considerations
+
+- **Suborbital Trajectories**:
+  - Common in early rocket tests and reusable spaceplanes (e.g., Blue Origin).
+  - Maximum altitude depends on velocity and release angle.
+  
+- **Circular Orbits**:
+  - Used for stable satellite operations (e.g., weather, GPS).
+  - Require continuous balancing of gravity and inertia.
+  
+- **Elliptical Orbits**:
+  - Used for transfers between altitudes or planets.
+  - Include **perigee** (closest point) and **apogee** (farthest point).
+
+- **Escape Trajectories**:
+  - Enable payloads to leave Earth entirely.
+  - Example: New Horizons and Voyager missions.
+
+- **Hyperbolic Trajectories**:
+  - Arise from excess velocity (e.g., gravity assist maneuvers).
+  - Used to leave not only Earth, but the Solar System.
+
+---
+
+### Role in Mission Planning
+
+Understanding trajectory types allows engineers to:
+
+- Calculate required **delta-v** (velocity change),
+- Select appropriate **launch windows**,
+- Optimize **fuel usage** and **transfer time**.
+
+> Numerical trajectory analysis is essential in orbital design, satellite deployment, and mission control.
+
+---
+
+### Visualization Suggestion
+
+Plotting trajectories with:
+- different initial speeds,
+- various angles of release,
+- altitude profiles,
+
+can reveal how tiny changes affect the **outcome** — reentry, orbit, or escape.
