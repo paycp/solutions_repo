@@ -247,3 +247,107 @@ Plotting trajectories with:
 - altitude profiles,
 
 can reveal how tiny changes affect the **outcome** — reentry, orbit, or escape.
+
+## 4. Simulation and Visualization Tool
+
+To explore how the trajectory of a released payload changes with different initial conditions, we build a flexible simulation tool. The user can set:
+
+- **Initial speed** (in m/s),
+- **Direction angle** (in degrees),
+- **Initial altitude** (in km above Earth's surface).
+
+The script then computes and visualizes the trajectory using numerical integration.
+
+---
+
+### Python Code
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Constants
+G = 6.67430e-11      # Gravitational constant
+M = 5.972e24         # Earth mass (kg)
+R = 6.371e6          # Earth radius (m)
+
+def simulate_payload_trajectory(v0, angle_deg, altitude_km=300, duration=10000):
+    # Initial position vector
+    r0 = np.array([R + altitude_km * 1e3, 0])
+    
+    # Initial velocity vector based on launch angle
+    theta = np.radians(angle_deg)
+    v0_vec = v0 * np.array([np.cos(theta), np.sin(theta)])
+
+    # Initial state: [x, y, vx, vy]
+    y0 = np.concatenate((r0, v0_vec))
+
+    # Gravitational acceleration system
+    def dynamics(t, y):
+        rx, ry, vx, vy = y
+        r = np.sqrt(rx**2 + ry**2)
+        ax = -G * M * rx / r**3
+        ay = -G * M * ry / r**3
+        return [vx, vy, ax, ay]
+
+    # Time configuration
+    t_span = (0, duration)
+    t_eval = np.linspace(*t_span, 3000)
+
+    # Numerical integration
+    sol = solve_ivp(dynamics, t_span, y0, t_eval=t_eval, rtol=1e-8)
+
+    # Extract and convert to kilometers
+    x_km = sol.y[0] / 1e3
+    y_km = sol.y[1] / 1e3
+
+    # Plot the trajectory
+    plt.figure(figsize=(7, 7))
+    plt.plot(x_km, y_km, label=f'{v0/1000:.1f} km/s, {angle_deg}°')
+    earth = plt.Circle((0, 0), R / 1e3, color='skyblue', alpha=0.5, label='Earth')
+    plt.gca().add_patch(earth)
+    plt.axis('equal')
+    plt.xlabel('x (km)')
+    plt.ylabel('y (km)')
+    plt.title('Payload Trajectory Simulation')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+```
+
+---
+
+### Example Simulations
+
+Try these scenarios to explore different outcomes:
+
+```python
+# Suborbital reentry (will fall back)
+simulate_payload_trajectory(v0=6500, angle_deg=20)
+
+# Near-circular orbit
+simulate_payload_trajectory(v0=7800, angle_deg=0)
+
+# Elliptical orbit
+simulate_payload_trajectory(v0=9000, angle_deg=0)
+
+# Escape trajectory (hyperbolic)
+simulate_payload_trajectory(v0=11500, angle_deg=0)
+```
+
+---
+
+### Parameters You Can Explore
+
+| Parameter       | Effect                                      |
+|------------------|---------------------------------------------|
+| `v0` (m/s)       | Affects energy: determines fall/orbit/escape |
+| `angle_deg`      | Affects trajectory shape and altitude arc    |
+| `altitude_km`    | Sets release height above Earth              |
+| `duration`       | Controls how long the trajectory is computed |
+
+---
+
+> This tool lets you visualize the exact path of a payload based on initial launch parameters — ideal for mission simulation, orbit design, and understanding gravitational motion.
