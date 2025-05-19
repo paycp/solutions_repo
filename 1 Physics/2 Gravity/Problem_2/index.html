@@ -82,6 +82,32 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#3-calculations-and-visualizations">3. Calculations and Visualizations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#constants">Constants</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#python-code">Python Code</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#example-results-rounded">Example Results (rounded)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#observations">Observations</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-application-in-space-exploration">4. Application in Space Exploration</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-first-cosmic-velocity-stable-orbit">1. First Cosmic Velocity – Stable Orbit</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-second-cosmic-velocity-escape-from-planet">2. Second Cosmic Velocity – Escape from Planet</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-third-cosmic-velocity-escape-the-solar-system">3. Third Cosmic Velocity – Escape the Solar System</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#combined-considerations">Combined Considerations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#summary_1">Summary</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Problem 3</a>
@@ -346,6 +372,200 @@ v_3^{\text{total}} = \sqrt{v_2^2 + v_3^2 - 2 v_1 v_3 \cos(\theta)}
 <blockquote>
 <p>These derivations form the basis for calculating required launch speeds, designing trajectories, and estimating fuel needs in orbital mechanics.</p>
 </blockquote>
+<h2 id="3-calculations-and-visualizations">3. Calculations and Visualizations</h2>
+<p>To compare the first, second, and third cosmic velocities across celestial bodies, we calculate them for:</p>
+<ul>
+<li>Earth</li>
+<li>Moon</li>
+<li>Mars</li>
+<li>Jupiter</li>
+</ul>
+<hr/>
+<h3 id="constants">Constants</h3>
+<table>
+<thead>
+<tr>
+<th>Body</th>
+<th>Radius <span class="arithmatex">\( r \)</span> (m)</th>
+<th>Mass <span class="arithmatex">\( M \)</span> (kg)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth</td>
+<td><span class="arithmatex">\( 6.371 \times 10^6 \)</span></td>
+<td><span class="arithmatex">\( 5.972 \times 10^{24} \)</span></td>
+</tr>
+<tr>
+<td>Moon</td>
+<td><span class="arithmatex">\( 1.737 \times 10^6 \)</span></td>
+<td><span class="arithmatex">\( 7.342 \times 10^{22} \)</span></td>
+</tr>
+<tr>
+<td>Mars</td>
+<td><span class="arithmatex">\( 3.390 \times 10^6 \)</span></td>
+<td><span class="arithmatex">\( 6.417 \times 10^{23} \)</span></td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td><span class="arithmatex">\( 6.991 \times 10^7 \)</span></td>
+<td><span class="arithmatex">\( 1.898 \times 10^{27} \)</span></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="python-code">Python Code</h3>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Gravitational constant
+G = 6.67430e-11
+
+# Data: name, radius (m), mass (kg)
+bodies = {
+    "Earth":   {"r": 6.371e6,  "M": 5.972e24},
+    "Moon":    {"r": 1.737e6,  "M": 7.342e22},
+    "Mars":    {"r": 3.390e6,  "M": 6.417e23},
+    "Jupiter": {"r": 6.991e7,  "M": 1.898e27}
+}
+
+# Prepare results
+results = []
+
+for name, data in bodies.items():
+    r = data["r"]
+    M = data["M"]
+
+    v1 = np.sqrt(G * M / r)           # First cosmic velocity
+    v2 = np.sqrt(2) * v1              # Escape velocity
+    results.append((name, v1, v2))
+
+# Plotting
+labels = [r[0] for r in results]
+v1_vals = [r[1] / 1000 for r in results]  # km/s
+v2_vals = [r[2] / 1000 for r in results]  # km/s
+
+x = np.arange(len(labels))
+width = 0.35
+
+plt.figure(figsize=(10, 6))
+plt.bar(x - width/2, v1_vals, width, label='First Cosmic Velocity (v₁)')
+plt.bar(x + width/2, v2_vals, width, label='Second Cosmic Velocity (v₂)')
+plt.ylabel('Velocity (km/s)')
+plt.title('Cosmic Velocities for Different Celestial Bodies')
+plt.xticks(x, labels)
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+</code></pre>
+<hr/>
+<h3 id="example-results-rounded">Example Results (rounded)</h3>
+<table>
+<thead>
+<tr>
+<th>Body</th>
+<th><span class="arithmatex">\( v_1 \)</span> (km/s)</th>
+<th><span class="arithmatex">\( v_2 \)</span> (km/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth</td>
+<td>~7.91</td>
+<td>~11.2</td>
+</tr>
+<tr>
+<td>Moon</td>
+<td>~1.68</td>
+<td>~2.38</td>
+</tr>
+<tr>
+<td>Mars</td>
+<td>~3.55</td>
+<td>~5.03</td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td>~42.1</td>
+<td>~59.5</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="observations">Observations</h3>
+<ul>
+<li>Jupiter requires the highest velocities due to its immense mass.</li>
+<li>The Moon requires the least velocity — ideal for training and early missions.</li>
+<li>Escape velocity is always <span class="arithmatex">\( \sqrt{2} \)</span> times the orbital velocity for a given body.</li>
+</ul>
+<blockquote>
+<p>These values are fundamental in planning rocket launches, satellite deployment, and interplanetary travel.</p>
+</blockquote>
+<h2 id="4-application-in-space-exploration">4. Application in Space Exploration</h2>
+<p>Understanding and applying the first, second, and third cosmic velocities is fundamental to spaceflight and interplanetary mission design.</p>
+<hr/>
+<h3 id="1-first-cosmic-velocity-stable-orbit">1. First Cosmic Velocity – Stable Orbit</h3>
+<p>Used to place satellites into <strong>low Earth orbit (LEO)</strong>, <strong>geostationary orbit</strong>, or <strong>planetary orbit</strong>:</p>
+<ul>
+<li>Example:<br/>
+  The International Space Station travels at approximately 7.66 km/s — close to Earth’s first cosmic velocity.</li>
+<li>Application:<br/>
+  Communication, weather, GPS, and Earth-observation satellites.</li>
+</ul>
+<hr/>
+<h3 id="2-second-cosmic-velocity-escape-from-planet">2. Second Cosmic Velocity – Escape from Planet</h3>
+<p>Used when launching <strong>interplanetary missions</strong> (e.g. Mars rovers, lunar landers):</p>
+<ul>
+<li>Example:<br/>
+  The Apollo missions used Saturn V to reach speeds &gt;11.2 km/s to escape Earth’s gravity.</li>
+<li>Application:<br/>
+  Missions to the Moon, Mars, and beyond must exceed <span class="arithmatex">\( v_2 \)</span> to leave Earth's gravitational field.</li>
+</ul>
+<hr/>
+<h3 id="3-third-cosmic-velocity-escape-the-solar-system">3. Third Cosmic Velocity – Escape the Solar System</h3>
+<p>Used in missions that aim to <strong>leave the Sun’s gravitational influence</strong>:</p>
+<ul>
+<li>Example:<br/>
+  Voyager 1 reached ~16.6 km/s and is now in interstellar space — the first human-made object to achieve this.</li>
+<li>Achieved through:<br/>
+  Gravity assists (slingshot maneuvers using planets) rather than direct launch at <span class="arithmatex">\( v_3 \)</span>.</li>
+</ul>
+<hr/>
+<h3 id="combined-considerations">Combined Considerations</h3>
+<table>
+<thead>
+<tr>
+<th>Mission Type</th>
+<th>Required Velocity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LEO Satellite</td>
+<td><span class="arithmatex">\( v_1 \)</span> (e.g., 7.9 km/s)</td>
+</tr>
+<tr>
+<td>Lunar / Interplanetary</td>
+<td><span class="arithmatex">\( &gt; v_2 \)</span> (e.g., 11.2+ km/s)</td>
+</tr>
+<tr>
+<td>Interstellar Probe</td>
+<td><span class="arithmatex">\( \geq v_3 \)</span> from Earth’s orbit</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>For real missions, engineers account for atmosphere, rotation, inclination, planetary motion, and fuel efficiency — but cosmic velocities serve as essential baselines.</p>
+</blockquote>
+<hr/>
+<h3 id="summary_1">Summary</h3>
+<ul>
+<li><strong><span class="arithmatex">\( v_1 \)</span></strong> defines orbital mechanics and satellite dynamics.  </li>
+<li><strong><span class="arithmatex">\( v_2 \)</span></strong> is critical for reaching the Moon, Mars, and other planets.  </li>
+<li><strong><span class="arithmatex">\( v_3 \)</span></strong> underpins our journey into deep space.</li>
+</ul>
+<p>These velocities help bridge theory and practice in <strong>astrodynamics</strong>, <strong>launch planning</strong>, and <strong>interstellar exploration</strong>.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
