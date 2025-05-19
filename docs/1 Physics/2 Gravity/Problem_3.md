@@ -77,6 +77,7 @@ The trajectory depends on initial velocity and position, and can be classified u
 > These parameters help predict whether a payload returns, stays in orbit, or escapes.
 
 
+````markdown
 ## 2. Numerical Simulation of Trajectories
 
 To simulate the motion of a payload near Earth, we solve Newton's second law numerically:
