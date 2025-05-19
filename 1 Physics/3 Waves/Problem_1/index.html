@@ -66,6 +66,18 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-source-wave-equation">Single Source Wave Equation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#superposition-of-waves">Superposition of Waves</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#symmetry-and-patterns">Symmetry and Patterns</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +184,76 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<p>When multiple circular waves are emitted from different point sources on a water surface, they overlap and form complex <strong>interference patterns</strong>. These patterns are governed by:</p>
+<ul>
+<li>The <strong>wave equation</strong> for each point source,</li>
+<li>The <strong>principle of superposition</strong>.</li>
+</ul>
+<hr/>
+<h3 id="single-source-wave-equation">Single Source Wave Equation</h3>
+<p>A wave emitted by a point source located at <span class="arithmatex">\( (x_0, y_0) \)</span> on the surface is given by:</p>
+<div class="arithmatex">\[
+\eta(x, y, t) = \frac{A}{\sqrt{r}} \cdot \cos(kr - \omega t + \phi)
+\]</div>
+<p>where:
+- <span class="arithmatex">\( \eta(x, y, t) \)</span> is the displacement of the water surface,
+- <span class="arithmatex">\( A \)</span> is the amplitude,
+- <span class="arithmatex">\( r = \sqrt{(x - x_0)^2 + (y - y_0)^2} \)</span> is the distance from the source to point <span class="arithmatex">\( (x, y) \)</span>,
+- <span class="arithmatex">\( k = \frac{2\pi}{\lambda} \)</span> is the wave number,
+- <span class="arithmatex">\( \omega = 2\pi f \)</span> is the angular frequency,
+- <span class="arithmatex">\( \phi \)</span> is the initial phase of the wave.</p>
+<p>We assume all waves are <strong>monochromatic</strong>, <strong>coherent</strong>, and <strong>have identical amplitude, frequency, and phase</strong>.</p>
+<hr/>
+<h3 id="superposition-of-waves">Superposition of Waves</h3>
+<p>If we place <span class="arithmatex">\( N \)</span> identical sources at different positions <span class="arithmatex">\( (x_i, y_i) \)</span>, the resulting displacement is the sum of displacements from each:</p>
+<div class="arithmatex">\[
+\eta_{\text{sum}}(x, y, t) = \sum_{i=1}^{N} \eta_i(x, y, t)
+\]</div>
+<p>This leads to <strong>constructive interference</strong> when wave crests align, and <strong>destructive interference</strong> when crests and troughs cancel each other.</p>
+<hr/>
+<h3 id="symmetry-and-patterns">Symmetry and Patterns</h3>
+<p>If the sources are placed at the <strong>vertices of a regular polygon</strong>, their symmetry will be reflected in the interference pattern:</p>
+<ul>
+<li>3 sources → triangular symmetry  </li>
+<li>4 sources → square symmetry  </li>
+<li>5+ sources → complex radial patterns</li>
+</ul>
+<p>These symmetrical setups are useful for studying:
+- Zones of maximum and minimum amplitude,
+- Nodal lines (where waves cancel out),
+- Phase alignment across space.</p>
+<hr/>
+<h3 id="summary">Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Point wave equation</td>
+<td>Describes wave from one source</td>
+</tr>
+<tr>
+<td>Superposition</td>
+<td>Adds effects of all sources together</td>
+</tr>
+<tr>
+<td>Interference pattern</td>
+<td>Emerges from wave overlap (constructive/destructive)</td>
+</tr>
+<tr>
+<td>Regular polygon layout</td>
+<td>Introduces symmetry and periodicity to the system</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>This theoretical base enables us to model and visualize wave interference patterns with clarity and control.</p>
+</blockquote>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
