@@ -17,12 +17,12 @@ A wave emitted by a point source located at \( (x_0, y_0) \) on the surface is g
 \eta(x, y, t) = \frac{A}{\sqrt{r}} \cdot \cos(kr - \omega t + \phi)
 \]
 
-where:
-- \( \eta(x, y, t) \) is the displacement of the water surface,
-- \( A \) is the amplitude,
-- \( r = \sqrt{(x - x_0)^2 + (y - y_0)^2} \) is the distance from the source to point \( (x, y) \),
-- \( k = \frac{2\pi}{\lambda} \) is the wave number,
-- \( \omega = 2\pi f \) is the angular frequency,
+where:  
+- \( \eta(x, y, t) \) is the displacement of the water surface,  
+- \( A \) is the amplitude,  
+- \( r = \sqrt{(x - x_0)^2 + (y - y_0)^2} \) is the distance from the source to point \( (x, y) \),  
+- \( k = \frac{2\pi}{\lambda} \) is the wave number,  
+- \( \omega = 2\pi f \) is the angular frequency,  
 - \( \phi \) is the initial phase of the wave.
 
 We assume all waves are **monochromatic**, **coherent**, and **have identical amplitude, frequency, and phase**.
