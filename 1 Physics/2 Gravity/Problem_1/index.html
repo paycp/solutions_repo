@@ -102,6 +102,20 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#5-discussion-beyond-circular-orbits">5. Discussion: Beyond Circular Orbits</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-elliptical-orbits">1. Elliptical Orbits</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-multi-body-systems">2. Multi-body Systems</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-mass-distribution-and-relativity">3. Mass Distribution and Relativity</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-space-missions-and-orbit-design">4. Space Missions and Orbit Design</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#summary_2">Summary</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -448,6 +462,57 @@ T^2 = k r^3
 <li>Extend the simulation to include <strong>elliptical orbits</strong> using numerical integration.</li>
 <li>Visualize orbits using <strong>position updates</strong> (x, y) for better understanding of orbital paths.</li>
 </ul>
+<h2 id="5-discussion-beyond-circular-orbits">5. Discussion: Beyond Circular Orbits</h2>
+<p>Kepler’s Third Law is exact only for <strong>circular orbits</strong> under the assumption of a point mass and no perturbations. However, it can be generalized to:</p>
+<hr/>
+<h3 id="1-elliptical-orbits">1. Elliptical Orbits</h3>
+<p>For elliptical orbits, the law still holds if we replace the orbital radius <span class="arithmatex">\( r \)</span> with the <strong>semi-major axis</strong> <span class="arithmatex">\( a \)</span>:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2}{G M} a^3
+\]</div>
+<p>This version applies to:</p>
+<ul>
+<li>Planets in the Solar System (e.g., Earth, Mars),</li>
+<li>Moons and satellites in non-circular trajectories,</li>
+<li>Binary star systems.</li>
+</ul>
+<p>✅ This form is still widely used in astrophysics.</p>
+<hr/>
+<h3 id="2-multi-body-systems">2. Multi-body Systems</h3>
+<p>In real systems, additional bodies influence motion:</p>
+<ul>
+<li>Jupiter perturbs asteroid orbits.</li>
+<li>The Moon’s orbit is affected by the Sun (three-body dynamics).</li>
+<li>Exoplanet systems show <strong>resonance and chaos</strong> due to gravitational interactions.</li>
+</ul>
+<blockquote>
+<p>While Kepler’s Law provides a starting point, numerical simulation is essential for precision modeling in multi-body systems.</p>
+</blockquote>
+<hr/>
+<h3 id="3-mass-distribution-and-relativity">3. Mass Distribution and Relativity</h3>
+<ul>
+<li>If the central mass is <strong>not a point</strong> (e.g., a planet with uneven mass), corrections are needed.</li>
+<li>In strong gravitational fields, <strong>General Relativity</strong> replaces Newtonian gravity — leading to corrections like <strong>orbital precession</strong> (e.g., Mercury).</li>
+</ul>
+<hr/>
+<h3 id="4-space-missions-and-orbit-design">4. Space Missions and Orbit Design</h3>
+<p>Kepler’s Law is foundational for:</p>
+<ul>
+<li>Launching satellites into desired orbits,</li>
+<li>Predicting planetary positions for interplanetary transfers (e.g., Hohmann transfers),</li>
+<li>Estimating fuel usage and timing for maneuvers.</li>
+</ul>
+<hr/>
+<h3 id="summary_2">Summary</h3>
+<p>Kepler’s Third Law:</p>
+<ul>
+<li>Remains a <strong>fundamental relationship</strong> in celestial mechanics,</li>
+<li>Can be generalized to <strong>elliptical orbits</strong> using semi-major axis,</li>
+<li>Requires refinement for <strong>real-world accuracy</strong> (perturbations, relativity, non-uniform mass).</li>
+</ul>
+<blockquote>
+<p>It is both an elegant mathematical law and a practical tool for engineers, astronomers, and mission designers.</p>
+</blockquote>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
