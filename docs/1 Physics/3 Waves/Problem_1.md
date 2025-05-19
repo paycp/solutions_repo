@@ -66,3 +66,69 @@ These symmetrical setups are useful for studying:
 | Regular polygon layout | Introduces symmetry and periodicity to the system     |
 
 > This theoretical base enables us to model and visualize wave interference patterns with clarity and control.
+
+## 2. Polygon-Based Source Layout and Simulation Strategy
+
+To analyze interference patterns from multiple sources, we arrange \( N \) identical wave sources at the **vertices of a regular polygon** (triangle, square, pentagon, etc.).
+
+---
+
+### 1. Positioning Sources on a Polygon
+
+All sources are placed on a circle of radius \( R \) centered at the origin. The coordinates of each source \( (x_i, y_i) \) are:
+
+\[
+x_i = R \cdot \cos\left( \frac{2\pi i}{N} \right), \quad
+y_i = R \cdot \sin\left( \frac{2\pi i}{N} \right), \quad i = 0, 1, \dots, N-1
+\]
+
+This ensures perfect rotational symmetry.
+
+---
+
+### 2. Grid of Observation Points
+
+We define a 2D grid of points \( (x, y) \) over a square region containing the polygon. At each point, we compute the total displacement:
+
+\[
+\eta_{\text{sum}}(x, y, t) = \sum_{i=1}^{N} \frac{A}{\sqrt{r_i}} \cdot \cos(k r_i - \omega t)
+\]
+
+where \( r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2} \) is the distance from each source to the grid point.
+
+---
+
+### 3. Simulation Parameters
+
+You can vary:
+
+| Parameter      | Effect                                      |
+|----------------|---------------------------------------------|
+| \( N \)         | Number of sources (symmetry of the pattern) |
+| \( R \)         | Radius of the source circle                 |
+| \( \lambda \)   | Wavelength of the wave                      |
+| \( f \)         | Frequency                                  |
+| \( A \)         | Amplitude (optional: normalize to 1)        |
+| Grid size       | Resolution of the visualization             |
+
+---
+
+### 4. Visualization
+
+- Use a **2D color map** to display the resulting wave amplitude or intensity at each point.
+- Choose either:
+  - Snapshot in time (e.g., fixed \( t = 0 \))
+  - Animated sequence for evolving interference
+
+---
+
+### Summary
+
+| Step                        | Description                                             |
+|-----------------------------|---------------------------------------------------------|
+| Generate \( N \) source positions | Based on regular polygon around center              |
+| Compute wave contribution  | At each point, from each source                        |
+| Apply superposition        | Sum wave amplitudes (or intensities)                   |
+| Visualize pattern          | Use color maps to show constructive/destructive regions |
+
+> This strategy creates the foundation for generating visually rich and physically accurate wave interference simulations.
