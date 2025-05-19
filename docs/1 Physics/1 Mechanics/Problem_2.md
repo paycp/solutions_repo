@@ -234,3 +234,38 @@ where:
 - **Phase Portrait**  
   Plots angular velocity versus angle to visualize the dynamical behavior of the system.  
   In chaotic regimes, the phase portrait appears scattered and complex.
+
+## 5. Limitations and Future Improvements
+
+### Limitations of the Model
+
+While the current model captures many key features of the forced damped pendulum, it relies on simplifying assumptions that limit its accuracy and applicability in more complex scenarios:
+
+- **No nonlinear damping**  
+  The damping term is assumed to be linear, but real systems often exhibit velocity-dependent or structural damping behaviors.
+
+- **Ideal periodic forcing**  
+  The driving force is modeled as a perfect cosine wave, while real external forces may be irregular, noisy, or even impulsive.
+
+- **Planar motion only**  
+  The model assumes the pendulum moves in a single plane, which may not hold in flexible or spatial pendulum systems.
+
+- **No mechanical constraints**  
+  It does not account for joint friction, finite range of motion, or collisions with boundaries.
+
+- **Constant parameters**  
+  Coefficients like damping \( b \), gravity \( g \), and amplitude \( A \) are treated as constants, but in reality they can change over time or with temperature, load, etc.
+
+---
+
+### Possible Extensions
+
+Future work can enhance the realism and scope of the model:
+
+- Add **nonlinear damping terms** (e.g. proportional to \( \omega^2 \)) to simulate more realistic energy loss.
+- Introduce **non-periodic or pulsed external forces**, including stochastic driving.
+- Simulate **3D pendulum dynamics**, including twisting and off-plane motion.
+- Include **parameter drift** over time to model aging, fatigue, or environmental changes.
+- Explore **coupled pendulums** or **double pendulum systems** to study synchronization, bifurcations, and chaos.
+
+> These improvements can help bridge the gap between an idealized mathematical model and real-world systems in robotics, biomechanics, structural engineering, and control theory.
