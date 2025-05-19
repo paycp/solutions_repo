@@ -215,3 +215,62 @@ Change these values to explore:
 
 > You can extend this model to animations or interactive sliders using `ipywidgets` or `matplotlib.animation`.
 
+## 4. Analysis and Interpretation
+
+The generated interference pattern reveals how waves interact based on their relative phase and source geometry.
+
+---
+
+### Key Features in the Pattern
+
+#### ➕ Constructive Interference
+
+Occurs where waves from different sources arrive **in phase**, reinforcing each other:
+
+- Appears as **bright or elevated regions**.
+- Found along symmetry lines from source to center.
+- Distance differences between sources equal to \( n \lambda \), where \( n \in \mathbb{Z} \).
+
+#### ➖ Destructive Interference
+
+Occurs where waves arrive **out of phase**, cancelling each other:
+
+- Appears as **dark regions or nodes**.
+- Wave amplitudes subtract and reduce the total displacement.
+- Happens when path difference equals \( (n + \frac{1}{2})\lambda \).
+
+---
+
+### Symmetry and Geometry
+
+- The **rotational symmetry** of the polygon is reflected in the interference pattern.
+  - Triangle → 3-fold symmetry.
+  - Square → 4-fold.
+  - Pentagon → 5-fold radial patterns.
+- The **number of radial arms** or nodal lines increases with the number of sources.
+
+---
+
+### Physical Interpretation
+
+| Feature | Physical Meaning |
+|--------|------------------|
+| Sharp bright peaks | Regions of high coherence, where waves align perfectly |
+| Concentric rings | Result from uniform distance differences between pairs of sources |
+| Nodal lines | Boundaries between constructive and destructive zones |
+| Complexity increases with \( N \) | More interference paths, richer structure |
+
+---
+
+### Applications
+
+This analysis is analogous to:
+
+- **Water tank experiments** (real-life lab visuals)
+- **Optical interference** (e.g., multiple-slit diffraction)
+- **Acoustic systems** (speaker arrays, architectural acoustics)
+- **Quantum wavefunctions** (interference in probability amplitudes)
+
+---
+
+> Interference patterns visually encode phase relationships and wave dynamics. By adjusting the number and arrangement of sources, we can design patterns with desired symmetry or cancellation zones — with applications from physics education to antenna design.
