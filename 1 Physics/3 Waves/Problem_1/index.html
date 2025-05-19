@@ -78,6 +78,20 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#2-polygon-based-source-layout-and-simulation-strategy">2. Polygon-Based Source Layout and Simulation Strategy</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-positioning-sources-on-a-polygon">1. Positioning Sources on a Polygon</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-grid-of-observation-points">2. Grid of Observation Points</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-simulation-parameters">3. Simulation Parameters</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-visualization">4. Visualization</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#summary_1">Summary</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -253,6 +267,99 @@
 </table>
 <blockquote>
 <p>This theoretical base enables us to model and visualize wave interference patterns with clarity and control.</p>
+</blockquote>
+<h2 id="2-polygon-based-source-layout-and-simulation-strategy">2. Polygon-Based Source Layout and Simulation Strategy</h2>
+<p>To analyze interference patterns from multiple sources, we arrange <span class="arithmatex">\( N \)</span> identical wave sources at the <strong>vertices of a regular polygon</strong> (triangle, square, pentagon, etc.).</p>
+<hr/>
+<h3 id="1-positioning-sources-on-a-polygon">1. Positioning Sources on a Polygon</h3>
+<p>All sources are placed on a circle of radius <span class="arithmatex">\( R \)</span> centered at the origin. The coordinates of each source <span class="arithmatex">\( (x_i, y_i) \)</span> are:</p>
+<div class="arithmatex">\[
+x_i = R \cdot \cos\left( \frac{2\pi i}{N} \right), \quad
+y_i = R \cdot \sin\left( \frac{2\pi i}{N} \right), \quad i = 0, 1, \dots, N-1
+\]</div>
+<p>This ensures perfect rotational symmetry.</p>
+<hr/>
+<h3 id="2-grid-of-observation-points">2. Grid of Observation Points</h3>
+<p>We define a 2D grid of points <span class="arithmatex">\( (x, y) \)</span> over a square region containing the polygon. At each point, we compute the total displacement:</p>
+<div class="arithmatex">\[
+\eta_{\text{sum}}(x, y, t) = \sum_{i=1}^{N} \frac{A}{\sqrt{r_i}} \cdot \cos(k r_i - \omega t)
+\]</div>
+<p>where <span class="arithmatex">\( r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2} \)</span> is the distance from each source to the grid point.</p>
+<hr/>
+<h3 id="3-simulation-parameters">3. Simulation Parameters</h3>
+<p>You can vary:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\( N \)</span></td>
+<td>Number of sources (symmetry of the pattern)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( R \)</span></td>
+<td>Radius of the source circle</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \lambda \)</span></td>
+<td>Wavelength of the wave</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( f \)</span></td>
+<td>Frequency</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( A \)</span></td>
+<td>Amplitude (optional: normalize to 1)</td>
+</tr>
+<tr>
+<td>Grid size</td>
+<td>Resolution of the visualization</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="4-visualization">4. Visualization</h3>
+<ul>
+<li>Use a <strong>2D color map</strong> to display the resulting wave amplitude or intensity at each point.</li>
+<li>Choose either:</li>
+<li>Snapshot in time (e.g., fixed <span class="arithmatex">\( t = 0 \)</span>)</li>
+<li>Animated sequence for evolving interference</li>
+</ul>
+<hr/>
+<h3 id="summary_1">Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generate <span class="arithmatex">\( N \)</span> source positions</td>
+<td>Based on regular polygon around center</td>
+</tr>
+<tr>
+<td>Compute wave contribution</td>
+<td>At each point, from each source</td>
+</tr>
+<tr>
+<td>Apply superposition</td>
+<td>Sum wave amplitudes (or intensities)</td>
+</tr>
+<tr>
+<td>Visualize pattern</td>
+<td>Use color maps to show constructive/destructive regions</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>This strategy creates the foundation for generating visually rich and physically accurate wave interference simulations.</p>
 </blockquote>
 </div>
 </div><footer>
