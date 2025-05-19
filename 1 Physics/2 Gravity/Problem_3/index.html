@@ -72,9 +72,29 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a>
 </li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-numerical-simulation-of-trajectories">2. Numerical Simulation of Trajectories</a>
+<ul>
 <li class="toctree-l4"><a class="reference internal" href="#initial-conditions">Initial Conditions</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#output">Output</a>
+<li class="toctree-l4"><a class="reference internal" href="#python-code">Python Code</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-discussion-of-trajectory-outcomes">3. Discussion of Trajectory Outcomes</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#summary-of-outcomes">Summary of Outcomes</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#practical-considerations">Practical Considerations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#role-in-mission-planning">Role in Mission Planning</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#visualization-suggestion">Visualization Suggestion</a>
 </li>
 </ul>
 </li>
@@ -270,97 +290,197 @@ r(\theta) = \frac{p}{1 + e \cos(\theta)}
 <blockquote>
 <p>These parameters help predict whether a payload returns, stays in orbit, or escapes.</p>
 </blockquote>
-<pre><code class="language-markdown">## 2. Numerical Simulation of Trajectories
-
-To simulate the motion of a payload near Earth, we solve Newton's second law numerically:
-
-\[
-\vec{a} = -\frac{G M}{r^3} \cdot \vec{r}
-\]
-
-This is a second-order differential equation describing motion under gravity.
-
----
-
-### Assumptions
-
-- Earth is treated as a point mass.
-- Only gravity acts on the payload (no atmosphere).
-- Motion occurs in 2D (x, y).
-
----
-
-### Python Implementation
-
-We use `scipy.integrate.solve_ivp` to simulate the trajectory from given initial position and velocity.
-
-```python
-import numpy as np
+<h2 id="2-numerical-simulation-of-trajectories">2. Numerical Simulation of Trajectories</h2>
+<p>To predict the motion of a freely released payload under Earth's gravity, we numerically solve Newton’s second law in a gravitational field:</p>
+<div class="arithmatex">\[
+\vec{a} = -\frac{GM}{r^3} \vec{r}
+\]</div>
+<p>This system models orbital, suborbital, and escape trajectories in two dimensions.</p>
+<hr/>
+<h3 id="initial-conditions">Initial Conditions</h3>
+<p>Let the payload be released at an altitude of 300 km above Earth’s surface with a specified velocity vector:</p>
+<ul>
+<li>
+<p>Initial position:<br/>
+  [
+  \vec{r}_0 = [R + h, 0]
+  ]<br/>
+  where <span class="arithmatex">\( R = 6.371 \times 10^6 \, \text{m} \)</span>, <span class="arithmatex">\( h = 3 \times 10^5 \, \text{m} \)</span></p>
+</li>
+<li>
+<p>Initial velocity (e.g. tangential):
+  [
+  \vec{v}_0 = [0, v]
+  ]</p>
+</li>
+</ul>
+<p>By varying <span class="arithmatex">\( v \)</span>, we generate different trajectory types.</p>
+<hr/>
+<h3 id="python-code">Python Code</h3>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
 # Constants
-G = 6.67430e-11
-M = 5.972e24       # Earth mass
-R = 6.371e6        # Earth radius
+G = 6.67430e-11        # Gravitational constant
+M = 5.972e24           # Earth mass (kg)
+R = 6.371e6            # Earth radius (m)
 
-# Initial position and velocity
-r0 = np.array([R + 300e3, 0])  # 300 km altitude
-v0 = np.array([0, 7700])       # 7.7 km/s horizontal velocity
+# Initial conditions
+h = 300e3              # Altitude (300 km)
+r0 = np.array([R + h, 0])          # Position vector
+v0 = np.array([0, 7700])           # Velocity vector (change this!)
 
-# ODE system: y = [x, y, vx, vy]
-def gravity(t, y):
+# Define the system of ODEs
+def two_body(t, y):
     rx, ry, vx, vy = y
     r = np.sqrt(rx**2 + ry**2)
     ax = -G * M * rx / r**3
     ay = -G * M * ry / r**3
     return [vx, vy, ax, ay]
 
-# Time span and initial state
+# Solve
 t_span = (0, 10000)
-y0 = [r0[0], r0[1], v0[0], v0[1]]
-t_eval = np.linspace(*t_span, 1000)
+y0 = np.concatenate((r0, v0))     # Combine position and velocity
+t_eval = np.linspace(*t_span, 2000)
+sol = solve_ivp(two_body, t_span, y0, t_eval=t_eval, rtol=1e-8)
 
-# Solve ODE
-sol = solve_ivp(gravity, t_span, y0, t_eval=t_eval)
-
-# Extract trajectory
-x, y = sol.y[0], sol.y[1]
+# Extract
+x, y = sol.y[0] / 1e3, sol.y[1] / 1e3     # Convert to km
 
 # Plot
-plt.figure(figsize=(6, 6))
-plt.plot(x / 1e3, y / 1e3, label='Payload trajectory')
-circle = plt.Circle((0, 0), R / 1e3, color='blue', alpha=0.3, label='Earth')
-plt.gca().add_patch(circle)
+plt.figure(figsize=(7, 7))
+plt.plot(x, y, label='Payload Trajectory')
+earth = plt.Circle((0, 0), R / 1e3, color='skyblue', alpha=0.6, label='Earth')
+plt.gca().add_patch(earth)
 plt.xlabel('x (km)')
 plt.ylabel('y (km)')
+plt.title('Trajectory of a Released Payload Near Earth')
 plt.axis('equal')
 plt.grid(True)
 plt.legend()
-plt.title('Trajectory of a Payload Released Near Earth')
 plt.tight_layout()
 plt.show()
 </code></pre>
 <hr/>
-<h3 id="initial-conditions">Initial Conditions</h3>
-<p>Try modifying:</p>
+<h3 id="interpreting-results">Interpreting Results</h3>
 <ul>
-<li><span class="arithmatex">\(v_0 &lt; v_1\)</span>: suborbital (falls back)</li>
-<li><span class="arithmatex">\(v_0 = v_1\)</span>: circular orbit</li>
-<li><span class="arithmatex">\(v_0 &gt; v_1\)</span>: elliptical</li>
-<li><span class="arithmatex">\(v_0 \approx v_2\)</span>: escape</li>
-<li><span class="arithmatex">\(v_0 &gt; v_2\)</span>: hyperbolic</li>
+<li><strong>7700 m/s</strong> → close to circular orbit (first cosmic speed)</li>
+<li><strong>&gt;11200 m/s</strong> → escape trajectory (second cosmic speed)</li>
+<li><strong>&lt;7700 m/s</strong> → suborbital, will fall back to Earth</li>
 </ul>
+<p>You can also test:
+- Diagonal or retrograde velocities
+- Higher altitudes
+- Angle variation to simulate real payload drops</p>
 <hr/>
-<h3 id="output">Output</h3>
+<h3 id="notes">Notes</h3>
 <ul>
-<li>The trajectory will curve depending on energy and eccentricity.</li>
-<li>The closer <span class="arithmatex">\(v\)</span> is to <span class="arithmatex">\(v_2\)</span>, the further the payload travels before turning.</li>
-<li><span class="arithmatex">\(v &gt; v_2\)</span>: the payload escapes to infinity.</li>
+<li>This model assumes <strong>vacuum</strong> and <strong>no atmosphere</strong>.</li>
+<li>For long simulations, numerical precision (e.g., <code>rtol</code>) is critical.</li>
+<li>Extending to 3D or adding perturbations (e.g., Moon, drag) is possible in future work.</li>
 </ul>
 <blockquote>
-<p>Numerical integration lets us explore any trajectory based on initial speed, angle, and altitude.</p>
+<p>By adjusting just the initial velocity, you can visualize orbit types and transitions from bound to unbound motion.</p>
 </blockquote>
+<h2 id="3-discussion-of-trajectory-outcomes">3. Discussion of Trajectory Outcomes</h2>
+<p>The shape and outcome of a payload’s trajectory depends on its <strong>initial speed</strong>, <strong>direction</strong>, and <strong>altitude</strong>. These parameters determine whether the object:</p>
+<ul>
+<li>returns to Earth (reentry),</li>
+<li>remains in orbit,</li>
+<li>escapes Earth’s gravity (interplanetary transfer).</li>
+</ul>
+<hr/>
+<h3 id="summary-of-outcomes">Summary of Outcomes</h3>
+<table>
+<thead>
+<tr>
+<th>Initial Velocity <span class="arithmatex">\( v \)</span></th>
+<th>Resulting Trajectory</th>
+<th>Real-World Application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\( v &lt; v_1 \)</span></td>
+<td>Suborbital / ballistic</td>
+<td>Space tourism, ICBMs, reentry capsules</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( v = v_1 \)</span></td>
+<td>Circular orbit</td>
+<td>Satellites (LEO, MEO, GEO), ISS</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( v_1 &lt; v &lt; v_2 \)</span></td>
+<td>Elliptical orbit</td>
+<td>Transfer orbits, Molniya, GTO</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( v = v_2 \)</span></td>
+<td>Parabolic (escape)</td>
+<td>Theoretical limit for escape trajectories</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( v &gt; v_2 \)</span></td>
+<td>Hyperbolic (unbound)</td>
+<td>Interplanetary probes, escape trajectories</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="practical-considerations">Practical Considerations</h3>
+<ul>
+<li><strong>Suborbital Trajectories</strong>:</li>
+<li>Common in early rocket tests and reusable spaceplanes (e.g., Blue Origin).</li>
+<li>
+<p>Maximum altitude depends on velocity and release angle.</p>
+</li>
+<li>
+<p><strong>Circular Orbits</strong>:</p>
+</li>
+<li>Used for stable satellite operations (e.g., weather, GPS).</li>
+<li>
+<p>Require continuous balancing of gravity and inertia.</p>
+</li>
+<li>
+<p><strong>Elliptical Orbits</strong>:</p>
+</li>
+<li>Used for transfers between altitudes or planets.</li>
+<li>
+<p>Include <strong>perigee</strong> (closest point) and <strong>apogee</strong> (farthest point).</p>
+</li>
+<li>
+<p><strong>Escape Trajectories</strong>:</p>
+</li>
+<li>Enable payloads to leave Earth entirely.</li>
+<li>
+<p>Example: New Horizons and Voyager missions.</p>
+</li>
+<li>
+<p><strong>Hyperbolic Trajectories</strong>:</p>
+</li>
+<li>Arise from excess velocity (e.g., gravity assist maneuvers).</li>
+<li>Used to leave not only Earth, but the Solar System.</li>
+</ul>
+<hr/>
+<h3 id="role-in-mission-planning">Role in Mission Planning</h3>
+<p>Understanding trajectory types allows engineers to:</p>
+<ul>
+<li>Calculate required <strong>delta-v</strong> (velocity change),</li>
+<li>Select appropriate <strong>launch windows</strong>,</li>
+<li>Optimize <strong>fuel usage</strong> and <strong>transfer time</strong>.</li>
+</ul>
+<blockquote>
+<p>Numerical trajectory analysis is essential in orbital design, satellite deployment, and mission control.</p>
+</blockquote>
+<hr/>
+<h3 id="visualization-suggestion">Visualization Suggestion</h3>
+<p>Plotting trajectories with:
+- different initial speeds,
+- various angles of release,
+- altitude profiles,</p>
+<p>can reveal how tiny changes affect the <strong>outcome</strong> — reentry, orbit, or escape.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
