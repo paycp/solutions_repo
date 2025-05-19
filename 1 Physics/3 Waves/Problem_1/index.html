@@ -92,6 +92,16 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#3-python-simulation-plotting">3. Python Simulation &amp; Plotting</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#python-code">Python Code</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-use">How to Use</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#what-this-shows">What This Shows</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -360,6 +370,100 @@ y_i = R \cdot \sin\left( \frac{2\pi i}{N} \right), \quad i = 0, 1, \dots, N-1
 </table>
 <blockquote>
 <p>This strategy creates the foundation for generating visually rich and physically accurate wave interference simulations.</p>
+</blockquote>
+<h2 id="3-python-simulation-plotting">3. Python Simulation &amp; Plotting</h2>
+<p>We simulate the interference pattern by computing the superposition of waves from multiple point sources over a 2D grid.</p>
+<p>The code below supports:
+- Configurable number of sources,
+- Adjustable polygon radius, wavelength, and frequency,
+- Static snapshot visualization using a 2D color map.</p>
+<hr/>
+<h3 id="python-code">Python Code</h3>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+N = 5                  # Number of wave sources (e.g., 3=triangle, 4=square, 5=pentagon)
+R = 1.0                # Radius of the polygon (in meters)
+A = 1.0                # Wave amplitude
+lam = 0.5              # Wavelength (meters)
+f = 1.0                # Frequency (Hz)
+omega = 2 * np.pi * f
+k = 2 * np.pi / lam
+t = 0                  # Snapshot time (seconds)
+
+# Grid for visualization
+grid_size = 500
+x = np.linspace(-2, 2, grid_size)
+y = np.linspace(-2, 2, grid_size)
+X, Y = np.meshgrid(x, y)
+eta_total = np.zeros_like(X)
+
+# Generate source positions in regular polygon
+source_coords = [
+    (R * np.cos(2 * np.pi * i / N), R * np.sin(2 * np.pi * i / N))
+    for i in range(N)
+]
+
+# Compute superposition of waves
+for (x0, y0) in source_coords:
+    r = np.sqrt((X - x0)**2 + (Y - y0)**2) + 1e-6  # avoid division by 0
+    eta = (A / np.sqrt(r)) * np.cos(k * r - omega * t)
+    eta_total += eta
+
+# Visualization
+plt.figure(figsize=(7, 6))
+plt.imshow(eta_total, extent=[-2, 2, -2, 2], cmap='viridis', origin='lower')
+plt.colorbar(label='Displacement η(x, y, t)')
+plt.title(f'Interference Pattern: {N} Sources on Polygon')
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.axis('equal')
+plt.tight_layout()
+plt.show()
+</code></pre>
+<hr/>
+<h3 id="how-to-use">How to Use</h3>
+<p>Change these values to explore:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>N</code></td>
+<td>Number of sources (polygon type)</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>Polygon size (radius)</td>
+</tr>
+<tr>
+<td><code>lam</code></td>
+<td>Wavelength — controls spacing of fringes</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>Frequency — affects animation if implemented</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td>Time snapshot — static or animated</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="what-this-shows">What This Shows</h3>
+<ul>
+<li><strong>Bright regions</strong>: constructive interference (amplified waves)</li>
+<li><strong>Dark regions</strong>: destructive interference (cancellation)</li>
+<li><strong>Fringes</strong>: result of path differences between wave sources</li>
+</ul>
+<blockquote>
+<p>You can extend this model to animations or interactive sliders using <code>ipywidgets</code> or <code>matplotlib.animation</code>.</p>
 </blockquote>
 </div>
 </div><footer>
