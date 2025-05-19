@@ -90,11 +90,13 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#5-limitations-and-future-improvements">5. Limitations and Future Improvements</a>
+<li class="toctree-l3"><a class="reference internal" href="#6-advanced-visualizations">6. Advanced Visualizations</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#limitations-of-the-model">Limitations of the Model</a>
+<li class="toctree-l4"><a class="reference internal" href="#poincare-section">Poincaré Section</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#possible-extensions">Possible Extensions</a>
+<li class="toctree-l4"><a class="reference internal" href="#bifurcation-diagram">Bifurcation Diagram</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a>
 </li>
 </ul>
 </li>
@@ -442,44 +444,90 @@ plt.show()
   In chaotic regimes, the phase portrait appears scattered and complex.</p>
 </li>
 </ul>
-<h2 id="5-limitations-and-future-improvements">5. Limitations and Future Improvements</h2>
-<h3 id="limitations-of-the-model">Limitations of the Model</h3>
-<p>While the current model captures many key features of the forced damped pendulum, it relies on simplifying assumptions that limit its accuracy and applicability in more complex scenarios:</p>
+<h2 id="6-advanced-visualizations">6. Advanced Visualizations</h2>
+<p>This section presents additional tools for analyzing the complex behavior of the forced damped pendulum. These include:</p>
 <ul>
-<li>
-<p><strong>No nonlinear damping</strong><br/>
-  The damping term is assumed to be linear, but real systems often exhibit velocity-dependent or structural damping behaviors.</p>
-</li>
-<li>
-<p><strong>Ideal periodic forcing</strong><br/>
-  The driving force is modeled as a perfect cosine wave, while real external forces may be irregular, noisy, or even impulsive.</p>
-</li>
-<li>
-<p><strong>Planar motion only</strong><br/>
-  The model assumes the pendulum moves in a single plane, which may not hold in flexible or spatial pendulum systems.</p>
-</li>
-<li>
-<p><strong>No mechanical constraints</strong><br/>
-  It does not account for joint friction, finite range of motion, or collisions with boundaries.</p>
-</li>
-<li>
-<p><strong>Constant parameters</strong><br/>
-  Coefficients like damping <span class="arithmatex">\( b \)</span>, gravity <span class="arithmatex">\( g \)</span>, and amplitude <span class="arithmatex">\( A \)</span> are treated as constants, but in reality they can change over time or with temperature, load, etc.</p>
-</li>
+<li><strong>Poincaré sections</strong>: useful for visualizing transitions to chaos by sampling the phase space at regular intervals.</li>
+<li><strong>Bifurcation diagrams</strong>: show how the system’s behavior evolves as a parameter (typically the driving amplitude <span class="arithmatex">\( A \)</span>) changes.</li>
 </ul>
 <hr/>
-<h3 id="possible-extensions">Possible Extensions</h3>
-<p>Future work can enhance the realism and scope of the model:</p>
-<ul>
-<li>Add <strong>nonlinear damping terms</strong> (e.g. proportional to <span class="arithmatex">\( \omega^2 \)</span>) to simulate more realistic energy loss.</li>
-<li>Introduce <strong>non-periodic or pulsed external forces</strong>, including stochastic driving.</li>
-<li>Simulate <strong>3D pendulum dynamics</strong>, including twisting and off-plane motion.</li>
-<li>Include <strong>parameter drift</strong> over time to model aging, fatigue, or environmental changes.</li>
-<li>Explore <strong>coupled pendulums</strong> or <strong>double pendulum systems</strong> to study synchronization, bifurcations, and chaos.</li>
-</ul>
+<h3 id="poincare-section">Poincaré Section</h3>
+<p>The Poincaré section is constructed by sampling the state <span class="arithmatex">\((\theta, \omega)\)</span> once per driving cycle:</p>
+<div class="arithmatex">\[
+T = \frac{2\pi}{\omega_{\text{drive}}}
+\]</div>
+<p>Only values at <span class="arithmatex">\( t_n = nT \)</span> are recorded, providing a simplified view of the system's long-term behavior.</p>
+<pre><code class="language-python"># Define driving period
+T_drive = 2 * np.pi / omega_drive
+sample_times = np.arange(0, t_span[1], T_drive)
+
+# Solve the ODE with dense output
+solution_dense = solve_ivp(pendulum, t_span, y0, dense_output=True)
+
+# Sample at multiples of T
+poincare = solution_dense.sol(sample_times)
+theta_p = (poincare[0] + np.pi) % (2 * np.pi) - np.pi
+omega_p = poincare[1]
+
+# Plot Poincaré section
+plt.figure(figsize=(6, 6))
+plt.plot(theta_p, omega_p, 'o', markersize=2)
+plt.xlabel('Angle (radians)')
+plt.ylabel('Angular velocity (rad/s)')
+plt.title('Poincaré Section')
+plt.grid(True)
+plt.show()
+</code></pre>
 <blockquote>
-<p>These improvements can help bridge the gap between an idealized mathematical model and real-world systems in robotics, biomechanics, structural engineering, and control theory.</p>
+<p>Periodic motion produces discrete points. Quasiperiodic motion forms closed curves. Chaotic motion leads to scattered, dense regions.</p>
 </blockquote>
+<hr/>
+<h3 id="bifurcation-diagram">Bifurcation Diagram</h3>
+<p>In this plot, the driving amplitude <span class="arithmatex">\( A \)</span> is gradually varied. For each value, the system's angle is sampled once per cycle (after transients) to observe how behavior changes:</p>
+<pre><code class="language-python">A_values = np.linspace(1.0, 1.6, 200)
+theta_samples = []
+
+for A_current in A_values:
+    def pendulum_A(t, y):
+        theta, omega = y
+        dtheta_dt = omega
+        domega_dt = -b * omega - (g/L) * np.sin(theta) + A_current * np.cos(omega_drive * t)
+        return [dtheta_dt, domega_dt]
+
+    sol = solve_ivp(pendulum_A, (0, 300), y0, dense_output=True)
+
+    # Sample last 50 cycles after transient
+    T = 2 * np.pi / omega_drive
+    times = np.arange(250, 300, T)
+    sampled = sol.sol(times)
+    thetas = (sampled[0] + np.pi) % (2 * np.pi) - np.pi
+
+    theta_samples.append(thetas)
+
+# Plot bifurcation diagram
+plt.figure(figsize=(10, 6))
+for i, A_val in enumerate(A_values):
+    plt.plot([A_val]*len(theta_samples[i]), theta_samples[i], ',k')
+
+plt.xlabel('Driving Amplitude (A)')
+plt.ylabel('Angle (radians)')
+plt.title('Bifurcation Diagram')
+plt.grid(True)
+plt.show()
+</code></pre>
+<blockquote>
+<p>The diagram shows stable periodic orbits, period doubling bifurcations, and transitions to chaos as <span class="arithmatex">\( A \)</span> increases.</p>
+</blockquote>
+<hr/>
+<h3 id="summary">Summary</h3>
+<p>These advanced visualizations help identify and classify dynamic regimes:</p>
+<ul>
+<li><strong>Phase portraits</strong>: visualize continuous trajectories.</li>
+<li><strong>Poincaré sections</strong>: reduce dimensionality, reveal structure.</li>
+<li><strong>Bifurcation diagrams</strong>: track system response to parameter changes.</li>
+</ul>
+<p>Together, they provide powerful insight into nonlinear dynamics and chaotic systems.
+```</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
