@@ -255,9 +255,8 @@ T = \frac{2\pi}{\omega_{\text{drive}}}
 
 Only values at \( t_n = nT \) are recorded, providing a simplified view of the system's long-term behavior.
 
----
 
-#### 🧩 Steps to Construct a Poincaré Section:
+#### Steps to Construct a Poincaré Section:
 
 1. **Define the driving period**:
 
