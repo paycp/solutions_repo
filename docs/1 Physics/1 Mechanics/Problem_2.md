@@ -227,15 +227,14 @@ where:
 ---
 
 ### Visualization Overview  
-![Plot1.2.1]()
+![Plot1.2.1](../../_pics/plot1.2.1.png)
 ![Phase Diagram](../_pics/plot1.2.1.png)
 ![Phase Diagram](/_pics/plot1.2.1.png)
 
-
-![1](_pics/image.png)
-![2](../_pics/image.png)
-![3](../_pics/image.png)
-!4[](_pics/image.png)
+![1](_pics/plot1.2.1.png)
+![2](../_pics/plot1.2.1.png)
+![3](../_pics/plot1.2.1.png)
+![4](_pics/plot1.2.1.png)
 
 - **Angle vs Time**  
   Shows how the pendulum's angle evolves under the combined effects of damping and external forcing.
