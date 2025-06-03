@@ -257,44 +257,42 @@ Only values at \( t_n = nT \) are recorded, providing a simplified view of the s
 
 ---
 
-### 🧮 Steps to Construct a Poincaré Section:
+## 🧩 Steps to Construct a Poincaré Section:
 
-1. **Define the driving period**:  
-   \[
+1. **Define the driving period**:
+
+   $$
    T_{\text{drive}} = \frac{2\pi}{\omega_{\text{drive}}}
-   \]  
-   Sample times:  
-   \[
+   $$
+
+   Sample times:
+
+   $$
    t_n = n \cdot T_{\text{drive}}
-   \]
+   $$
 
 2. **Solve the system with dense output enabled**:  
    Use `solve_ivp(..., dense_output=True)` to allow evaluation at arbitrary times.
 
-3. **Sample solution at driving periods**:
-   Extract values at \( t_n \) to build the section:
-   - Normalize angle to \( [-\pi, \pi] \):
-     \[
-     \theta_n = (\theta(t_n) + \pi) \bmod 2\pi - \pi
-     \]
-   - Record \( (\theta_n, \omega_n) \)
+3. **Sample solution at driving periods**:  
+   Extract values at \( t_n \) to build the section.
 
-4. **Plot points \( (\theta_n, \omega_n) \)**:
-   - Each point represents the system state after each cycle.
-   - Plot reveals dynamics:  
-     - periodic → discrete points,  
-     - quasiperiodic → closed curves,  
-     - chaotic → scattered cloud.
+4. **Normalize angle to** \( [-\pi, \pi] \):
 
----
+   $$
+   \theta_n = (\theta(t_n) + \pi) \bmod 2\pi - \pi
+   $$
 
-### 🔍 Interpretation:
+5. **Record** \( (\theta_n, \omega_n) \)
 
-- **Periodic motion** → isolated, repeating dots.  
-- **Quasiperiodic motion** → nested loops or tori.  
-- **Chaotic motion** → irregular dense clouds with no structure.
+6. **Plot points** \( (\theta_n, \omega_n) \):  
+   Each point represents the system state after each cycle.
 
-> Poincaré sections provide a powerful way to reduce continuous dynamics to discrete maps, revealing order or chaos.
+7. **Plot reveals dynamics**:
+
+   - **periodic** → discrete points  
+   - **quasiperiodic** → closed curves  
+   - **chaotic** → scattered cloud
 
 ---
 
