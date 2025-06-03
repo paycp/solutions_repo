@@ -226,7 +226,8 @@ where:
 
 ---
 
-### Visualization Overview
+### Visualization Overview  
+![Plot1.2.1](_pics/plot1.2.1.png)
 
 - **Angle vs Time**  
   Shows how the pendulum's angle evolves under the combined effects of damping and external forcing.
