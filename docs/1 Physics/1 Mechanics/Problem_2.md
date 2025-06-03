@@ -284,7 +284,9 @@ Periodic motion produces discrete points. Quasiperiodic motion forms closed curv
 
 ### Bifurcation Diagram
 
-In this plot, the driving amplitude \( A \) is gradually varied. For each value, the system's angle is sampled once per cycle (after transients) to observe how behavior changes:
+In this plot, the driving amplitude \( A \) is gradually varied. For each value, the system's angle is sampled once per cycle (after transients) to observe how behavior changes:  
+![Plot1.2.3](../../_pics/plot1.2.3.png)
+
 
 ```python
 A_values = np.linspace(1.0, 1.6, 200)
