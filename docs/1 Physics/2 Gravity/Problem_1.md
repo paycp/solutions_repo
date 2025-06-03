@@ -249,7 +249,8 @@ Kepler’s Law is essential in:
 
 ## 4. Implementation
 
-To verify Kepler’s Third Law numerically, we simulate circular orbits of varying radii around a central mass and calculate the orbital periods for each case.
+To verify Kepler’s Third Law numerically, we simulate circular orbits of varying radii around a central mass and calculate the orbital periods for each case.  
+![Plot2.1.3](../../_pics/plot2.1.3.png)
 
 ---
 
