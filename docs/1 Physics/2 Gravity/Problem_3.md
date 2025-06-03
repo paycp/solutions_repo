@@ -159,7 +159,8 @@ plt.show()
 
 ---
 
-### Interpreting Results
+### Interpreting Results  
+![Plot2.3.1](../../_pics/plot2.3.1.png)
 
 - **7700 m/s** → close to circular orbit (first cosmic speed)
 - **>11200 m/s** → escape trajectory (second cosmic speed)
@@ -256,7 +257,8 @@ To explore how the trajectory of a released payload changes with different initi
 - **Direction angle** (in degrees),
 - **Initial altitude** (in km above Earth's surface).
 
-The script then computes and visualizes the trajectory using numerical integration.
+The script then computes and visualizes the trajectory using numerical integration.  
+![Plot2.3.2](../../_pics/plot2.3.2.png)
 
 ---
 
@@ -336,6 +338,7 @@ simulate_payload_trajectory(v0=9000, angle_deg=0)
 # Escape trajectory (hyperbolic)
 simulate_payload_trajectory(v0=11500, angle_deg=0)
 ```
+![Plot2.3.3](../../_pics/plot2.3.3.png)
 
 ---
 
