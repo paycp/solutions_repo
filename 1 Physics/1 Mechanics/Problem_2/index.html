@@ -433,13 +433,7 @@ plt.show()
 </code></pre>
 <hr/>
 <h3 id="visualization-overview">Visualization Overview</h3>
-<p><img alt="Plot1.2.1" src="../../../_pics/plot1.2.1.png"/>
-<img alt="Phase Diagram" src="../_pics/plot1.2.1.png"/>
-<img alt="Phase Diagram" src="/_pics/plot1.2.1.png"/></p>
-<p><img alt="1" src="_pics/plot1.2.1.png"/>
-<img alt="2" src="../_pics/plot1.2.1.png"/>
-<img alt="3" src="../_pics/plot1.2.1.png"/>
-<img alt="4" src="_pics/plot1.2.1.png"/></p>
+<p><img alt="Plot1.2.1" src="../../../_pics/plot1.2.1.png"/></p>
 <ul>
 <li>
 <p><strong>Angle vs Time</strong><br/>
@@ -463,51 +457,30 @@ plt.show()
 <div class="arithmatex">\[
 T = \frac{2\pi}{\omega_{\text{drive}}}
 \]</div>
-<p>Only values at <span class="arithmatex">\( t_n = nT \)</span> are recorded, providing a simplified view of the system's long-term behavior.</p>
-<h4 id="steps-to-construct-a-poincare-section">Steps to Construct a Poincaré Section:</h4>
-<ol>
-<li><strong>Define the driving period</strong>:</li>
-</ol>
-<p>$$
-   T_{\text{drive}} = \frac{2\pi}{\omega_{\text{drive}}}
-   $$</p>
-<p>Sample times:</p>
-<p>$$
-   t_n = n \cdot T_{\text{drive}}
-   $$</p>
-<ol>
-<li>
-<p><strong>Solve the system with dense output enabled</strong>:<br/>
-   Use <code>solve_ivp(..., dense_output=True)</code> to allow evaluation at arbitrary times.</p>
-</li>
-<li>
-<p><strong>Sample solution at driving periods</strong>:<br/>
-   Extract values at <span class="arithmatex">\( t_n \)</span> to build the section.</p>
-</li>
-<li>
-<p><strong>Normalize angle to</strong> <span class="arithmatex">\( [-\pi, \pi] \)</span>:</p>
-</li>
-</ol>
-<p>$$
-   \theta_n = (\theta(t_n) + \pi) \bmod 2\pi - \pi
-   $$</p>
-<ol>
-<li>
-<p><strong>Record</strong> <span class="arithmatex">\( (\theta_n, \omega_n) \)</span></p>
-</li>
-<li>
-<p><strong>Plot points</strong> <span class="arithmatex">\( (\theta_n, \omega_n) \)</span>:<br/>
-   Each point represents the system state after each cycle.</p>
-</li>
-<li>
-<p><strong>Plot reveals dynamics</strong>:</p>
-</li>
-<li>
-<p><strong>periodic</strong> → discrete points  </p>
-</li>
-<li><strong>quasiperiodic</strong> → closed curves  </li>
-<li><strong>chaotic</strong> → scattered cloud</li>
-</ol>
+<p>Only values at <span class="arithmatex">\( t_n = nT \)</span> are recorded, providing a simplified view of the system's long-term behavior.<br/>
+<img alt="Plot1.2.2" src="../../../_pics/plot1.2.2.png"/></p>
+<pre><code># Define driving period
+T_drive = 2 * np.pi / omega_drive
+sample_times = np.arange(0, t_span[1], T_drive)
+
+# Solve the ODE with dense output
+solution_dense = solve_ivp(pendulum, t_span, y0, dense_output=True)
+
+# Sample at multiples of T
+poincare = solution_dense.sol(sample_times)
+theta_p = (poincare[0] + np.pi) % (2 * np.pi) - np.pi
+omega_p = poincare[1]
+
+# Plot Poincaré section
+plt.figure(figsize=(6, 6))
+plt.plot(theta_p, omega_p, 'o', markersize=2)
+plt.xlabel('Angle (radians)')
+plt.ylabel('Angular velocity (rad/s)')
+plt.title('Poincaré Section')
+plt.grid(True)
+plt.show()
+</code></pre>
+<p>Periodic motion produces discrete points. Quasiperiodic motion forms closed curves. Chaotic motion leads to scattered, dense regions.</p>
 <hr/>
 <h3 id="bifurcation-diagram">Bifurcation Diagram</h3>
 <p>In this plot, the driving amplitude <span class="arithmatex">\( A \)</span> is gradually varied. For each value, the system's angle is sampled once per cycle (after transients) to observe how behavior changes:</p>
