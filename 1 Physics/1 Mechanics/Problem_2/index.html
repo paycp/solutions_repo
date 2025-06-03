@@ -94,10 +94,10 @@
 <ul>
 <li class="toctree-l4"><a class="reference internal" href="#poincare-section">Poincaré Section</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#steps-to-construct-a-poincare-section">🧮 Steps to Construct a Poincaré Section:</a>
+</ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#interpretation">🔍 Interpretation:</a>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#steps-to-construct-a-poincare-section">🧩 Steps to Construct a Poincaré Section:</a>
+<ul>
 <li class="toctree-l4"><a class="reference internal" href="#bifurcation-diagram">Bifurcation Diagram</a>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a>
@@ -462,54 +462,50 @@ T = \frac{2\pi}{\omega_{\text{drive}}}
 \]</div>
 <p>Only values at <span class="arithmatex">\( t_n = nT \)</span> are recorded, providing a simplified view of the system's long-term behavior.</p>
 <hr/>
-<h3 id="steps-to-construct-a-poincare-section">🧮 Steps to Construct a Poincaré Section:</h3>
+<h2 id="steps-to-construct-a-poincare-section">🧩 Steps to Construct a Poincaré Section:</h2>
 <ol>
-<li>
-<p><strong>Define the driving period</strong>:<br/>
-   [
+<li><strong>Define the driving period</strong>:</li>
+</ol>
+<p>$$
    T_{\text{drive}} = \frac{2\pi}{\omega_{\text{drive}}}
-   ]<br/>
-   Sample times:<br/>
-   [
+   $$</p>
+<p>Sample times:</p>
+<p>$$
    t_n = n \cdot T_{\text{drive}}
-   ]</p>
-</li>
+   $$</p>
+<ol>
 <li>
 <p><strong>Solve the system with dense output enabled</strong>:<br/>
    Use <code>solve_ivp(..., dense_output=True)</code> to allow evaluation at arbitrary times.</p>
 </li>
 <li>
-<p><strong>Sample solution at driving periods</strong>:
-   Extract values at <span class="arithmatex">\( t_n \)</span> to build the section:</p>
-</li>
-<li>Normalize angle to <span class="arithmatex">\( [-\pi, \pi] \)</span>:
-     [
-     \theta_n = (\theta(t_n) + \pi) \bmod 2\pi - \pi
-     ]</li>
-<li>
-<p>Record <span class="arithmatex">\( (\theta_n, \omega_n) \)</span></p>
+<p><strong>Sample solution at driving periods</strong>:<br/>
+   Extract values at <span class="arithmatex">\( t_n \)</span> to build the section.</p>
 </li>
 <li>
-<p><strong>Plot points <span class="arithmatex">\( (\theta_n, \omega_n) \)</span></strong>:</p>
-</li>
-<li>Each point represents the system state after each cycle.</li>
-<li>Plot reveals dynamics:  <ul>
-<li>periodic → discrete points,  </li>
-<li>quasiperiodic → closed curves,  </li>
-<li>chaotic → scattered cloud.</li>
-</ul>
+<p><strong>Normalize angle to</strong> <span class="arithmatex">\( [-\pi, \pi] \)</span>:</p>
 </li>
 </ol>
-<hr/>
-<h3 id="interpretation">🔍 Interpretation:</h3>
-<ul>
-<li><strong>Periodic motion</strong> → isolated, repeating dots.  </li>
-<li><strong>Quasiperiodic motion</strong> → nested loops or tori.  </li>
-<li><strong>Chaotic motion</strong> → irregular dense clouds with no structure.</li>
-</ul>
-<blockquote>
-<p>Poincaré sections provide a powerful way to reduce continuous dynamics to discrete maps, revealing order or chaos.</p>
-</blockquote>
+<p>$$
+   \theta_n = (\theta(t_n) + \pi) \bmod 2\pi - \pi
+   $$</p>
+<ol>
+<li>
+<p><strong>Record</strong> <span class="arithmatex">\( (\theta_n, \omega_n) \)</span></p>
+</li>
+<li>
+<p><strong>Plot points</strong> <span class="arithmatex">\( (\theta_n, \omega_n) \)</span>:<br/>
+   Each point represents the system state after each cycle.</p>
+</li>
+<li>
+<p><strong>Plot reveals dynamics</strong>:</p>
+</li>
+<li>
+<p><strong>periodic</strong> → discrete points  </p>
+</li>
+<li><strong>quasiperiodic</strong> → closed curves  </li>
+<li><strong>chaotic</strong> → scattered cloud</li>
+</ol>
 <hr/>
 <h3 id="bifurcation-diagram">Bifurcation Diagram</h3>
 <p>In this plot, the driving amplitude <span class="arithmatex">\( A \)</span> is gradually varied. For each value, the system's angle is sampled once per cycle (after transients) to observe how behavior changes:</p>
