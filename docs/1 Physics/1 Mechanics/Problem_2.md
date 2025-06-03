@@ -228,13 +228,6 @@ where:
 
 ### Visualization Overview  
 ![Plot1.2.1](../../_pics/plot1.2.1.png)
-![Phase Diagram](../_pics/plot1.2.1.png)
-![Phase Diagram](/_pics/plot1.2.1.png)
-
-![1](_pics/plot1.2.1.png)
-![2](../_pics/plot1.2.1.png)
-![3](../_pics/plot1.2.1.png)
-![4](_pics/plot1.2.1.png)
 
 - **Angle vs Time**  
   Shows how the pendulum's angle evolves under the combined effects of damping and external forcing.
@@ -261,45 +254,31 @@ The Poincaré section is constructed by sampling the state \((\theta, \omega)\) 
 T = \frac{2\pi}{\omega_{\text{drive}}}
 \]
 
-Only values at \( t_n = nT \) are recorded, providing a simplified view of the system's long-term behavior.
+Only values at \( t_n = nT \) are recorded, providing a simplified view of the system's long-term behavior.  
+![Plot1.2.2](../../_pics/plot1.2.2.png)
 
+    # Define driving period
+    T_drive = 2 * np.pi / omega_drive
+    sample_times = np.arange(0, t_span[1], T_drive)
 
-#### Steps to Construct a Poincaré Section:
+    # Solve the ODE with dense output
+    solution_dense = solve_ivp(pendulum, t_span, y0, dense_output=True)
 
-1. **Define the driving period**:
+    # Sample at multiples of T
+    poincare = solution_dense.sol(sample_times)
+    theta_p = (poincare[0] + np.pi) % (2 * np.pi) - np.pi
+    omega_p = poincare[1]
 
-   $$
-   T_{\text{drive}} = \frac{2\pi}{\omega_{\text{drive}}}
-   $$
+    # Plot Poincaré section
+    plt.figure(figsize=(6, 6))
+    plt.plot(theta_p, omega_p, 'o', markersize=2)
+    plt.xlabel('Angle (radians)')
+    plt.ylabel('Angular velocity (rad/s)')
+    plt.title('Poincaré Section')
+    plt.grid(True)
+    plt.show()
 
-   Sample times:
-
-   $$
-   t_n = n \cdot T_{\text{drive}}
-   $$
-
-2. **Solve the system with dense output enabled**:  
-   Use `solve_ivp(..., dense_output=True)` to allow evaluation at arbitrary times.
-
-3. **Sample solution at driving periods**:  
-   Extract values at \( t_n \) to build the section.
-
-4. **Normalize angle to** \( [-\pi, \pi] \):
-
-   $$
-   \theta_n = (\theta(t_n) + \pi) \bmod 2\pi - \pi
-   $$
-
-5. **Record** \( (\theta_n, \omega_n) \)
-
-6. **Plot points** \( (\theta_n, \omega_n) \):  
-   Each point represents the system state after each cycle.
-
-7. **Plot reveals dynamics**:
-
-   - **periodic** → discrete points  
-   - **quasiperiodic** → closed curves  
-   - **chaotic** → scattered cloud
+Periodic motion produces discrete points. Quasiperiodic motion forms closed curves. Chaotic motion leads to scattered, dense regions.
 
 ---
 
