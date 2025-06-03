@@ -255,30 +255,46 @@ T = \frac{2\pi}{\omega_{\text{drive}}}
 
 Only values at \( t_n = nT \) are recorded, providing a simplified view of the system's long-term behavior.
 
-```python
-# Define driving period
-T_drive = 2 * np.pi / omega_drive
-sample_times = np.arange(0, t_span[1], T_drive)
+---
 
-# Solve the ODE with dense output
-solution_dense = solve_ivp(pendulum, t_span, y0, dense_output=True)
+### 🧮 Steps to Construct a Poincaré Section:
 
-# Sample at multiples of T
-poincare = solution_dense.sol(sample_times)
-theta_p = (poincare[0] + np.pi) % (2 * np.pi) - np.pi
-omega_p = poincare[1]
+1. **Define the driving period**:  
+   \[
+   T_{\text{drive}} = \frac{2\pi}{\omega_{\text{drive}}}
+   \]  
+   Sample times:  
+   \[
+   t_n = n \cdot T_{\text{drive}}
+   \]
 
-# Plot Poincaré section
-plt.figure(figsize=(6, 6))
-plt.plot(theta_p, omega_p, 'o', markersize=2)
-plt.xlabel('Angle (radians)')
-plt.ylabel('Angular velocity (rad/s)')
-plt.title('Poincaré Section')
-plt.grid(True)
-plt.show()
-```
+2. **Solve the system with dense output enabled**:  
+   Use `solve_ivp(..., dense_output=True)` to allow evaluation at arbitrary times.
 
-> Periodic motion produces discrete points. Quasiperiodic motion forms closed curves. Chaotic motion leads to scattered, dense regions.
+3. **Sample solution at driving periods**:
+   Extract values at \( t_n \) to build the section:
+   - Normalize angle to \( [-\pi, \pi] \):
+     \[
+     \theta_n = (\theta(t_n) + \pi) \bmod 2\pi - \pi
+     \]
+   - Record \( (\theta_n, \omega_n) \)
+
+4. **Plot points \( (\theta_n, \omega_n) \)**:
+   - Each point represents the system state after each cycle.
+   - Plot reveals dynamics:  
+     - periodic → discrete points,  
+     - quasiperiodic → closed curves,  
+     - chaotic → scattered cloud.
+
+---
+
+### 🔍 Interpretation:
+
+- **Periodic motion** → isolated, repeating dots.  
+- **Quasiperiodic motion** → nested loops or tori.  
+- **Chaotic motion** → irregular dense clouds with no structure.
+
+> Poincaré sections provide a powerful way to reduce continuous dynamics to discrete maps, revealing order or chaos.
 
 ---
 
