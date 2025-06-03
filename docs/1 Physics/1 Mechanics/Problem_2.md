@@ -257,7 +257,7 @@ Only values at \( t_n = nT \) are recorded, providing a simplified view of the s
 
 ---
 
-## 🧩 Steps to Construct a Poincaré Section:
+#### 🧩 Steps to Construct a Poincaré Section:
 
 1. **Define the driving period**:
 
