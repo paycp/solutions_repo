@@ -229,7 +229,8 @@ plt.show()
 
 ---
 
-### Example Results (rounded)
+### Example Results (rounded)  
+![Plot2.2.1](../../_pics/plot2.2.1.png)
 
 | Body     | \( v_1 \) (km/s) | \( v_2 \) (km/s) |
 |----------|------------------|------------------|
