@@ -5,7 +5,6 @@
 Calculating the equivalent resistance is a fundamental task in electrical circuits. While manual methods like series-parallel reduction work for small circuits, they become impractical for complex networks. Graph theory offers a powerful and systematic alternative.
 
 By modeling the circuit as a graph:
-
 - **Nodes** represent junctions
 - **Edges** represent resistors, with edge weights as resistance values
 
@@ -33,14 +32,14 @@ We can iteratively reduce the graph until only a single equivalent resistance re
 
 ### Pseudocode
 
-```
+```python
 function calculate_equivalent_resistance(graph):
     while graph can be simplified:
         for each pair of nodes (u, v):
             if multiple edges exist between (u, v):  # Parallel
                 R_parallel = 1 / sum(1 / R for each edge between u and v)
                 remove all edges between u and v
-                add new edge (u, v) with R_parallel
+                add edge (u, v) with R_parallel
 
         for each node n in graph:
             if degree(n) == 2 and n is not input/output:  # Series
@@ -56,16 +55,54 @@ function calculate_equivalent_resistance(graph):
 
 ---
 
-### Nested Combinations
+### Test Examples
 
-This algorithm automatically handles nested combinations. By repeatedly applying reduction rules (parallel first, then series), deeply nested circuits are simplified progressively.
+**1. Series connection**  
+- Nodes: A — B — C  
+- Edges: A–B: 2Ω, B–C: 3Ω  
+
+Expected result:
+
+$$
+R_{\text{eq}} = 2 + 3 = 5\ \Omega
+$$
 
 ---
 
-### Next Steps
+**2. Parallel connection**  
+- Nodes: A, B  
+- Edges: A–B: 4Ω, A–B: 6Ω  
 
-- Implement this algorithm in Python (e.g., using `networkx`)
-- Visualize example graphs before and after reduction
-- Test with simple, nested, and cyclic circuits
+Expected result:
+
+$$
+R_{\text{eq}} = \left( \frac{1}{4} + \frac{1}{6} \right)^{-1} = 2.4\ \Omega
+$$
+
+---
+
+**3. Nested configuration**  
+- A–B: 2Ω  
+- B–C: 4Ω, 4Ω (parallel)  
+- C–D: 1Ω  
+
+Reduction steps:
+- B–C in parallel → 2Ω  
+- A–B–C–D in series → 2Ω + 2Ω + 1Ω = 5Ω
+
+---
+
+### Advantages of Graph-Based Approach
+
+- Works for arbitrary topologies  
+- Suitable for automation with tools like Python and `networkx`  
+- Efficient for large, nested, or cyclic circuits
+
+---
+
+### Conclusion
+
+Using graph theory to calculate equivalent resistance simplifies and generalizes the process. It enables automated reasoning, handles arbitrary complexity, and lays the foundation for scalable simulation tools in physics, electrical engineering, and computer science.
+```
 
 ---
