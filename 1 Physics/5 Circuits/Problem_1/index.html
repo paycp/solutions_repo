@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Equivalent Resistance Using Graph Theory - Physics and Mathematics</title>
+<title>Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Equivalent Resistance Using Graph Theory";
+        var mkdocs_page_name = "Problem 1";
         var mkdocs_page_input_path = "1 Physics/5 Circuits/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -76,13 +76,17 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Equivalent Resistance Using Graph Theory</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#algorithm-description">Algorithm Description</a>
+<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#step-by-step-algorithm">Step-by-Step Algorithm</a>
+<li class="toctree-l3"><a class="reference internal" href="#algorithm-overview">Algorithm Overview</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pseudocode">Pseudocode</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nested-combinations">Nested Combinations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a>
 </li>
 </ul>
 </li>
@@ -169,7 +173,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">5 Circuits</li>
-<li class="breadcrumb-item active">Equivalent Resistance Using Graph Theory</li>
+<li class="breadcrumb-item active">Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -177,57 +181,63 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="equivalent-resistance-using-graph-theory">Equivalent Resistance Using Graph Theory</h1>
-<h2 id="algorithm-description">Algorithm Description</h2>
-<p>To calculate the equivalent resistance of a circuit using graph theory, we treat the electrical circuit as a weighted undirected graph:</p>
+<h2 id="equivalent-resistance-using-graph-theory">Equivalent Resistance Using Graph Theory</h2>
+<h3 id="motivation">Motivation</h3>
+<p>Calculating the equivalent resistance is a fundamental task in electrical circuits. While manual methods like series-parallel reduction work for small circuits, they become impractical for complex networks. Graph theory offers a powerful and systematic alternative.</p>
+<p>By modeling the circuit as a graph:</p>
 <ul>
-<li><strong>Nodes</strong> represent electrical junctions.</li>
-<li><strong>Edges</strong> represent resistors, with weights equal to resistance in ohms (Ω).</li>
+<li><strong>Nodes</strong> represent junctions</li>
+<li><strong>Edges</strong> represent resistors, with edge weights as resistance values</li>
 </ul>
-<p>The goal is to reduce this graph step-by-step until a single edge remains, representing the total equivalent resistance between two terminals.</p>
+<p>We can iteratively reduce the graph until only a single equivalent resistance remains between the input and output nodes.</p>
 <hr/>
-<h2 id="step-by-step-algorithm">Step-by-Step Algorithm</h2>
+<h3 id="algorithm-overview">Algorithm Overview</h3>
 <ol>
-<li><strong>Input</strong>: Circuit as a weighted graph.</li>
-<li><strong>While simplification is possible</strong>:</li>
-<li><strong>Find parallel resistors</strong>: multiple edges between the same two nodes.<ul>
-<li>Replace them with one edge using:
-   [
-   \frac{1}{R_{\text{eq}}} = \sum \frac{1}{R_i}
-   ]</li>
-</ul>
-</li>
-<li><strong>Find series resistors</strong>: nodes connected to exactly two neighbors, not a terminal.<ul>
-<li>Collapse the node and merge the two edges into one:
-   [
-   R_{\text{eq}} = R_1 + R_2
-   ]</li>
-</ul>
-</li>
-<li><strong>Repeat</strong> the process until only one edge remains between the start and end nodes.</li>
-<li><strong>Return</strong> the final resistance value.</li>
+<li><strong>Input</strong>: A weighted graph representing the circuit</li>
+<li><strong>Repeat</strong> until no further simplification is possible:</li>
+<li>🔁 <strong>Parallel reduction</strong>: If multiple edges exist between two nodes, replace them with a single edge:
+     [
+     R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
+     ]</li>
+<li>➕ <strong>Series reduction</strong>: If a node connects to exactly two others (and is not input/output), merge it:
+     [
+     R_{\text{eq}} = R_1 + R_2
+     ]</li>
+<li><strong>Output</strong>: Final edge’s resistance between the input and output node.</li>
 </ol>
 <hr/>
-<h2 id="pseudocode">Pseudocode</h2>
-<pre><code class="language-python">function calculate_equivalent_resistance(graph):
+<h3 id="pseudocode">Pseudocode</h3>
+<pre><code>function calculate_equivalent_resistance(graph):
     while graph can be simplified:
         for each pair of nodes (u, v):
-            if multiple edges exist between u and v:
+            if multiple edges exist between (u, v):  # Parallel
                 R_parallel = 1 / sum(1 / R for each edge between u and v)
                 remove all edges between u and v
-                add edge (u, v) with resistance R_parallel
+                add new edge (u, v) with R_parallel
 
         for each node n in graph:
-            if degree(n) == 2 and n is not input/output terminal:
+            if degree(n) == 2 and n is not input/output:  # Series
                 neighbors = [a, b]
                 R1 = resistance between a and n
                 R2 = resistance between n and b
                 R_total = R1 + R2
                 remove node n and its edges
-                add edge (a, b) with resistance R_total
+                add edge (a, b) with R_total
 
-    return resistance of the final edge
+    return resistance of the only remaining edge
 </code></pre>
+<hr/>
+<h3 id="nested-combinations">Nested Combinations</h3>
+<p>This algorithm automatically handles nested combinations. By repeatedly applying reduction rules (parallel first, then series), deeply nested circuits are simplified progressively.</p>
+<hr/>
+<h3 id="next-steps">Next Steps</h3>
+<ul>
+<li>Implement this algorithm in Python (e.g., using <code>networkx</code>)</li>
+<li>Visualize example graphs before and after reduction</li>
+<li>Test with simple, nested, and cyclic circuits
+```</li>
+</ul>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
