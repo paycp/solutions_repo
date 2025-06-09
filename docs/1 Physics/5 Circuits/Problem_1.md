@@ -58,6 +58,7 @@ function calculate_equivalent_resistance(graph):
 ### Test Examples
 
 **1. Series connection**  
+![Plot5.1.1](../../_pics/plot5.1.1.png)
 - Nodes: A — B — C  
 - Edges: A–B: 2Ω, B–C: 3Ω  
 
@@ -70,6 +71,7 @@ $$
 ---
 
 **2. Parallel connection**  
+![Plot5.1.2](../../_pics/plot5.1.2.png)
 - Nodes: A, B  
 - Edges: A–B: 4Ω, A–B: 6Ω  
 
@@ -82,6 +84,7 @@ $$
 ---
 
 **3. Nested configuration**  
+![Plot5.1.3](../../_pics/plot5.1.3.png)
 - A–B: 2Ω  
 - B–C: 4Ω, 4Ω (parallel)  
 - C–D: 1Ω  
@@ -103,6 +106,5 @@ Reduction steps:
 ### Conclusion
 
 Using graph theory to calculate equivalent resistance simplifies and generalizes the process. It enables automated reasoning, handles arbitrary complexity, and lays the foundation for scalable simulation tools in physics, electrical engineering, and computer science.
-```
 
 ---
