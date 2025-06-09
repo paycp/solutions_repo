@@ -51,3 +51,4 @@ function calculate_equivalent_resistance(graph):
                 add edge (a, b) with resistance R_total
 
     return resistance of the final edge
+```
