@@ -84,9 +84,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pseudocode">Pseudocode</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#nested-combinations">Nested Combinations</a>
+<li class="toctree-l3"><a class="reference internal" href="#test-examples">Test Examples</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a>
+<li class="toctree-l3"><a class="reference internal" href="#advantages-of-graph-based-approach">Advantages of Graph-Based Approach</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
 </li>
 </ul>
 </li>
@@ -184,11 +186,9 @@
 <h2 id="equivalent-resistance-using-graph-theory">Equivalent Resistance Using Graph Theory</h2>
 <h3 id="motivation">Motivation</h3>
 <p>Calculating the equivalent resistance is a fundamental task in electrical circuits. While manual methods like series-parallel reduction work for small circuits, they become impractical for complex networks. Graph theory offers a powerful and systematic alternative.</p>
-<p>By modeling the circuit as a graph:</p>
-<ul>
-<li><strong>Nodes</strong> represent junctions</li>
-<li><strong>Edges</strong> represent resistors, with edge weights as resistance values</li>
-</ul>
+<p>By modeling the circuit as a graph:
+- <strong>Nodes</strong> represent junctions
+- <strong>Edges</strong> represent resistors, with edge weights as resistance values</p>
 <p>We can iteratively reduce the graph until only a single equivalent resistance remains between the input and output nodes.</p>
 <hr/>
 <h3 id="algorithm-overview">Algorithm Overview</h3>
@@ -213,13 +213,13 @@
 </ol>
 <hr/>
 <h3 id="pseudocode">Pseudocode</h3>
-<pre><code>function calculate_equivalent_resistance(graph):
+<pre><code class="language-python">function calculate_equivalent_resistance(graph):
     while graph can be simplified:
         for each pair of nodes (u, v):
             if multiple edges exist between (u, v):  # Parallel
                 R_parallel = 1 / sum(1 / R for each edge between u and v)
                 remove all edges between u and v
-                add new edge (u, v) with R_parallel
+                add edge (u, v) with R_parallel
 
         for each node n in graph:
             if degree(n) == 2 and n is not input/output:  # Series
@@ -233,15 +233,41 @@
     return resistance of the only remaining edge
 </code></pre>
 <hr/>
-<h3 id="nested-combinations">Nested Combinations</h3>
-<p>This algorithm automatically handles nested combinations. By repeatedly applying reduction rules (parallel first, then series), deeply nested circuits are simplified progressively.</p>
+<h3 id="test-examples">Test Examples</h3>
+<p><strong>1. Series connection</strong><br/>
+- Nodes: A — B — C<br/>
+- Edges: A–B: 2Ω, B–C: 3Ω  </p>
+<p>Expected result:</p>
+<div class="arithmatex">\[
+R_{\text{eq}} = 2 + 3 = 5\ \Omega
+\]</div>
 <hr/>
-<h3 id="next-steps">Next Steps</h3>
+<p><strong>2. Parallel connection</strong><br/>
+- Nodes: A, B<br/>
+- Edges: A–B: 4Ω, A–B: 6Ω  </p>
+<p>Expected result:</p>
+<div class="arithmatex">\[
+R_{\text{eq}} = \left( \frac{1}{4} + \frac{1}{6} \right)^{-1} = 2.4\ \Omega
+\]</div>
+<hr/>
+<p><strong>3. Nested configuration</strong><br/>
+- A–B: 2Ω<br/>
+- B–C: 4Ω, 4Ω (parallel)<br/>
+- C–D: 1Ω  </p>
+<p>Reduction steps:
+- B–C in parallel → 2Ω<br/>
+- A–B–C–D in series → 2Ω + 2Ω + 1Ω = 5Ω</p>
+<hr/>
+<h3 id="advantages-of-graph-based-approach">Advantages of Graph-Based Approach</h3>
 <ul>
-<li>Implement this algorithm in Python (e.g., using <code>networkx</code>)</li>
-<li>Visualize example graphs before and after reduction</li>
-<li>Test with simple, nested, and cyclic circuits</li>
+<li>Works for arbitrary topologies  </li>
+<li>Suitable for automation with tools like Python and <code>networkx</code> </li>
+<li>Efficient for large, nested, or cyclic circuits</li>
 </ul>
+<hr/>
+<h3 id="conclusion">Conclusion</h3>
+<p>Using graph theory to calculate equivalent resistance simplifies and generalizes the process. It enables automated reasoning, handles arbitrary complexity, and lays the foundation for scalable simulation tools in physics, electrical engineering, and computer science.
+```</p>
 <hr/>
 </div>
 </div><footer>
