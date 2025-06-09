@@ -193,23 +193,19 @@
 <hr/>
 <h3 id="algorithm-overview">Algorithm Overview</h3>
 <ol>
-<li><strong>Input</strong>: A weighted graph representing the circuit</li>
-<li><strong>Repeat</strong> until no further simplification is possible:</li>
-<li>
-<p><strong>Parallel reduction</strong>: If multiple edges exist between two nodes, replace them with a single edge:</p>
-<p>[
- R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
- ]</p>
+<li><strong>Input</strong>: A weighted graph representing the circuit  </li>
+<li><strong>Repeat</strong> until no further simplification is possible:  <ul>
+<li><strong>Parallel reduction</strong>: If multiple edges exist between two nodes, replace them with a single edge:<br/>
+   [
+   R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
+   ]</li>
+<li><strong>Series reduction</strong>: If a node connects to exactly two others (and is not input/output), merge it:<br/>
+   [
+   R_{\text{eq}} = R_1 + R_2
+   ]</li>
+</ul>
 </li>
-<li>
-<p><strong>Series reduction</strong>: If a node connects to exactly two others (and is not input/output), merge it:</p>
-<p>[
- R_{\text{eq}} = R_1 + R_2
- ]</p>
-</li>
-<li>
-<p><strong>Output</strong>: Final edge’s resistance between the input and output node.</p>
-</li>
+<li><strong>Output</strong>: Final edge’s resistance between the input and output node.</li>
 </ol>
 <hr/>
 <h3 id="pseudocode">Pseudocode</h3>
