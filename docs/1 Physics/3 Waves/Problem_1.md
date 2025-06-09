@@ -49,9 +49,9 @@ If the sources are placed at the **vertices of a regular polygon**, their symmet
 - 4 sources → square symmetry  
 - 5+ sources → complex radial patterns
 
-These symmetrical setups are useful for studying:
-- Zones of maximum and minimum amplitude,
-- Nodal lines (where waves cancel out),
+These symmetrical setups are useful for studying:  
+- Zones of maximum and minimum amplitude,  
+- Nodal lines (where waves cancel out),  
 - Phase alignment across space.
 
 ---
@@ -137,10 +137,12 @@ You can vary:
 
 We simulate the interference pattern by computing the superposition of waves from multiple point sources over a 2D grid.
 
-The code below supports:
-- Configurable number of sources,
-- Adjustable polygon radius, wavelength, and frequency,
+The code below supports:  
+- Configurable number of sources,  
+- Adjustable polygon radius, wavelength, and frequency,  
 - Static snapshot visualization using a 2D color map.
+
+![Plot3.1.1](../../_pics/plot3.1.1.png)
 
 ---
 
