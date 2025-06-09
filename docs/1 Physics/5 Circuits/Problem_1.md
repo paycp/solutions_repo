@@ -28,7 +28,7 @@ We can iteratively reduce the graph until only a single equivalent resistance re
      \[
      R_{\text{eq}} = R_1 + R_2
      \]
-     
+
 3. **Output**: Final edge’s resistance between the input and output node.
 
 ---
@@ -69,6 +69,5 @@ This algorithm automatically handles nested combinations. By repeatedly applying
 - Implement this algorithm in Python (e.g., using `networkx`)
 - Visualize example graphs before and after reduction
 - Test with simple, nested, and cyclic circuits
-```
 
 ---
