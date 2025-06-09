@@ -1,54 +1,70 @@
-# Equivalent Resistance Using Graph Theory
+## Equivalent Resistance Using Graph Theory
 
-## Algorithm Description
+### Motivation
 
-To calculate the equivalent resistance of a circuit using graph theory, we treat the electrical circuit as a weighted undirected graph:
+Calculating the equivalent resistance is a fundamental task in electrical circuits. While manual methods like series-parallel reduction work for small circuits, they become impractical for complex networks. Graph theory offers a powerful and systematic alternative.
 
-- **Nodes** represent electrical junctions.
-- **Edges** represent resistors, with weights equal to resistance in ohms (Ω).
+By modeling the circuit as a graph:
 
-The goal is to reduce this graph step-by-step until a single edge remains, representing the total equivalent resistance between two terminals.
+- **Nodes** represent junctions
+- **Edges** represent resistors, with edge weights as resistance values
 
----
-
-## Step-by-Step Algorithm
-
-1. **Input**: Circuit as a weighted graph.
-2. **While simplification is possible**:
-   - **Find parallel resistors**: multiple edges between the same two nodes.
-     - Replace them with one edge using:
-       \[
-       \frac{1}{R_{\text{eq}}} = \sum \frac{1}{R_i}
-       \]
-   - **Find series resistors**: nodes connected to exactly two neighbors, not a terminal.
-     - Collapse the node and merge the two edges into one:
-       \[
-       R_{\text{eq}} = R_1 + R_2
-       \]
-3. **Repeat** the process until only one edge remains between the start and end nodes.
-4. **Return** the final resistance value.
+We can iteratively reduce the graph until only a single equivalent resistance remains between the input and output nodes.
 
 ---
 
-## Pseudocode
+### Algorithm Overview
 
-```python
+1. **Input**: A weighted graph representing the circuit
+2. **Repeat** until no further simplification is possible:
+   - 🔁 **Parallel reduction**: If multiple edges exist between two nodes, replace them with a single edge:
+     \[
+     R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
+     \]
+   - ➕ **Series reduction**: If a node connects to exactly two others (and is not input/output), merge it:
+     \[
+     R_{\text{eq}} = R_1 + R_2
+     \]
+3. **Output**: Final edge’s resistance between the input and output node.
+
+---
+
+### Pseudocode
+
+```
 function calculate_equivalent_resistance(graph):
     while graph can be simplified:
         for each pair of nodes (u, v):
-            if multiple edges exist between u and v:
+            if multiple edges exist between (u, v):  # Parallel
                 R_parallel = 1 / sum(1 / R for each edge between u and v)
                 remove all edges between u and v
-                add edge (u, v) with resistance R_parallel
+                add new edge (u, v) with R_parallel
 
         for each node n in graph:
-            if degree(n) == 2 and n is not input/output terminal:
+            if degree(n) == 2 and n is not input/output:  # Series
                 neighbors = [a, b]
                 R1 = resistance between a and n
                 R2 = resistance between n and b
                 R_total = R1 + R2
                 remove node n and its edges
-                add edge (a, b) with resistance R_total
+                add edge (a, b) with R_total
 
-    return resistance of the final edge
+    return resistance of the only remaining edge
 ```
+
+---
+
+### Nested Combinations
+
+This algorithm automatically handles nested combinations. By repeatedly applying reduction rules (parallel first, then series), deeply nested circuits are simplified progressively.
+
+---
+
+### Next Steps
+
+- Implement this algorithm in Python (e.g., using `networkx`)
+- Visualize example graphs before and after reduction
+- Test with simple, nested, and cyclic circuits
+```
+
+---
