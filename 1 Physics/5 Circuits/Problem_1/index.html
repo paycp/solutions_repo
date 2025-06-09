@@ -209,24 +209,24 @@
 </ol>
 <hr/>
 <h2 id="pseudocode">Pseudocode</h2>
-<p>```plaintext
-function calculate_equivalent_resistance(graph):
+<pre><code class="language-python">function calculate_equivalent_resistance(graph):
     while graph can be simplified:
         for each pair of nodes (u, v):
             if multiple edges exist between u and v:
                 R_parallel = 1 / sum(1 / R for each edge between u and v)
                 remove all edges between u and v
-                add edge (u, v) with resistance R_parallel</p>
-<pre><code>    for each node n in graph:
-        if degree(n) == 2 and n is not input/output terminal:
-            neighbors = [a, b]
-            R1 = resistance between a and n
-            R2 = resistance between n and b
-            R_total = R1 + R2
-            remove node n and its edges
-            add edge (a, b) with resistance R_total
+                add edge (u, v) with resistance R_parallel
 
-return resistance of the final edge
+        for each node n in graph:
+            if degree(n) == 2 and n is not input/output terminal:
+                neighbors = [a, b]
+                R1 = resistance between a and n
+                R2 = resistance between n and b
+                R_total = R1 + R2
+                remove node n and its edges
+                add edge (a, b) with resistance R_total
+
+    return resistance of the final edge
 </code></pre>
 </div>
 </div><footer>
