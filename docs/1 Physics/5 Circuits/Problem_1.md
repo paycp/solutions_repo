@@ -15,22 +15,19 @@ We can iteratively reduce the graph until only a single equivalent resistance re
 
 ### Algorithm Overview
 
-1. **Input**: A weighted graph representing the circuit  
-2. **Repeat** until no further simplification is possible:  
-  - **Parallel reduction**: If multiple edges exist between two nodes, replace them with a single edge:
+1. **Input**: A weighted graph representing the circuit.
 
-\[
-R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
-\]
+2. **Repeat** until no further simplification is possible:
 
-  - **Series reduction**: If a node connects to exactly two others (and is not input/output), merge it:
+   - **Parallel reduction**: If multiple edges exist between two nodes, replace them with a single edge using:
 
-\[
-R_{\text{eq}} = R_1 + R_2
-\]
+     $$ R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1} $$
 
-3. **Output**: Final edge’s resistance between the input and output node.
+   - **Series reduction**: If a node connects to exactly two others (and is not input/output), merge it using:
 
+     $$ R_{\text{eq}} = R_1 + R_2 $$
+
+3. **Output**: The final resistance between the input and output node.
 
 ---
 
