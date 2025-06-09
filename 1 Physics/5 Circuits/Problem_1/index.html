@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Problem 1: Resistor Circuit Analysis - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Problem 1: Resistor Circuit Analysis";
         var mkdocs_page_input_path = "1 Physics/5 Circuits/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -76,8 +76,18 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1: Resistor Circuit Analysis</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#solution">Solution</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-equivalent-resistance-r_eq">1. Equivalent Resistance (\(R_{eq}\))</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-current-through-resistor-r_5">2. Current Through Resistor \(R_5\)</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +173,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">5 Circuits</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Problem 1: Resistor Circuit Analysis</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +181,63 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="problem-1-resistor-circuit-analysis">Problem 1: Resistor Circuit Analysis</h1>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>For the circuit shown in the figure, find the <strong>equivalent resistance</strong> of the circuit and the <strong>current flowing through the resistor <span class="arithmatex">\(R_5\)</span></strong>.</p>
+<p><img alt="Circuit Diagram" src="https://dchorazkiewicz.github.io/Mathematics_Physics_Lectures/Physics/Exercises_for_Students/img/dch_ex_fis_pr_1_1.png"/></p>
+<p><strong>Given values:</strong>
+* Voltage source: <span class="arithmatex">\(V = 12 \, \text{V}\)</span>
+* Resistors:
+    * <span class="arithmatex">\(R_1 = 10 \, \Omega\)</span>
+    * <span class="arithmatex">\(R_2 = 20 \, \Omega\)</span>
+    * <span class="arithmatex">\(R_3 = 30 \, \Omega\)</span>
+    * <span class="arithmatex">\(R_4 = 40 \, \Omega\)</span>
+    * <span class="arithmatex">\(R_5 = 50 \, \Omega\)</span>
+    * <span class="arithmatex">\(R_6 = 60 \, \Omega\)</span>
+    * <span class="arithmatex">\(R_7 = 70 \, \Omega\)</span></p>
+<hr/>
+<h2 id="solution">Solution</h2>
+<p>The solution is divided into two parts:
+1.  Calculating the total equivalent resistance (<span class="arithmatex">\(R_{eq}\)</span>) of the circuit.
+2.  Calculating the current (<span class="arithmatex">\(I_5\)</span>) flowing through resistor <span class="arithmatex">\(R_5\)</span>.</p>
+<h3 id="1-equivalent-resistance-r_eq">1. Equivalent Resistance (<span class="arithmatex">\(R_{eq}\)</span>)</h3>
+<p>To find the total equivalent resistance, we will simplify the circuit step-by-step.</p>
+<p><strong>Step 1: Simplify parallel resistors <span class="arithmatex">\(R_3\)</span> and <span class="arithmatex">\(R_4\)</span></strong></p>
+<p>Resistors <span class="arithmatex">\(R_3\)</span> and <span class="arithmatex">\(R_4\)</span> are in parallel. Their equivalent resistance, <span class="arithmatex">\(R_{34}\)</span>, is:
+$$ R_{34} = \frac{R_3 \cdot R_4}{R_3 + R_4} = \frac{30 \, \Omega \cdot 40 \, \Omega}{30 \, \Omega + 40 \, \Omega} = \frac{1200}{70} \, \Omega \approx 17.14 \, \Omega $$</p>
+<p><strong>Step 2: Simplify parallel resistors <span class="arithmatex">\(R_6\)</span> and <span class="arithmatex">\(R_7\)</span></strong></p>
+<p>Similarly, resistors <span class="arithmatex">\(R_6\)</span> and <span class="arithmatex">\(R_7\)</span> are in parallel. Their equivalent resistance, <span class="arithmatex">\(R_{67}\)</span>, is:
+$$ R_{67} = \frac{R_6 \cdot R_7}{R_6 + R_7} = \frac{60 \, \Omega \cdot 70 \, \Omega}{60 \, \Omega + 70 \, \Omega} = \frac{4200}{130} \, \Omega \approx 32.31 \, \Omega $$</p>
+<p><strong>Step 3: Calculate the resistance of the two main branches</strong></p>
+<p>Now, we calculate the total resistance for the two main branches that are in parallel.</p>
+<ul>
+<li><strong>Branch A</strong> contains <span class="arithmatex">\(R_2\)</span> in series with <span class="arithmatex">\(R_{34}\)</span>:
+    $$ R_A = R_2 + R_{34} = 20 \, \Omega + 17.14 \, \Omega = 37.14 \, \Omega $$</li>
+<li><strong>Branch B</strong> contains <span class="arithmatex">\(R_5\)</span> in series with <span class="arithmatex">\(R_{67}\)</span>:
+    $$ R_B = R_5 + R_{67} = 50 \, \Omega + 32.31 \, \Omega = 82.31 \, \Omega $$</li>
+</ul>
+<p><strong>Step 4: Combine the main parallel branches</strong></p>
+<p>The equivalent resistance of the two parallel branches (Branch A and Branch B), let's call it <span class="arithmatex">\(R_{AB}\)</span>, is:
+$$ R_{AB} = \frac{R_A \cdot R_B}{R_A + R_B} = \frac{37.14 \, \Omega \cdot 82.31 \, \Omega}{37.14 \, \Omega + 82.31 \, \Omega} = \frac{3057.1}{119.45} \, \Omega \approx 25.59 \, \Omega $$</p>
+<p><strong>Step 5: Calculate the total equivalent resistance</strong></p>
+<p>Finally, the total equivalent resistance of the circuit, <span class="arithmatex">\(R_{eq}\)</span>, is the sum of <span class="arithmatex">\(R_1\)</span> and <span class="arithmatex">\(R_{AB}\)</span>, as they are in series.
+$$ R_{eq} = R_1 + R_{AB} = 10 \, \Omega + 25.59 \, \Omega = 35.59 \, \Omega $$</p>
+<p><strong>The equivalent resistance of the circuit is approximately <span class="arithmatex">\(35.6 \, \Omega\)</span>.</strong></p>
+<hr/>
+<h3 id="2-current-through-resistor-r_5">2. Current Through Resistor <span class="arithmatex">\(R_5\)</span></h3>
+<p>To find the current through <span class="arithmatex">\(R_5\)</span>, we first need the total current from the voltage source.</p>
+<p><strong>Step 1: Calculate the total current</strong></p>
+<p>Using Ohm's Law, the total current <span class="arithmatex">\(I_{total}\)</span> flowing from the source is:
+$$ I_{total} = \frac{V}{R_{eq}} = \frac{12 \, \text{V}}{35.59 \, \Omega} \approx 0.337 \, \text{A} $$</p>
+<p><strong>Step 2: Calculate the voltage across the parallel branches</strong></p>
+<p>The voltage drop across the entire parallel section (containing branches A and B) is <span class="arithmatex">\(V_{AB}\)</span>. This voltage is the product of the total current and the equivalent resistance of the parallel section, <span class="arithmatex">\(R_{AB}\)</span>.
+$$ V_{AB} = I_{total} \cdot R_{AB} = 0.337 \, \text{A} \cdot 25.59 \, \Omega \approx 8.62 \, \text{V} $$</p>
+<p><strong>Step 3: Calculate the current through Branch B</strong></p>
+<p>The voltage across Branch B is <span class="arithmatex">\(V_{AB}\)</span>. The current flowing through Branch B, <span class="arithmatex">\(I_B\)</span>, can be found using Ohm's law:
+$$ I_B = \frac{V_{AB}}{R_B} = \frac{8.62 \, \text{V}}{82.31 \, \Omega} \approx 0.105 \, \text{A} $$</p>
+<p>Since resistor <span class="arithmatex">\(R_5\)</span> is in series within Branch B, the current flowing through it, <span class="arithmatex">\(I_5\)</span>, is the same as the current flowing through Branch B.</p>
+<div class="arithmatex">\[ I_5 = I_B \approx 0.105 \, \text{A} \]</div>
+<p><strong>The current flowing through resistor <span class="arithmatex">\(R_5\)</span> is approximately <span class="arithmatex">\(0.105 \, \text{A}\)</span> or <span class="arithmatex">\(105 \, \text{mA}\)</span>.</strong></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
