@@ -194,16 +194,15 @@
 <h3 id="algorithm-overview">Algorithm Overview</h3>
 <ol>
 <li><strong>Input</strong>: A weighted graph representing the circuit  </li>
-<li><strong>Repeat</strong> until no further simplification is possible:  <ul>
+<li><strong>Repeat</strong> until no further simplification is possible:  </li>
 <li><strong>Parallel reduction</strong>: If multiple edges exist between two nodes, replace them with a single edge:</li>
-</ul>
-</li>
 </ol>
 <div class="arithmatex">\[
 R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
 \]</div>
-<pre><code>- **Series reduction**: If a node connects to exactly two others (and is not input/output), merge it:
-</code></pre>
+<ul>
+<li><strong>Series reduction</strong>: If a node connects to exactly two others (and is not input/output), merge it:</li>
+</ul>
 <div class="arithmatex">\[
 R_{\text{eq}} = R_1 + R_2
 \]</div>
