@@ -195,15 +195,21 @@
 <ol>
 <li><strong>Input</strong>: A weighted graph representing the circuit</li>
 <li><strong>Repeat</strong> until no further simplification is possible:</li>
-<li>🔁 <strong>Parallel reduction</strong>: If multiple edges exist between two nodes, replace them with a single edge:
-     [
-     R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
-     ]</li>
-<li>➕ <strong>Series reduction</strong>: If a node connects to exactly two others (and is not input/output), merge it:
-     [
-     R_{\text{eq}} = R_1 + R_2
-     ]</li>
-<li><strong>Output</strong>: Final edge’s resistance between the input and output node.</li>
+<li>
+<p><strong>Parallel reduction</strong>: If multiple edges exist between two nodes, replace them with a single edge:</p>
+<p>[
+ R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
+ ]</p>
+</li>
+<li>
+<p><strong>Series reduction</strong>: If a node connects to exactly two others (and is not input/output), merge it:</p>
+<p>[
+ R_{\text{eq}} = R_1 + R_2
+ ]</p>
+</li>
+<li>
+<p><strong>Output</strong>: Final edge’s resistance between the input and output node.</p>
+</li>
 </ol>
 <hr/>
 <h3 id="pseudocode">Pseudocode</h3>
@@ -234,8 +240,7 @@
 <ul>
 <li>Implement this algorithm in Python (e.g., using <code>networkx</code>)</li>
 <li>Visualize example graphs before and after reduction</li>
-<li>Test with simple, nested, and cyclic circuits
-```</li>
+<li>Test with simple, nested, and cyclic circuits</li>
 </ul>
 <hr/>
 </div>
