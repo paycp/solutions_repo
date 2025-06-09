@@ -117,8 +117,8 @@ You can vary:
 
 - Use a **2D color map** to display the resulting wave amplitude or intensity at each point.
 - Choose either:
-  - Snapshot in time (e.g., fixed \( t = 0 \))
-  - Animated sequence for evolving interference
+    - Snapshot in time (e.g., fixed \( t = 0 \))
+    - Animated sequence for evolving interference
 
 ---
 
