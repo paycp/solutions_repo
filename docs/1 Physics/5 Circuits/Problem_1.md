@@ -32,7 +32,7 @@ The goal is to reduce this graph step-by-step until a single edge remains, repre
 
 ## Pseudocode
 
-```plaintext
+```python
 function calculate_equivalent_resistance(graph):
     while graph can be simplified:
         for each pair of nodes (u, v):
