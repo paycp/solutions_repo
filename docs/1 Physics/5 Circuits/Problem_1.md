@@ -17,13 +17,13 @@ We can iteratively reduce the graph until only a single equivalent resistance re
 
 1. **Input**: A weighted graph representing the circuit  
 2. **Repeat** until no further simplification is possible:  
-    - **Parallel reduction**: If multiple edges exist between two nodes, replace them with a single edge:
+  - **Parallel reduction**: If multiple edges exist between two nodes, replace them with a single edge:
 
 \[
 R_{\text{eq}} = \left( \sum_i \frac{1}{R_i} \right)^{-1}
 \]
 
-    - **Series reduction**: If a node connects to exactly two others (and is not input/output), merge it:
+  - **Series reduction**: If a node connects to exactly two others (and is not input/output), merge it:
 
 \[
 R_{\text{eq}} = R_1 + R_2
