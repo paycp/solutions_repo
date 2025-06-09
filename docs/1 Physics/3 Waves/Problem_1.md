@@ -50,6 +50,7 @@ If the sources are placed at the **vertices of a regular polygon**, their symmet
 - 5+ sources → complex radial patterns
 
 These symmetrical setups are useful for studying:  
+
 - Zones of maximum and minimum amplitude,  
 - Nodal lines (where waves cancel out),  
 - Phase alignment across space.
