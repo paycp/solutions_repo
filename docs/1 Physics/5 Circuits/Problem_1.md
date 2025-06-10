@@ -1,4 +1,4 @@
-## Equivalent Resistance Using Graph Theory
+## Problem 1 - Equivalent Resistance Using Graph Theory
 
 ### Motivation
 
