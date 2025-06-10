@@ -280,6 +280,7 @@ for n, est in zip(needle_counts, pi_estimates_buffon):
 **Convergence:** Both methods demonstrate convergence to the true value of $\pi$ as the number of trials increases. The rate of convergence in both cases is theoretically $O(1/\sqrt{N})$, which is characteristic of Monte Carlo methods.
 
 **Efficiency:**
+
 * **The Circle Method** is generally considered more "efficient" computationally. Each iteration requires generating two random numbers and one simple check. It is very straightforward to implement.
 * **The Buffon's Needle Method** requires more calculations per iteration (including a trigonometric function, `sin`), which makes it slower. However, it has immense historical and pedagogical value.
 
