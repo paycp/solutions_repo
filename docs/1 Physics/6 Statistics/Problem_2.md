@@ -14,11 +14,11 @@ This method is based on a simple geometric relationship. If we randomly "throw d
 2.  The area of the circle is: $A_{circle} = \pi r^2$.
 3.  The area of the square is: $A_{square} = (2r)^2 = 4r^2$.
 4.  The probability ($P$) that a randomly chosen point inside the square will also be inside the circle is the ratio of their areas:
-    $$P = \frac{A_{circle}}{A_{square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4}$$
+    $$P = \frac{A_{circle}}{A_{square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4}$
 5.  In a simulation, we can estimate this probability as the ratio of points that landed inside the circle to the total number of points:
-    $$P \approx \frac{\text{points inside circle}}{\text{total points}}$$
+    $P \approx \frac{\text{points inside circle}}{\text{total points}}$
 6.  By combining these two expressions, we get a formula to estimate $\pi$:
-    $$\frac{\pi}{4} \approx \frac{\text{points inside circle}}{\text{total points}} \implies \pi \approx 4 \cdot \frac{\text{points inside circle}}{\text{total points}}$$
+    $\frac{\pi}{4} \approx \frac{\text{points inside circle}}{\text{total points}} \implies \pi \approx 4 \cdot \frac{\text{points inside circle}}{\text{total points}}$
 
 For simplicity, we will use a square with sides from -1 to 1 and an inscribed unit circle (radius $r=1$).
 
@@ -142,11 +142,11 @@ This is another classic Monte Carlo experiment, conceived in the 18th century. I
 1.  Imagine a plane with parallel lines drawn at an equal distance $t$ from each other.
 2.  A needle of length $l$ is randomly dropped onto this plane. To simplify the analysis, we consider the case where $l \leq t$ (the needle cannot cross more than one line at a time).
 3.  The probability ($P$) that the needle will cross one of the lines is given by the formula:
-    $$P = \frac{2l}{\pi t}$$
+    $P = \frac{2l}{\pi t}$
 4.  As in the first method, we can estimate this probability from the experiment:
-    $$P \approx \frac{\text{number of crossings}}{\text{total number of drops}}$$
+    $P \approx \frac{\text{number of crossings}}{\text{total number of drops}}$
 5.  By equating the theoretical and experimental probabilities, we get a formula for $\pi$:
-    $$\frac{2l}{\pi t} \approx \frac{\text{number of crossings}}{\text{total number of drops}} \implies \pi \approx \frac{2l \cdot (\text{total number of drops})}{t \cdot (\text{number of crossings})}$$
+    $\frac{2l}{\pi t} \approx \frac{\text{number of crossings}}{\text{total number of drops}} \implies \pi \approx \frac{2l \cdot (\text{total number of drops})}{t \cdot (\text{number of crossings})}$
 
 ### 2. Simulation and Visualization
 
