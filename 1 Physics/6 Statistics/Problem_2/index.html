@@ -86,6 +86,28 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#part-1-estimating-pi-using-a-circle">Part 1: Estimating \(\pi\) using a Circle</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-simulation-and-visualization">2. Simulation and Visualization</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-convergence-analysis">3. Convergence Analysis</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#part-2-estimating-pi-using-buffons-needle">Part 2: Estimating \(\pi\) using Buffon's Needle</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-theoretical-foundation_1">1. Theoretical Foundation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-simulation-and-visualization_1">2. Simulation and Visualization</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-convergence-analysis_1">3. Convergence Analysis</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-comparison-of-methods-and-conclusion">4. Comparison of Methods and Conclusion</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +194,336 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<p>Monte Carlo methods are a powerful class of computational algorithms that rely on repeated random sampling to obtain numerical results. One of the most elegant applications of this approach is estimating the value of <span class="arithmatex">\(\pi\)</span>. In this problem, we will explore two famous methods.</p>
+<hr/>
+<h2 id="part-1-estimating-pi-using-a-circle">Part 1: Estimating <span class="arithmatex">\(\pi\)</span> using a Circle</h2>
+<p>This method is based on a simple geometric relationship. If we randomly "throw darts" at a square with a circle inscribed in it, the ratio of the number of darts that land inside the circle to the total number of darts thrown will be approximately equal to the ratio of the circle's area to the square's area.</p>
+<h3 id="1-theoretical-foundation">1. Theoretical Foundation</h3>
+<ol>
+<li>Consider a circle with radius <span class="arithmatex">\(r\)</span> inscribed within a square with a side length of <span class="arithmatex">\(2r\)</span>.</li>
+<li>The area of the circle is: <span class="arithmatex">\(A_{circle} = \pi r^2\)</span>.</li>
+<li>The area of the square is: <span class="arithmatex">\(A_{square} = (2r)^2 = 4r^2\)</span>.</li>
+<li>The probability (<span class="arithmatex">\(P\)</span>) that a randomly chosen point inside the square will also be inside the circle is the ratio of their areas:
+    <span class="arithmatex">\(<span class="arithmatex">\(P = \frac{A_{circle}}{A_{square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4}\)</span>\)</span></li>
+<li>In a simulation, we can estimate this probability as the ratio of points that landed inside the circle to the total number of points:
+    <span class="arithmatex">\(<span class="arithmatex">\(P \approx \frac{\text{points inside circle}}{\text{total points}}\)</span>\)</span></li>
+<li>By combining these two expressions, we get a formula to estimate <span class="arithmatex">\(\pi\)</span>:
+    <span class="arithmatex">\(<span class="arithmatex">\(\frac{\pi}{4} \approx \frac{\text{points inside circle}}{\text{total points}} \implies \pi \approx 4 \cdot \frac{\text{points inside circle}}{\text{total points}}\)</span>\)</span></li>
+</ol>
+<p>For simplicity, we will use a square with sides from -1 to 1 and an inscribed unit circle (radius <span class="arithmatex">\(r=1\)</span>).</p>
+<h3 id="2-simulation-and-visualization">2. Simulation and Visualization</h3>
+<p>We will generate a large number of random points <span class="arithmatex">\((x, y)\)</span> within the square <span class="arithmatex">\([-1, 1] \times [-1, 1]\)</span>. A point is inside the unit circle if the condition <span class="arithmatex">\(x^2 + y^2 \leq 1\)</span> is met.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import math
+
+def estimate_pi_circle(num_points):
+    """
+    Estimates Pi using the Monte Carlo method with a circle and a square.
+    Returns the Pi estimate and the coordinates of the points for visualization.
+    """
+    # Generate random points in the square [-1, 1] x [-1, 1]
+    x = np.random.uniform(-1, 1, num_points)
+    y = np.random.uniform(-1, 1, num_points)
+
+    # Calculate the distance from the center (0,0)
+    distance_from_center = x**2 + y**2
+
+    # Find the points that are inside or on the circle's boundary
+    points_inside = np.sum(distance_from_center &lt;= 1)
+
+    # Estimate Pi
+    pi_estimate = 4 * points_inside / num_points
+
+    return pi_estimate, x, y, distance_from_center
+
+# --- Simulation and Visualization ---
+num_points_for_plot = 5000
+pi_val, x_coords, y_coords, dist = estimate_pi_circle(num_points_for_plot)
+
+# Separate points into inside and outside for coloring
+inside_mask = dist &lt;= 1
+outside_mask = dist &gt; 1
+
+plt.figure(figsize=(8, 8))
+plt.scatter(x_coords[inside_mask], y_coords[inside_mask], color='blue', s=5, label='Inside the circle')
+plt.scatter(x_coords[outside_mask], y_coords[outside_mask], color='red', s=5, label='Outside the circle')
+
+# Draw the circle's outline
+circle = plt.Circle((0, 0), 1, color='black', fill=False, linewidth=2)
+plt.gca().add_artist(circle)
+
+plt.title(f'Monte Carlo Method for Estimating $\pi$ ({num_points_for_plot} points)\nEstimate: {pi_val:.5f}')
+plt.xlabel('X coordinate')
+plt.ylabel('Y coordinate')
+plt.legend()
+plt.axis('equal')
+plt.grid(True)
+plt.show()
+</code></pre>
+<p><strong>Graphical Output:</strong></p>
+<p><img alt="Plot6.2.4" src="../../../_pics/plot6.2.4.png"/></p>
+<p>The plot will show a square filled with points. Points that landed inside the circle will be blue, while those in the corners of the square will be red. A black circle clearly marks the boundary.</p>
+<h3 id="3-convergence-analysis">3. Convergence Analysis</h3>
+<p>Now, let's investigate how the accuracy of the estimate depends on the number of points.</p>
+<pre><code class="language-python"># --- Convergence Analysis ---
+point_counts = [100, 500, 1000, 5000, 10000, 50000, 100000, 500000]
+pi_estimates = []
+
+for n in point_counts:
+    estimate, _, _, _ = estimate_pi_circle(n)
+    pi_estimates.append(estimate)
+
+plt.figure(figsize=(10, 6))
+plt.plot(point_counts, pi_estimates, marker='o', linestyle='-', label='$\pi$ Estimate')
+plt.axhline(y=math.pi, color='r', linestyle='--', label='True value of $\pi$')
+plt.xscale('log') # Use a log scale for better visualization
+plt.title('Convergence of $\pi$ Estimate as Number of Points Increases')
+plt.xlabel('Number of Points (Log Scale)')
+plt.ylabel('$\pi$ Estimate')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# Print a table with the results
+print("Number of Points | Pi Estimate | Error")
+print("-----------------|-------------|------------")
+for n, est in zip(point_counts, pi_estimates):
+    error = abs(est - math.pi)
+    print(f"{n:&lt;16} | {est:&lt;11.6f} | {error:.6f}")
+</code></pre>
+<p><strong>Analysis:</strong></p>
+<p><img alt="Plot6.2.2" src="../../../_pics/plot6.2.2.png"/></p>
+<table>
+<thead>
+<tr>
+<th>Number of Points</th>
+<th>Pi Estimate</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>3.160000</td>
+<td>0.018407</td>
+</tr>
+<tr>
+<td>500</td>
+<td>3.096000</td>
+<td>0.045593</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>3.176000</td>
+<td>0.034407</td>
+</tr>
+<tr>
+<td>5000</td>
+<td>3.177600</td>
+<td>0.036007</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>3.129200</td>
+<td>0.012393</td>
+</tr>
+<tr>
+<td>50000</td>
+<td>3.136960</td>
+<td>0.004633</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>3.140440</td>
+<td>0.001153</td>
+</tr>
+<tr>
+<td>500000</td>
+<td>3.140352</td>
+<td>0.001241</td>
+</tr>
+</tbody>
+</table>
+<p>The convergence plot and table show that as the number of points increases, the estimate of <span class="arithmatex">\(\pi\)</span> gets closer to the true value. However, the convergence is quite slow: to gain an additional correct decimal place, the number of points needs to be increased by a factor of about 100. The error of a Monte Carlo method typically decreases in proportion to <span class="arithmatex">\(1/\sqrt{N}\)</span>, where <span class="arithmatex">\(N\)</span> is the number of trials (points).</p>
+<hr/>
+<h2 id="part-2-estimating-pi-using-buffons-needle">Part 2: Estimating <span class="arithmatex">\(\pi\)</span> using Buffon's Needle</h2>
+<p>This is another classic Monte Carlo experiment, conceived in the 18th century. It involves dropping needles onto a plane ruled with parallel lines.</p>
+<h3 id="1-theoretical-foundation_1">1. Theoretical Foundation</h3>
+<ol>
+<li>Imagine a plane with parallel lines drawn at an equal distance <span class="arithmatex">\(t\)</span> from each other.</li>
+<li>A needle of length <span class="arithmatex">\(l\)</span> is randomly dropped onto this plane. To simplify the analysis, we consider the case where <span class="arithmatex">\(l \leq t\)</span> (the needle cannot cross more than one line at a time).</li>
+<li>The probability (<span class="arithmatex">\(P\)</span>) that the needle will cross one of the lines is given by the formula:
+    <span class="arithmatex">\(<span class="arithmatex">\(P = \frac{2l}{\pi t}\)</span>\)</span></li>
+<li>As in the first method, we can estimate this probability from the experiment:
+    <span class="arithmatex">\(<span class="arithmatex">\(P \approx \frac{\text{number of crossings}}{\text{total number of drops}}\)</span>\)</span></li>
+<li>By equating the theoretical and experimental probabilities, we get a formula for <span class="arithmatex">\(\pi\)</span>:
+    <span class="arithmatex">\(<span class="arithmatex">\(\frac{2l}{\pi t} \approx \frac{\text{number of crossings}}{\text{total number of drops}} \implies \pi \approx \frac{2l \cdot (\text{total number of drops})}{t \cdot (\text{number of crossings})}\)</span>\)</span></li>
+</ol>
+<h3 id="2-simulation-and-visualization_1">2. Simulation and Visualization</h3>
+<p>We will simulate the needle drops. For each drop, we need to determine two random variables: the position of the needle's center and its angle. Due to the problem's symmetry, it's sufficient to consider the position of the center relative to the nearest line and an angle in the range of <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(\pi/2\)</span>.</p>
+<pre><code class="language-python">import random
+
+def estimate_pi_buffon(num_needles, needle_length, line_dist):
+    """
+    Estimates Pi using the Buffon's Needle method.
+    """
+    # Simplify by assuming l &lt;= t
+    if needle_length &gt; line_dist:
+        raise ValueError("Needle length (l) cannot be greater than the distance between lines (t).")
+
+    crossings = 0
+
+    for _ in range(num_needles):
+        # Distance from the needle's center to the nearest line (range from 0 to t/2)
+        dist_to_line = random.uniform(0, line_dist / 2)
+        # Angle of the needle (range from 0 to pi/2)
+        angle = random.uniform(0, math.pi / 2)
+
+        # Projection of half the needle's length onto the vertical axis
+        projection = (needle_length / 2) * math.sin(angle)
+
+        # If the distance to the line is less than the projection, the needle crosses it
+        if dist_to_line &lt;= projection:
+            crossings += 1
+
+    # Prevent division by zero if there are no crossings
+    if crossings == 0:
+        return float('inf') # Return infinity as an error signal
+
+    pi_estimate = (2 * needle_length * num_needles) / (line_dist * crossings)
+    return pi_estimate
+
+# --- Visualization for a small number of needles ---
+num_needles_for_plot = 100
+l, t = 1, 2 # l = needle length, t = distance between lines
+
+plt.figure(figsize=(10, 10))
+# Draw parallel lines
+for i in range(5):
+    plt.axhline(y=i*t, color='black')
+
+# Drop and visualize the needles
+cross_count_viz = 0
+for _ in range(num_needles_for_plot):
+    # Random position for the needle's center
+    center_x = random.uniform(0, 10)
+    center_y = random.uniform(0, 8)
+    angle = random.uniform(0, math.pi) # Full range for aesthetics
+
+    # Coordinates of the needle's endpoints
+    end_x1 = center_x - (l/2) * math.cos(angle)
+    end_y1 = center_y - (l/2) * math.sin(angle)
+    end_x2 = center_x + (l/2) * math.cos(angle)
+    end_y2 = center_y + (l/2) * math.sin(angle)
+
+    # Check for crossing
+    line_below = math.floor(center_y / t) * t
+    line_above = line_below + t
+
+    color = 'blue'
+    if end_y1 &lt; line_below or end_y2 &lt; line_below or end_y1 &gt; line_above or end_y2 &gt; line_above:
+        color = 'red'
+        cross_count_viz += 1
+
+    plt.plot([end_x1, end_x2], [end_y1, end_y2], color=color)
+
+plt.title(f"Buffon's Needle Simulation ({num_needles_for_plot} needles)\nCrossings: {cross_count_viz}")
+plt.xlim(0, 10)
+plt.ylim(-1, 9)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.show()
+</code></pre>
+<p><img alt="Plot6.2.3" src="../../../_pics/plot6.2.3.png"/></p>
+<h3 id="3-convergence-analysis_1">3. Convergence Analysis</h3>
+<p>Similar to the first method, let's check the convergence of the estimate.</p>
+<pre><code class="language-python"># --- Convergence Analysis for Buffon's Needle ---
+needle_counts = [100, 500, 1000, 5000, 10000, 50000, 100000, 500000]
+pi_estimates_buffon = []
+
+l, t = 1, 2 # Use the same parameters
+
+for n in needle_counts:
+    estimate = estimate_pi_buffon(n, l, t)
+    pi_estimates_buffon.append(estimate)
+
+plt.figure(figsize=(10, 6))
+plt.plot(needle_counts, pi_estimates_buffon, marker='o', linestyle='-', label="$\pi$ Estimate (Buffon)")
+plt.axhline(y=math.pi, color='r', linestyle='--', label='True value of $\pi$')
+plt.xscale('log')
+plt.title("Convergence of $\pi$ Estimate (Buffon's Needle Method)")
+plt.xlabel('Number of Needles (Log Scale)')
+plt.ylabel('$\pi$ Estimate')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# Print a table with the results
+print("Number of Needles | Pi Estimate | Error")
+print("------------------|-------------|------------")
+for n, est in zip(needle_counts, pi_estimates_buffon):
+    error = abs(est - math.pi)
+    print(f"{n:&lt;18} | {est:&lt;11.6f} | {error:.6f}")
+</code></pre>
+<p><img alt="Plot6.2.1" src="../../../_pics/plot6.2.1.png"/></p>
+<table>
+<thead>
+<tr>
+<th>Number of Needles</th>
+<th>Pi Estimate</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>3.225806</td>
+<td>0.084214</td>
+</tr>
+<tr>
+<td>500</td>
+<td>3.048780</td>
+<td>0.092812</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>3.184713</td>
+<td>0.043121</td>
+</tr>
+<tr>
+<td>5000</td>
+<td>3.168568</td>
+<td>0.026975</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>3.128911</td>
+<td>0.012682</td>
+</tr>
+<tr>
+<td>50000</td>
+<td>3.146237</td>
+<td>0.004644</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>3.117887</td>
+<td>0.023705</td>
+</tr>
+<tr>
+<td>500000</td>
+<td>3.141848</td>
+<td>0.000256</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-comparison-of-methods-and-conclusion">4. Comparison of Methods and Conclusion</h3>
+<p><strong>Convergence:</strong> Both methods demonstrate convergence to the true value of <span class="arithmatex">\(\pi\)</span> as the number of trials increases. The rate of convergence in both cases is theoretically <span class="arithmatex">\(O(1/\sqrt{N})\)</span>, which is characteristic of Monte Carlo methods.</p>
+<p><strong>Efficiency:</strong>
+* <strong>The Circle Method</strong> is generally considered more "efficient" computationally. Each iteration requires generating two random numbers and one simple check. It is very straightforward to implement.
+* <strong>The Buffon's Needle Method</strong> requires more calculations per iteration (including a trigonometric function, <code>sin</code>), which makes it slower. However, it has immense historical and pedagogical value.</p>
+<p><strong>Conclusion:</strong>
+We have successfully implemented two classic Monte Carlo methods for estimating the value of <span class="arithmatex">\(\pi\)</span>. Both approaches beautifully illustrate the core idea of using randomness to solve a deterministic problem. The circle method is more practical for a quick estimate, while the Buffon's Needle problem serves as a wonderful example of the connection between geometry and probability theory.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
