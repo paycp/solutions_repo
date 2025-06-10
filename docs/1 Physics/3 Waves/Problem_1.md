@@ -45,14 +45,14 @@ This leads to **constructive interference** when wave crests align, and **destru
 
 If the sources are placed at the **vertices of a regular polygon**, their symmetry will be reflected in the interference pattern:
 
-- 3 sources → triangular symmetry  
-- 4 sources → square symmetry  
-- 5+ sources → complex radial patterns
+- 3 sources → triangular symmetry.
+- 4 sources → square symmetry.
+- 5+ sources → complex radial patterns.
 
-These symmetrical setups are useful for studying:  
+These symmetrical setups are useful for studying:
 
-- Zones of maximum and minimum amplitude,  
-- Nodal lines (where waves cancel out),  
+- Zones of maximum and minimum amplitude,
+- Nodal lines (where waves cancel out),
 - Phase alignment across space.
 
 ---
