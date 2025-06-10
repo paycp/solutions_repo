@@ -1,4 +1,4 @@
-# Problem 1 - Simulating the Effects of the Lorentz Force
+# Problem 1
 
 ## 1. Circular and Helical Trajectories
 These plots demonstrate how a charged particle moves in a magnetic field:
