@@ -1,10 +1,10 @@
 # Problem 1
 
 ## 1. Circular and Helical Trajectories
-These plots demonstrate how a charged particle moves in a magnetic field:
 
-- **Circular motion** when velocity is perpendicular to **B**.
-- **Helical motion** when velocity has a component along **B**.
+These plots demonstrate how a charged particle moves in a magnetic field:  
+- **Circular motion** when velocity is perpendicular to **B**.  
+- **Helical motion** when velocity has a component along **B**.  
 - **Helical drift** when combined with electric field.
 
 ![Plot4.1.5](../../_pics/plot4.1.5.png)
@@ -20,8 +20,7 @@ This plot shows the full 3D trajectory of a particle in crossed **E** and **B** 
 
 ## 3. Trajectories under B, E, and E×B
 
-Three different configurations are compared:
-
+Three different configurations are compared:  
 - Only magnetic field (circular)  
 - Only electric field (linear)  
 - Both fields (drift)
@@ -46,7 +45,7 @@ A clear circular path is formed due to Lorentz force.
 
 ## 6. Larmor Radius and Drift Velocity (Log-Scale)
 
-These plots illustrate:
+These plots illustrate:  
 - Left: Larmor radius shrinking as **B** increases.  
 - Right: Drift velocity dropping with increasing **B**.
 
