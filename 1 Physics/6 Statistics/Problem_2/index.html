@@ -519,9 +519,11 @@ for n, est in zip(needle_counts, pi_estimates_buffon):
 </table>
 <h3 id="4-comparison-of-methods-and-conclusion">4. Comparison of Methods and Conclusion</h3>
 <p><strong>Convergence:</strong> Both methods demonstrate convergence to the true value of <span class="arithmatex">\(\pi\)</span> as the number of trials increases. The rate of convergence in both cases is theoretically <span class="arithmatex">\(O(1/\sqrt{N})\)</span>, which is characteristic of Monte Carlo methods.</p>
-<p><strong>Efficiency:</strong>
-* <strong>The Circle Method</strong> is generally considered more "efficient" computationally. Each iteration requires generating two random numbers and one simple check. It is very straightforward to implement.
-* <strong>The Buffon's Needle Method</strong> requires more calculations per iteration (including a trigonometric function, <code>sin</code>), which makes it slower. However, it has immense historical and pedagogical value.</p>
+<p><strong>Efficiency:</strong></p>
+<ul>
+<li><strong>The Circle Method</strong> is generally considered more "efficient" computationally. Each iteration requires generating two random numbers and one simple check. It is very straightforward to implement.</li>
+<li><strong>The Buffon's Needle Method</strong> requires more calculations per iteration (including a trigonometric function, <code>sin</code>), which makes it slower. However, it has immense historical and pedagogical value.</li>
+</ul>
 <p><strong>Conclusion:</strong>
 We have successfully implemented two classic Monte Carlo methods for estimating the value of <span class="arithmatex">\(\pi\)</span>. Both approaches beautifully illustrate the core idea of using randomness to solve a deterministic problem. The circle method is more practical for a quick estimate, while the Buffon's Needle problem serves as a wonderful example of the connection between geometry and probability theory.</p>
 </div>
