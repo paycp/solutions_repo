@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Problem 1 - Simulating the Effects of the Lorentz Force - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Problem 1 - Simulating the Effects of the Lorentz Force";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,8 +70,24 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1 - Simulating the Effects of the Lorentz Force</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-circular-and-helical-trajectories">1. Circular and Helical Trajectories</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-3d-trajectory-under-crossed-fields">2. 3D Trajectory under Crossed Fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-trajectories-under-b-e-and-eb">3. Trajectories under B, E, and E×B</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-particle-drift-under-e-b">4. Particle Drift under E ⊥ B</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-circular-trajectory-in-uniform-magnetic-field">5. Circular Trajectory in Uniform Magnetic Field</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#6-larmor-radius-and-drift-velocity-log-scale">6. Larmor Radius and Drift Velocity (Log-Scale)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#7-larmor-radius-vs-magnetic-field-linear-scale">7. Larmor Radius vs Magnetic Field (Linear Scale)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#8-drift-velocity-vs-magnetic-field-linear-scale">8. Drift Velocity vs Magnetic Field (Linear Scale)</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +179,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Problem 1 - Simulating the Effects of the Lorentz Force</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +187,46 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="problem-1-simulating-the-effects-of-the-lorentz-force">Problem 1 - Simulating the Effects of the Lorentz Force</h1>
+<h2 id="1-circular-and-helical-trajectories">1. Circular and Helical Trajectories</h2>
+<p>These plots demonstrate how a charged particle moves in a magnetic field:
+- <strong>Circular motion</strong> when velocity is perpendicular to <strong>B</strong>.
+- <strong>Helical motion</strong> when velocity has a component along <strong>B</strong>.
+- <strong>Helical drift</strong> when combined with electric field.</p>
+<p><img alt="Plot4.1.1" src="../../../_pics/plot4.1.1.png"/></p>
+<hr/>
+<h2 id="2-3d-trajectory-under-crossed-fields">2. 3D Trajectory under Crossed Fields</h2>
+<p>This plot shows the full 3D trajectory of a particle in crossed <strong>E</strong> and <strong>B</strong> fields.</p>
+<p><img alt="Plot4.1.2" src="../../../_pics/plot4.1.2.png"/></p>
+<hr/>
+<h2 id="3-trajectories-under-b-e-and-eb">3. Trajectories under B, E, and E×B</h2>
+<p>Three different configurations are compared:
+- Only magnetic field (circular)
+- Only electric field (linear)
+- Both fields (drift)</p>
+<p><img alt="Plot4.1.3" src="../../../_pics/plot4.1.3.png"/></p>
+<hr/>
+<h2 id="4-particle-drift-under-e-b">4. Particle Drift under E ⊥ B</h2>
+<p>This 2D plot shows the particle path under perpendicular electric and magnetic fields.
+<img alt="Plot4.1.4" src="../../../_pics/plot4.1.4.png"/></p>
+<hr/>
+<h2 id="5-circular-trajectory-in-uniform-magnetic-field">5. Circular Trajectory in Uniform Magnetic Field</h2>
+<p>A clear circular path is formed due to Lorentz force.</p>
+<p><img alt="Plot4.1.5" src="../../../_pics/plot4.1.5.png"/></p>
+<hr/>
+<h2 id="6-larmor-radius-and-drift-velocity-log-scale">6. Larmor Radius and Drift Velocity (Log-Scale)</h2>
+<p>These plots illustrate:
+- Left: Larmor radius shrinking as <strong>B</strong> increases.
+- Right: Drift velocity dropping with increasing <strong>B</strong>.</p>
+<p><img alt="Plot4.1.6" src="../../../_pics/plot4.1.6.png"/></p>
+<hr/>
+<h2 id="7-larmor-radius-vs-magnetic-field-linear-scale">7. Larmor Radius vs Magnetic Field (Linear Scale)</h2>
+<p>Illustrates how Larmor radius behaves in low- to high-<strong>B</strong> regions.</p>
+<p><img alt="Plot4.1.7" src="../../../_pics/plot4.1.7.png"/></p>
+<hr/>
+<h2 id="8-drift-velocity-vs-magnetic-field-linear-scale">8. Drift Velocity vs Magnetic Field (Linear Scale)</h2>
+<p>Shows the relationship between drift velocity and magnetic field strength.</p>
+<p><img alt="Plot4.1.8" src="../../../_pics/plot4.1.8.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
