@@ -21,9 +21,9 @@ This plot shows the full 3D trajectory of a particle in crossed **E** and **B** 
 ## 3. Trajectories under B, E, and E×B
 
 Three different configurations are compared:  
-- Only magnetic field (circular)  
-- Only electric field (linear)  
-- Both fields (drift)
+- Only magnetic field (circular).  
+- Only electric field (linear).  
+- Both fields (drift).
 
 ![Plot4.1.1](../../_pics/plot4.1.1.png)
 
