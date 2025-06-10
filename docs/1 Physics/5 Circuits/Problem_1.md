@@ -5,8 +5,9 @@
 Calculating the equivalent resistance is a fundamental task in electrical circuits. While manual methods like series-parallel reduction work for small circuits, they become impractical for complex networks. Graph theory offers a powerful and systematic alternative.
 
 By modeling the circuit as a graph:
-- **Nodes** represent junctions
-- **Edges** represent resistors, with edge weights as resistance values
+
+- **Nodes** represent junctions.
+- **Edges** represent resistors, with edge weights as resistance values.
 
 We can iteratively reduce the graph until only a single equivalent resistance remains between the input and output nodes.
 
