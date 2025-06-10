@@ -78,7 +78,7 @@ plt.show()
 
 **Graphical Output:**
 
-![Plot6.2.4](../../_pics/plot6.2.4.png)
+![Plot6.2.1](../../_pics/plot6.2.1.png)
 
 The plot will show a square filled with points. Points that landed inside the circle will be blue, while those in the corners of the square will be red. A black circle clearly marks the boundary.
 
@@ -262,7 +262,7 @@ for n, est in zip(needle_counts, pi_estimates_buffon):
     print(f"{n:<18} | {est:<11.6f} | {error:.6f}")
 ```
 
-![Plot6.2.1](../../_pics/plot6.2.1.png)
+![Plot6.2.4](../../_pics/plot6.2.4.png)
 
 | Number of Needles | Pi Estimate | Error |
 |-------------------|-------------|-------|
