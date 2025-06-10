@@ -92,6 +92,38 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-foundation">Theoretical Foundation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulated-experimental-procedure">Simulated Experimental Procedure</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup-parameters">Setup Parameters</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#data-collection">Data Collection</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#calculations-and-data-analysis">Calculations and Data Analysis</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-calculating-the-period-t-and-its-uncertainty-delta-t">1. Calculating the Period (\(T\)) and its Uncertainty (\(\Delta T\))</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-determining-the-value-of-g">2. Determining the Value of \(g\)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-propagating-the-uncertainty-in-g-delta-g">3. Propagating the Uncertainty in \(g\) (\(\Delta g\))</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#analysis">Analysis</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-comparison-with-the-standard-value">1. Comparison with the Standard Value</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-discussion-of-uncertainty-sources">2. Discussion of Uncertainty Sources</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +204,161 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h3 id="motivation">Motivation</h3>
+<p>The acceleration of a freely falling object, <span class="arithmatex">\(g\)</span>, is a fundamental physical constant that governs motion near the Earth's surface. A precise value of <span class="arithmatex">\(g\)</span> is critical in many fields, from satellite dynamics to civil engineering. The simple pendulum provides a classic and accessible experimental method to determine this value, offering a valuable lesson in measurement techniques, data analysis, and the propagation of uncertainties.</p>
+<h3 id="theoretical-foundation">Theoretical Foundation</h3>
+<p>The period (<span class="arithmatex">\(T\)</span>) of a simple pendulum—the time it takes to complete one full back-and-forth swing—depends on its length (<span class="arithmatex">\(L\)</span>) and the local gravitational acceleration (<span class="arithmatex">\(g\)</span>). For oscillations with a small amplitude, this relationship is accurately described by the formula:</p>
+<p><span class="arithmatex">\(T = 2\pi \sqrt{\frac{L}{g}}\)</span></p>
+<p>By rearranging this equation, we can express <span class="arithmatex">\(g\)</span> in terms of the measurable quantities <span class="arithmatex">\(L\)</span> and <span class="arithmatex">\(T\)</span>:</p>
+<p><span class="arithmatex">\(g = 4\pi^2 \frac{L}{T^2}\)</span></p>
+<p>Since all physical measurements have uncertainties, we must calculate how the uncertainties in our measurements of length (<span class="arithmatex">\(\Delta L\)</span>) and period (<span class="arithmatex">\(\Delta T\)</span>) affect the final uncertainty in our result for <span class="arithmatex">\(g\)</span> (<span class="arithmatex">\(\Delta g\)</span>). The formula for this propagation of uncertainty is:</p>
+<p><span class="arithmatex">\(\Delta g = g \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2\frac{\Delta T}{T}\right)^2}\)</span></p>
+<h3 id="simulated-experimental-procedure">Simulated Experimental Procedure</h3>
+<p>We will simulate the steps of a physical experiment, including defining the apparatus parameters and generating a realistic data set for analysis.</p>
+<h4 id="setup-parameters">Setup Parameters</h4>
+<ul>
+<li><strong>Pendulum Length (L):</strong> The measured distance from the fixed pivot point to the center of mass of the pendulum's bob. For this simulation, we'll use a new length.<ul>
+<li><span class="arithmatex">\(L = 1.250 \text{ m}\)</span></li>
+</ul>
+</li>
+<li><strong>Uncertainty in Length (<span class="arithmatex">\(\Delta L\)</span>):</strong> Determined by the resolution of the measuring tool. Using a standard meter stick with 1 mm divisions (0.001 m), the uncertainty is taken as half the smallest division.<ul>
+<li><span class="arithmatex">\(\Delta L = \frac{0.001 \text{ m}}{2} = 0.0005 \text{ m}\)</span></li>
+</ul>
+</li>
+</ul>
+<h4 id="data-collection">Data Collection</h4>
+<p>To improve accuracy and minimize the effect of reaction time error, we measured the total time for 10 complete oscillations (<span class="arithmatex">\(T_{10}\)</span>). This process was repeated 10 times to create a statistical sample. The following data was generated to simulate these measurements, including small random variations.</p>
+<p><strong>Table 1: Time Measurements for 10 Oscillations (<span class="arithmatex">\(T_{10}\)</span>)</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Measurement Number (i)</th>
+<th style="text-align: center;">Time <span class="arithmatex">\(T_{10}\)</span> (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">22.45</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">22.29</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">22.51</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">22.40</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">22.58</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">22.33</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">22.48</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">22.61</td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">22.39</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">22.42</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="calculations-and-data-analysis">Calculations and Data Analysis</h3>
+<h4 id="1-calculating-the-period-t-and-its-uncertainty-delta-t">1. Calculating the Period (<span class="arithmatex">\(T\)</span>) and its Uncertainty (<span class="arithmatex">\(\Delta T\)</span>)</h4>
+<ul>
+<li>
+<p><strong>Mean Time for 10 Oscillations (<span class="arithmatex">\(\bar{T}_{10}\)</span>):</strong>
+<span class="arithmatex">\(\bar{T}_{10} = \frac{1}{10} \sum_{i=1}^{10} T_{10,i} = \frac{224.46}{10} = 22.446 \text{ s}\)</span></p>
+</li>
+<li>
+<p><strong>Standard Deviation of the Time Measurements (<span class="arithmatex">\(\sigma_{T_{10}}\)</span>):</strong>
+<span class="arithmatex">\(\sigma_{T_{10}} = \sqrt{\frac{\sum (T_{10,i} - \bar{T}_{10})^2}{n-1}} \approx 0.108 \text{ s}\)</span></p>
+</li>
+<li>
+<p><strong>Uncertainty in the Mean Time (Standard Error) (<span class="arithmatex">\(\Delta T_{10}\)</span>):</strong>
+<span class="arithmatex">\(\Delta T_{10} = \frac{\sigma_{T_{10}}}{\sqrt{n}} = \frac{0.108}{\sqrt{10}} \approx 0.0341 \text{ s}\)</span></p>
+</li>
+<li>
+<p><strong>Period of a Single Oscillation (<span class="arithmatex">\(T\)</span>):</strong>
+<span class="arithmatex">\(T = \frac{\bar{T}_{10}}{10} = \frac{22.446}{10} = 2.2446 \text{ s}\)</span></p>
+</li>
+<li>
+<p><strong>Uncertainty in the Period (<span class="arithmatex">\(\Delta T\)</span>):</strong>
+<span class="arithmatex">\(\Delta T = \frac{\Delta T_{10}}{10} = \frac{0.0341}{10} = 0.00341 \text{ s}\)</span></p>
+</li>
+</ul>
+<h4 id="2-determining-the-value-of-g">2. Determining the Value of <span class="arithmatex">\(g\)</span></h4>
+<p>We now calculate our experimental value for <span class="arithmatex">\(g\)</span> using the primary formula:</p>
+<p><span class="arithmatex">\(g = 4\pi^2 \frac{L}{T^2} = 4\pi^2 \frac{1.250}{(2.2446)^2} \approx 4\pi^2 \frac{1.250}{5.0382} \approx 9.792 \text{ m/s}^2\)</span></p>
+<h4 id="3-propagating-the-uncertainty-in-g-delta-g">3. Propagating the Uncertainty in <span class="arithmatex">\(g\)</span> (<span class="arithmatex">\(\Delta g\)</span>)</h4>
+<p>Finally, we calculate the uncertainty in our value for <span class="arithmatex">\(g\)</span>:</p>
+<p><span class="arithmatex">\(\Delta g = g \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2\frac{\Delta T}{T}\right)^2}\)</span><span class="arithmatex">\(\Delta g = 9.792 \sqrt{\left(\frac{0.0005}{1.250}\right)^2 + \left(2 \cdot \frac{0.00341}{2.2446}\right)^2}\)</span><span class="arithmatex">\(\Delta g = 9.792 \sqrt{(0.0004)^2 + (0.00304)^2}\)</span>
+<span class="arithmatex">\(\Delta g = 9.792 \sqrt{1.6 \times 10^{-7} + 9.24 \times 10^{-6}} \approx 9.792 \cdot \sqrt{9.40 \times 10^{-6}} \approx 9.792 \cdot 0.00307 \approx 0.030 \text{ m/s}^2\)</span></p>
+<p>Rounding the uncertainty to one significant figure and the result accordingly:
+<span class="arithmatex">\(\Delta g \approx 0.03 \text{ m/s}^2\)</span>
+<span class="arithmatex">\(g \approx 9.79 \text{ m/s}^2\)</span></p>
+<p><strong>Final Experimental Result:</strong>
+<span class="arithmatex">\(g = (9.79 \pm 0.03) \text{ m/s}^2\)</span></p>
+<hr/>
+<h3 id="analysis">Analysis</h3>
+<h4 id="1-comparison-with-the-standard-value">1. Comparison with the Standard Value</h4>
+<p>The accepted standard value for gravitational acceleration is <span class="arithmatex">\(g_{std} = 9.81\)</span> m/s². Our experimental result gives a confidence interval of <span class="arithmatex">\([9.79 - 0.03, 9.79 + 0.03] = [9.76, 9.82]\)</span> m/s².</p>
+<p>The standard value of <span class="arithmatex">\(9.81\)</span> m/s² falls just within this experimental range. This indicates a successful experiment with a result that is consistent with the accepted value, within the calculated margin of error.</p>
+<h4 id="2-discussion-of-uncertainty-sources">2. Discussion of Uncertainty Sources</h4>
+<ul>
+<li>
+<p><strong>Dominant Source of Uncertainty:</strong> Let's compare the relative contributions to the final uncertainty.</p>
+<ul>
+<li>Contribution from length: <span class="arithmatex">\((\Delta L / L) \approx 0.04\%\)</span></li>
+<li>Contribution from period: <span class="arithmatex">\(2 \cdot (\Delta T / T) \approx 0.30\%\)</span>
+This comparison clearly demonstrates that the random error in the measurement of the period is the dominant source of uncertainty, contributing much more significantly to the final uncertainty <span class="arithmatex">\(\Delta g\)</span> than the precision of the length measurement.</li>
+</ul>
+</li>
+<li>
+<p><strong>Experimental Limitations and Potential Systematic Errors:</strong>
+    Even though our result is consistent, it's important to consider factors that could introduce systematic errors, which are not captured by the statistical uncertainty <span class="arithmatex">\(\Delta g\)</span>.</p>
+<ol>
+<li><strong>The Small-Angle Approximation:</strong> The period formula is an approximation. If the initial angle of release was consistently larger than <span class="arithmatex">\(15^\circ\)</span>, the actual period would be slightly longer than the formula predicts, causing our calculated <span class="arithmatex">\(g\)</span> to be an underestimate of the true value.</li>
+<li><strong>Air Resistance:</strong> Air drag acts as a damping force on the pendulum, which can slightly increase the period of oscillation. This would also lead to a calculated value of <span class="arithmatex">\(g\)</span> that is lower than the actual value.</li>
+<li><strong>Physical Pendulum vs. Simple Pendulum:</strong> The model assumes a point-like mass (bob) on a massless string. In reality, the string has mass and the bob has a non-zero radius. Treating this system as an ideal simple pendulum introduces a small systematic error.</li>
+</ol>
+</li>
+</ul>
+<h3 id="deliverables">Deliverables</h3>
+<ol>
+<li><strong>Tabulated Data:</strong> The simulated measurement data is presented in Table 1.</li>
+<li>
+<p><strong>Calculated Values:</strong></p>
+<ul>
+<li><span class="arithmatex">\(L = 1.250 \text{ m}\)</span></li>
+<li><span class="arithmatex">\(\Delta L = 0.0005 \text{ m}\)</span></li>
+<li><span class="arithmatex">\(\bar{T}_{10} = 22.446 \text{ s}\)</span></li>
+<li><span class="arithmatex">\(\Delta T = 0.00341 \text{ s}\)</span></li>
+<li><strong><span class="arithmatex">\(g_{exp} = 9.79 \text{ m/s}^2\)</span></strong></li>
+<li><strong><span class="arithmatex">\(\Delta g = 0.03 \text{ m/s}^2\)</span></strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Discussion of Uncertainty and Results:</strong> This is provided in the Analysis section above. The results are consistent with the accepted value of <span class="arithmatex">\(g\)</span>, and the primary source of random error was identified as the timing measurement.</p>
+</li>
+</ol>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
